@@ -3,7 +3,7 @@ import React from 'react'
 const App = () => {
   return (
     <>
-     <h1>hii</h1> 
+     <h1>XCART</h1> 
     </>
   )
 }
