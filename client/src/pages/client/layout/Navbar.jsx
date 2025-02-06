@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="container-fluid navbar">
-        <div className="container">
+        <div className="container padding-side">
           <NavLink to="/">
             <img className="nav-logo" src={logo} alt="Logo" />
           </NavLink>

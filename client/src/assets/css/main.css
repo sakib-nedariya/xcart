@@ -10,6 +10,7 @@
   /* font color */
   --primary-font-color: #8b8e99;
   --white-color: #fff;
+  --light-white-color:#F5F5F7;
   --black-color: #000;
   /* border */
   --primary-border-color: #e4e7e9;
@@ -26,7 +27,7 @@
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -71,9 +72,14 @@ p {
 a {
   text-decoration: none;
   font-family: var(--primary-font);
-  color: #fff;
 }
-.btn {
+.padding-main {
+  padding: 3% 2%;
+}
+.padding-side{
+  padding: 0.3% 2%;
+}
+button {
   font-family: var(--primary-font);
   cursor: pointer;
   font-size: 14px;
