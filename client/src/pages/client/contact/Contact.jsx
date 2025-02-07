@@ -9,13 +9,15 @@ import { FaInstagram } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import "../../../assets/css/client/login.css";
+import Footer from "../layout/Footer";
 
 const Contact = () => {
   return (
     <>
       <Navbar />
-      <div className="container-fluid padding-main bg-color">
-        <div className="container contact-container">
+      <div className="container-fluid bg-color">
+        <div className="container padding-main ">
+          <div className="contact-container">
           <div className="contact-information">
             <div className="heading">
               <h3>Contact Information</h3>
@@ -118,8 +120,10 @@ const Contact = () => {
               <button className="btn primary-btn">Send Message</button>
             </form>
           </div>
+          </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

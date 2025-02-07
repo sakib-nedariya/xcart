@@ -4,12 +4,13 @@ import "../../../assets/css/client/login.css";
 import login from "../../../assets/image/login-bg.png";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc"; // Import Google icon
+import Footer from "../layout/Footer";
 const Signup = () => {
   return (
     <>
-    <Navbar/>
-      <div className="container-fluid padding-main bg-color">
-        <div className="container login-container">
+      <Navbar />
+      <div className="container-fluid bg-color">
+        <div className="container padding-main login-container">
           <div className="login">
             <img src={login} alt="Login" />
           </div>
@@ -23,7 +24,11 @@ const Signup = () => {
 
               <div className="form-group">
                 <label>Email</label>
-                <input type="email" name="email" placeholder="example@gmail.com" />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="example@gmail.com"
+                />
               </div>
 
               <div className="form-group">
@@ -60,9 +65,9 @@ const Signup = () => {
                     Login
                   </button>
                 </div>
-               
+
                 <p className="sign-up">
-                Already have an account?{" "}
+                  Already have an account?{" "}
                   <Link to="/login">
                     <span>Login Now</span>
                   </Link>
@@ -71,7 +76,11 @@ const Signup = () => {
                 <div className="google-btn">
                   <button className="btn primary-btn" type="button">
                     <FcGoogle
-                      style={{ fontSize: "20px", marginRight: "8px", marginBottom:"-4px"}}
+                      style={{
+                        fontSize: "20px",
+                        marginRight: "8px",
+                        marginBottom: "-4px",
+                      }}
                     />
                     Continue With Google
                   </button>
@@ -81,6 +90,7 @@ const Signup = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

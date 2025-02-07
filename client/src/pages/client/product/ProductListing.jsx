@@ -1,11 +1,14 @@
 import React from "react";
 import "../../../assets/css/client/product-listing.css";
+import Navbar from "../layout/Navbar";
+import Footer from "../layout/Footer";
 import product from "../../../assets/image/product-image.png";
 
 const ProductListing = () => {
   return (
     <>
-      <div className="product-container">
+      <Navbar />
+      <div className="container-fluid product-container">
         <aside className="sidebar">
           <h6>Category</h6>
           <div class="radio-group">
@@ -23,7 +26,7 @@ const ProductListing = () => {
             </label>
           </div>
 
-            <p>Price Range Slider</p>
+          <p>Price Range Slider</p>
           <div className="input">
             <input type="text" name="min-price" placeholder="Min Price" />
             <input type="text" name="min-price" placeholder="Min Price" />
@@ -69,7 +72,9 @@ const ProductListing = () => {
               <option value="price-high">Price: High to Low</option>
             </select>
 
-            <p className="result"><strong>20/400</strong> Results Loaded</p>
+            <p className="result">
+              <strong>20/400</strong> Results Loaded
+            </p>
           </nav>
 
           <div className="product-items">
@@ -232,6 +237,7 @@ const ProductListing = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
