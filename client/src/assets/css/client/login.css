@@ -1,5 +1,5 @@
 /* main */
-input, textarea {
+input, textarea, select {
   font-family: var(--secondary-font);
   width: 100%;
   margin-top: 5px;
@@ -7,7 +7,7 @@ input, textarea {
   border-radius: 6px;
   border: 1px solid var(--primary-border-color);
 }
-input::placeholder, textarea::placeholder {
+input::placeholder, textarea::placeholder, select::placeholder{
   font-family: var(--secondary-font);
   font-size: 14px;
   color: var(--primary-font-color);
@@ -26,14 +26,14 @@ label {
 }
 /* main */
 .bg-color {
-  background-color: #f5f5f7;
+  background-color: var(----light-white-color);
 }
 .login-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.login {
+.login-container .login {
   width: 50%;
   text-align: center;
 }
@@ -56,7 +56,7 @@ label {
   width: 80%;
 }
 
-form p{
+.login-container form p{
     font-size: 14px;
     color: var(--primary-btn-bg);
     cursor: pointer;
@@ -64,20 +64,20 @@ form p{
     margin-bottom: 15px;
 }
 
-form .login-btn button{
+.login-container form .login-btn button{
     width: 100%;
     margin-bottom: 20px;
     border-radius: 8px;
 }
 
 
-form .google-btn button{
+.login-container form .google-btn button{
     width: 100%;
     margin-bottom: 20px;
     color: var(--black-color);
     background-color: var(--primary-border-color);
     border-radius: 25px;
-    border: 1px solid var(--primary-border-color);
+    border: 2px solid var(--primary-border-color);
 }
 
 
@@ -91,31 +91,6 @@ form .google-btn button{
     font-family: var(--primary-font);
 }
 
-
-.input-container {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    background: white;
-    position: relative;
-  }
-  
-  .input-container input {
-    border: none;
-    outline: none;
-    flex: 1;
-    padding-right: 35px; /* Space for eye icon */
-  }
-  
-  .eye-icon {
-    position: absolute;
-    right: 10px;
-    color: #777;
-    font-size: 18px;
-  }
-  
 
 @media screen and (max-width: 426px) {
     .login-container{
