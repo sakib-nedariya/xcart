@@ -1,5 +1,6 @@
 import React from "react";
-import "../../assets/css/client/contact.css";
+import "../../../assets/css/client/contact.css";
+import Navbar from "../layout/Navbar";
 import { BiSolidPhoneCall } from "react-icons/bi";
 import { MdOutlineMail } from "react-icons/md";
 import { IoLocationSharp } from "react-icons/io5";
@@ -7,11 +8,12 @@ import { FaFacebookSquare } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
-import "../../assets/css/client/login.css"
+import "../../../assets/css/client/login.css";
 
 const Contact = () => {
   return (
     <>
+      <Navbar />
       <div className="container-fluid padding-main bg-color">
         <div className="container contact-container">
           <div className="contact-information">
@@ -75,42 +77,45 @@ const Contact = () => {
                 </div>
               </div>
 
-
-              
-                <div className="form-group">
-                  <label style={{fontWeight:"500", fontFamily:"var(--primary-font)"}}>Select Subject?</label>
-                  <div class="radio-group">
-            <label>
-                <input type="radio" name="subject" />
-                <span class="custom-radio"></span> General Inquiry
-            </label>
-            <label>
-                <input type="radio" name="subject" />
-                <span class="custom-radio"></span> General Inquiry
-            </label>
-            <label>
-                <input type="radio" name="subject" />
-                <span class="custom-radio"></span> General Inquiry
-            </label>
-            <label>
-                <input type="radio" name="subject"/>
-                <span class="custom-radio"></span> General Inquiry
-            </label>
-        </div>
+              <div className="form-group">
+                <label
+                  style={{
+                    fontWeight: "500",
+                    fontFamily: "var(--primary-font)",
+                  }}
+                >
+                  Select Subject?
+                </label>
+                <div class="radio-group">
+                  <label>
+                    <input type="radio" name="subject" />
+                    <span class="custom-radio"></span> General Inquiry
+                  </label>
+                  <label>
+                    <input type="radio" name="subject" />
+                    <span class="custom-radio"></span> General Inquiry
+                  </label>
+                  <label>
+                    <input type="radio" name="subject" />
+                    <span class="custom-radio"></span> General Inquiry
+                  </label>
+                  <label>
+                    <input type="radio" name="subject" />
+                    <span class="custom-radio"></span> General Inquiry
+                  </label>
                 </div>
+              </div>
 
-                <div className="form-group">
-                  <label>Message</label>
-                  <textarea
-                    type="email"
-                    name="email"
-                    placeholder="Write your message here"
-                  />
-                </div>
+              <div className="form-group">
+                <label>Message</label>
+                <textarea
+                  type="email"
+                  name="email"
+                  placeholder="Write your message here"
+                />
+              </div>
 
-                <button className="btn primary-btn">Send Message</button>
-                
-              
+              <button className="btn primary-btn">Send Message</button>
             </form>
           </div>
         </div>

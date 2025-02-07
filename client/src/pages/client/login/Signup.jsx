@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "../layout/Navbar";
 import "../../../assets/css/client/login.css";
 import login from "../../../assets/image/login-bg.png";
 import { Link } from "react-router-dom";
@@ -6,6 +7,7 @@ import { FcGoogle } from "react-icons/fc"; // Import Google icon
 const Signup = () => {
   return (
     <>
+    <Navbar/>
       <div className="container-fluid padding-main bg-color">
         <div className="container login-container">
           <div className="login">

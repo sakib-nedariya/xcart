@@ -12,6 +12,7 @@
   --white-color: #fff;
   --light-white-color:#F5F5F7;
   --black-color: #000;
+  --light-black-color:#747477;
   /* border */
   --primary-border-color: #e4e7e9;
   /* button */
@@ -41,32 +42,31 @@ h6 {
   /* line-height: 1px; */
 }
 h1 {
-  font-size: 40px;
+  font-size: 44px;
   font-weight: 700;
 }
 h2 {
-  font-size: 32px;
-  font-weight: 600;
+  font-size: 42px;
+  font-weight: 700;
 }
 h3 {
-  font-size: 28px;
-  font-weight: 500;
+  font-size: 34px;
+  font-weight: 700;
 }
 h4 {
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 500;
 }
 h5 {
-  font-size: 20px;
+  font-size: 26px;
   font-weight: 400;
 }
 h6 {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 400;
 }
 p {
   font-family: var(--primary-font);
-  /* line-height: 1px; */
   font-size: 15px;
 }
 a {
@@ -74,7 +74,7 @@ a {
   font-family: var(--primary-font);
 }
 .padding-main {
-  padding: 3% 2%;
+  padding: 4% 2%;
 }
 .padding-side{
   padding: 0.3% 2%;
