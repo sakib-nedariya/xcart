@@ -1,0 +1,28 @@
+.bg-color{
+    background-color: var(--light-white-color);
+}
+
+.product-view-container{
+    display: flex;
+    gap: 20px;
+}
+
+.product-view-container .view-product-content{
+    font-family: var(--info-font);
+}
+
+.product-view-container .view-product-info{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 5px;
+}
+
+.product-view-container .view-product-info p{
+    font-family: var(--info-font);
+    color: var(--primary-font-color);
+}
+.product-view-container .view-product-info p b{
+    color: var(--black-color);
+    font-weight: 500;
+}

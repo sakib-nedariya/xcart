@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Product from "../../pages/client/product/ProductListing";
 
+
 const ProductListingRoute = () => {
   return (
     <Routes>

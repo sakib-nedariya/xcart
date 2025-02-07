@@ -102,7 +102,7 @@
 .radio-group .custom-radio {
   width: 16px;
   height: 16px;
-  border: 2px solid #bbb;
+  border: 2px solid var(--primary-font-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -111,14 +111,14 @@
 }
 
 .radio-group input:checked + .custom-radio {
-  border-color: #666;
+  border-color: var(--primary-btn-bg);
 }
 
 .radio-group input:checked + .custom-radio::before {
   content: "";
   width: 8px;
   height: 8px;
-  background-color: #666;
+  background-color: var(--primary-btn-bg);
   border-radius: 50%;
   display: block;
 }
