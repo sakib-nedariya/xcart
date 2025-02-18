@@ -8,14 +8,38 @@ const BrandCollection = () => {
         <h2>Brand Collection Available</h2>
 
         <div className="brands_collection_images">
-          <img src={BrandImage} alt="hero-image" />
-          <img src={BrandImage} alt="hero-image" />
-          <img src={BrandImage} alt="hero-image" />
-          <img src={BrandImage} alt="hero-image" />
-          <img src={BrandImage} alt="hero-image" />
-          <img src={BrandImage} alt="hero-image" />
-          <img src={BrandImage} alt="hero-image" />
-          <img src={BrandImage} alt="hero-image" />
+          <div className="brands-collection-with-name">
+            <img src={BrandImage} alt="hero-image" />
+            <p>Dell</p>
+          </div>
+          <div className="brands-collection-with-name">
+            <img src={BrandImage} alt="hero-image" />
+            <p>Dell</p>
+          </div>
+          <div className="brands-collection-with-name">
+            <img src={BrandImage} alt="hero-image" />
+            <p>Dell</p>
+          </div>
+          <div className="brands-collection-with-name">
+            <img src={BrandImage} alt="hero-image" />
+            <p>Dell</p>
+          </div>
+          <div className="brands-collection-with-name">
+            <img src={BrandImage} alt="hero-image" />
+            <p>Dell</p>
+          </div>
+          <div className="brands-collection-with-name">
+            <img src={BrandImage} alt="hero-image" />
+            <p>Dell</p>
+          </div>
+          <div className="brands-collection-with-name">
+            <img src={BrandImage} alt="hero-image" />
+            <p>Dell</p>
+          </div>
+          <div className="brands-collection-with-name">
+            <img src={BrandImage} alt="hero-image" />
+            <p>Dell</p>
+          </div>
         </div>
       </div>
     </section>

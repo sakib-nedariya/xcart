@@ -22,22 +22,18 @@
   font-size: 14px;
   color: var(--primary-font-color);
 }
-
 .product-container .login-form .form-group {
   margin-bottom: 15px;
 }
-
 .product-container {
   background: var(--light-white-color);
 }
-
 .product-container .sidebar {
   width: 270px;
   height: 100%;
   padding: 30px 30px 30px 50px;
   font-family: var(--primary-font);
 }
-
 .product-container .sidebar h6 {
   font-family: var(--primary-font);
   text-transform: uppercase;
@@ -45,99 +41,81 @@
   color: var(--primary-font-color);
   margin-bottom: 20px;
 }
-
 .product-container .sidebar .radio-group {
   display: block;
 }
 .product-container .sidebar .radio-group label {
   margin-bottom: 10px;
 }
-
 .product-container .sidebar .radio-group label {
   margin-bottom: 10px;
 }
-
 .product-container .sidebar .input {
   display: flex;
   gap: 10px;
 }
-
 .product-container {
   display: flex;
   gap: 20px;
 }
-
 .product-container .product-items .product-info {
   font-family: var(--info-font);
 }
-
 .product-container .product-items .product-info h6 {
   margin: 20px 0 10px 0;
 }
-
 .product-container .product-items .product-info .old-price {
   text-decoration: line-through;
   color: var(--primary-font-color);
 }
-
 .product-container .product-items .product-info .new-price {
   color: var(--primary-btn-bg);
   margin-left: 10px;
 }
-
 .product-container .product-items {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   margin-top: 30px;
 }
-
 .product-container .product-items .product-card {
   padding: 30px 20px;
   background-color: var(--white-color);
   border-radius: 10px;
   border: 1px solid var(--primary-border-color);
 }
-
 .product-container .product-items .product-card .product-img {
   text-align: center;
 }
 .product-container .product-items .product-card .product-img img {
   width: 65%;
 }
-
 .product-container .products-with-searchbar {
   margin-top: 20px;
 }
-
 .product-container .products-with-searchbar .short-dropdown {
   font-family: var(--primary-font);
 }
 .product-container .product-navbar input {
   width: 40%;
 }
-
 .product-container .product-navbar select {
   width: 20%;
   background-color: transparent;
   outline: none;
   border: 1px solid var(--primary-font-color);
 }
-
 .product-container .product-navbar {
   display: flex;
   align-items: center;
   gap: 20px;
 }
-
 .product-container .product-navbar .result {
   margin-left: 50px;
 }
-
 .product-container .product-navbar .result {
   color: var(--primary-font-color);
 }
-
 .product-container .product-navbar .result strong {
   color: var(--black-color);
 }

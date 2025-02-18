@@ -1,14 +1,21 @@
 import React from "react";
-import Navbar from "../layout/Navbar";
+import { useNavigate } from "react-router-dom";
 import "../../../assets/css/client/login.css";
 import login from "../../../assets/image/login-bg.png";
 import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc"; // Import Google icon
+import { FcGoogle } from "react-icons/fc";
+import Navbar from "../layout/Navbar";
 import Footer from "../layout/Footer";
+
 const Login = () => {
+  const navigate = useNavigate();
+
+  const handleshoppingcartNavigate = () => {
+    navigate("/shopping-cart");
+  };
   return (
     <>
-      <Navbar />
+    <Navbar/>
       <div className="container-fluid bg-color">
         <div className="container padding-main login-container">
           <div className="login">
@@ -33,7 +40,11 @@ const Login = () => {
               <div>
                 <p>Forget password?</p>
                 <div className="login-btn">
-                  <button className="btn primary-btn" type="submit">
+                  <button
+                    className="btn primary-btn"
+                    type="submit"
+                    onClick={() => handleshoppingcartNavigate()}
+                  >
                     Login
                   </button>
                 </div>
@@ -60,7 +71,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer/>
     </>
   );
 };

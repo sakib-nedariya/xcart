@@ -1,0 +1,19 @@
+.admin-panel-header-div .dashboard-table-container td img {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+.admin-panel-header-div .dashboard-table-container .product-info {
+  display: flex;
+  align-items: center;
+  color: var(--black-color);
+}
+.admin-panel-header-div .dashboard-table-container .product-stock-keeping-unit{
+  color: var(--primary-btn-bg);
+  font-weight: 600;
+}
+.admin-panel-header-div .dashboard-table-container tbody tr:hover{
+  background-color: var(--dashboard-tr-hover-color);
+}

@@ -16,11 +16,11 @@ const Footer = () => {
               <span>Seeking personalized support?</span> Request a call from our
               team
             </h3>
-            <div class="input-container">
+            <div className="input-container">
               <label for="name">YOUR NAME</label>
               <input type="text" id="name" placeholder="" />
             </div>
-            <div class="input-container">
+            <div className="input-container">
               <label for="phone">PHONE NUMBER</label>
               <input type="tel" id="phone" placeholder="" />
             </div>

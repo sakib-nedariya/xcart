@@ -6,7 +6,6 @@ import "../../../assets/css/client/navbar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -27,7 +26,7 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/product" onClick={() => setIsOpen(false)}>
+              <NavLink to="/products" onClick={() => setIsOpen(false)}>
                 Product
               </NavLink>
             </li>

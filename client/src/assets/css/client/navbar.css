@@ -24,7 +24,9 @@
   color: var(--primary-font-color);
 }
 .nav-links a:hover,
-.login-signup-btn a:hover {
+.login-signup-btn a:hover,
+.nav-links a.active,
+.login-signup-btn a.active {
   color: var(--white-color);
 }
 .navbar .nav-logo {
@@ -51,11 +53,7 @@
   width: 65px;
   text-align: end;
 }
-@media screen and (max-width: 1300px) {
-  .navbar {
-    padding: 1% 2%;
-  }
-}
+
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
   .menu-icon {
@@ -68,7 +66,7 @@
 
   .nav-links {
     position: absolute;
-    top: 65px;
+    top: 63px;
     right: 0;
     width: 100%;
     height: 0;
@@ -99,6 +97,6 @@
     width: 70px;
   }
   .nav-links {
-    top: 58px;
+    top: 53px;
   }
 }
