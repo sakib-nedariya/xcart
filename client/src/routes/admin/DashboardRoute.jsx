@@ -8,6 +8,7 @@ import Order from "../../pages/admin/orders/Order";
 import Coupon from "../../pages/admin/coupon/coupon";
 import ManageAdmin from "../../pages/admin/manage_admin/ManageAdmin";
 import Customer from "../../pages/admin/customers/Customer";
+import AddProduct from "../../pages/admin/product/AddProduct";
 
 
 const DashboardRoute = () => {
@@ -21,6 +22,7 @@ const DashboardRoute = () => {
         <Route path="/coupon" element={<Coupon/>} />
         <Route path="/manage-admins" element={<ManageAdmin/>} />
         <Route path="/customers" element={<Customer/>} />
+        <Route path="/add-products" element={<AddProduct/>} />
       </Routes>
     </>
   );

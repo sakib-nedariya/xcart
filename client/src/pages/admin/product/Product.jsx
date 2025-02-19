@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoMdArrowDropright, IoIosEye } from "react-icons/io";
 import {
   HiOutlinePlus,
@@ -15,6 +15,11 @@ import Navbar from "../layout/Navbar";
 
 const Product = () => {
   const [activeTab, setActiveTab] = useState("All Products");
+  const navigate = useNavigate();
+
+  const handleAddProductNavigate = () => {
+    navigate("/add-products");
+  };
 
   return (
     <>
@@ -32,7 +37,10 @@ const Product = () => {
               <span className="breadcrumb-text">Product List</span>
             </div>
           </div>
-          <button className="primary-btn dashboard-add-product-btn">
+          <button
+            className="primary-btn dashboard-add-product-btn"
+            onClick={() => handleAddProductNavigate()}
+          >
             <HiOutlinePlus /> Add Product
           </button>
         </div>
