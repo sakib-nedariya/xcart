@@ -11,6 +11,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { IoPencil } from "react-icons/io5";
 import Sidebar from "../layout/Sidebar";
 import Navbar from "../layout/Navbar";
+import Breadcrumb from "../layout/Breadcrumb";
 
 const ManageAdmin = () => {
   const [activeTab, setActiveTab] = useState("All");
@@ -19,22 +20,11 @@ const ManageAdmin = () => {
       <Sidebar />
       <Navbar />
       <main className="admin-panel-header-div">
-        <div className="admin-dashboard-main-header">
-          <div>
-            <h5>Admin</h5>
-            <div className="admin-panel-breadcrumb">
-              <Link to="/dashboard" className="breadcrumb-link active">
-                Dashboard
-              </Link>
-              <IoMdArrowDropright />
-              <span className="breadcrumb-text">Admin List</span>
-            </div>
-          </div>
-          <button className="primary-btn dashboard-add-product-btn">
-            <HiOutlinePlus /> Add New Admin
-          </button>
-        </div>
-
+        <Breadcrumb
+          title="Admin"
+          breadcrumbText="Admin List"
+          button={{ link: "/admin/manage-admins", text: "Add New Admin" }}
+        />
         <div className="admin-panel-header-tabs">
           <button
             className={`admin-panel-header-tab 

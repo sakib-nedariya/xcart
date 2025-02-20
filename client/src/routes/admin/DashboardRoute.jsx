@@ -15,14 +15,14 @@ const DashboardRoute = () => {
   return (
     <>
       <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/category" element={<Category />} />
-        <Route path="/orders" element={<Order />} />
-        <Route path="/coupon" element={<Coupon/>} />
-        <Route path="/manage-admins" element={<ManageAdmin/>} />
-        <Route path="/customers" element={<Customer/>} />
-        <Route path="/add-products" element={<AddProduct/>} />
+        <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/admin/product" element={<Product />} />
+        <Route path="/admin/category" element={<Category />} />
+        <Route path="/admin/orders" element={<Order />} />
+        <Route path="/admin/coupon" element={<Coupon/>} />
+        <Route path="/admin/manage-admins" element={<ManageAdmin/>} />
+        <Route path="/admin/customers" element={<Customer/>} />
+        <Route path="/admin/add-product" element={<AddProduct/>} />
       </Routes>
     </>
   );

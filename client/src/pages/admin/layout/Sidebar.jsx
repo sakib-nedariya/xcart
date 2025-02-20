@@ -19,31 +19,31 @@ const Sidebar = () => {
           <h6>MENU</h6>
           <ul>
             <li>
-              <NavLink to="/dashboard">
+              <NavLink to="/admin/dashboard">
                 <RxDashboard />
                 Dashboard
               </NavLink>
             </li>
             <li>
-              <NavLink to="/product">
+              <NavLink to="/admin/product">
                 <RiProductHuntLine />
                 Products
               </NavLink>
             </li>
             <li>
-              <NavLink to="/category">
+              <NavLink to="/admin/category">
                 <MdOutlineCategory />
                 Category
               </NavLink>
             </li>
             <li>
-              <NavLink to="/orders">
+              <NavLink to="/admin/orders">
                 <IoGiftOutline />
                 Orders
               </NavLink>
             </li>
             <li>
-              <NavLink to="/coupon">
+              <NavLink to="/admin/coupon">
                 <RiCoupon2Line />
                 Coupon
               </NavLink>
@@ -54,13 +54,13 @@ const Sidebar = () => {
           <h6>USER MANAGEMENT</h6>
           <ul>
             <li>
-              <NavLink to="/manage-admins">
+              <NavLink to="/admin/manage-admins">
                 <RiAdminLine />
                 Manage Admins
               </NavLink>
             </li>
             <li>
-              <NavLink to="/customers">
+              <NavLink to="/admin/customers">
                 <LuUsers />
                 Customers
               </NavLink>

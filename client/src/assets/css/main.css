@@ -298,7 +298,7 @@ button {
   margin-right: 10px;
 }
 
-/* pagination-css */
+/* table-bottom-pagination-css */
 
 .dashboard-table-container .table-footer-pagination {
   padding: 15px 22px;
@@ -347,7 +347,6 @@ button {
 .dashboard-add-content-card-div{
   display: flex;
   gap: 25px;
-  margin-top: 20px;
 }
 .dashboard-add-content-card{
   background-color: var(--white-color);
@@ -356,21 +355,12 @@ button {
   border-radius: 12px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.02);
 }
+.dashboard-add-content-card:not(:first-child) {
+  margin-top: 24px; 
+}
 .dashboard-add-content-card h6{
   font-size: 18px;
   font-family: var(--info-font);
-  padding-bottom: 18px;
+  padding-bottom: 5px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 /* dashboard-add-content-css */

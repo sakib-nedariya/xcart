@@ -5,36 +5,27 @@ import {
   HiOutlineArrowLeft,
   HiOutlineArrowRight,
 } from "react-icons/hi";
-import Navbar from '../layout/Navbar'
-import Sidebar from '../layout/Sidebar'
+import Navbar from "../layout/Navbar";
+import Sidebar from "../layout/Sidebar";
 import { IoMdArrowDropright, IoIosEye } from "react-icons/io";
 import AdminProfile from "../../../assets/image/dash-profile.png";
 import { MdDeleteForever } from "react-icons/md";
 import { IoPencil } from "react-icons/io5";
+import Breadcrumb from "../layout/Breadcrumb";
 
 const Customer = () => {
-  const [activeTab, setActiveTab] = useState('All');
+  const [activeTab, setActiveTab] = useState("All");
 
   return (
     <>
-      <Navbar/>
-      <Sidebar/>
+      <Navbar />
+      <Sidebar />
       <main className="admin-panel-header-div">
-        <div className="admin-dashboard-main-header">
-          <div>
-            <h5>Customers</h5>
-            <div className="admin-panel-breadcrumb">
-              <Link to="/dashboard" className="breadcrumb-link active">
-                Dashboard
-              </Link>
-              <IoMdArrowDropright />
-              <span className="breadcrumb-text">Customers List</span>
-            </div>
-          </div>
-          <button className="primary-btn dashboard-add-product-btn">
-            <HiOutlinePlus /> Add New Customer
-          </button>
-        </div>
+        <Breadcrumb
+          title="Customers"
+          breadcrumbText="Customers List"
+          button={{ link: "/admin/customers", text: "Add New Customer" }}
+        />
 
         <div className="admin-panel-header-tabs">
           <button
@@ -330,7 +321,7 @@ const Customer = () => {
         </div>
       </main>
     </>
-  )
-}
+  );
+};
 
-export default Customer
+export default Customer;

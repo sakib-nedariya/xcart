@@ -1,49 +1,28 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { IoMdArrowDropright, IoIosEye } from "react-icons/io";
-import {
-  HiOutlinePlus,
-  HiOutlineArrowLeft,
-  HiOutlineArrowRight,
-} from "react-icons/hi";
+import { Link, NavLink } from "react-router-dom";
+import { IoIosEye } from "react-icons/io";
+import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import DashboardProImage from "../../../assets/image/dashboard_product_img.png";
 import { MdDeleteForever } from "react-icons/md";
 import { IoPencil } from "react-icons/io5";
 import "../../../assets/css/admin/product.css";
 import Sidebar from "../layout/Sidebar";
 import Navbar from "../layout/Navbar";
+import Breadcrumb from "../layout/Breadcrumb";
 
 const Product = () => {
   const [activeTab, setActiveTab] = useState("All Products");
-  const navigate = useNavigate();
-
-  const handleAddProductNavigate = () => {
-    navigate("/add-products");
-  };
 
   return (
     <>
       <Sidebar />
       <Navbar />
       <main className="admin-panel-header-div">
-        <div className="admin-dashboard-main-header">
-          <div>
-            <h5>Product</h5>
-            <div className="admin-panel-breadcrumb">
-              <Link to="/dashboard" className="breadcrumb-link active">
-                Dashboard
-              </Link>
-              <IoMdArrowDropright />
-              <span className="breadcrumb-text">Product List</span>
-            </div>
-          </div>
-          <button
-            className="primary-btn dashboard-add-product-btn"
-            onClick={() => handleAddProductNavigate()}
-          >
-            <HiOutlinePlus /> Add Product
-          </button>
-        </div>
+        <Breadcrumb
+          title="Product"
+          breadcrumbText="Product List"
+          button={{ link: "/admin/add-product", text: "Add Product" }}
+        />
 
         <div className="admin-panel-header-tabs">
           <button
@@ -79,7 +58,7 @@ const Product = () => {
                 ${activeTab === "Out Of Stock" ? "active" : ""}`}
             onClick={() => setActiveTab("Out Of Stock")}
           >
-            Out Of Stock
+            Out of Stock
           </button>
         </div>
 

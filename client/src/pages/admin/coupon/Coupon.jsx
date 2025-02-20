@@ -10,6 +10,7 @@ import {
 import { IoMdArrowDropright } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
 import { IoPencil } from "react-icons/io5";
+import Breadcrumb from "../layout/Breadcrumb";
 
 const Coupon = () => {
   const [activeTab, setActiveTab] = useState("All");
@@ -19,22 +20,11 @@ const Coupon = () => {
       <Navbar />
       <Sidebar />
       <main className="admin-panel-header-div">
-        <div className="admin-dashboard-main-header">
-          <div>
-            <h5>Coupon</h5>
-            <div className="admin-panel-breadcrumb">
-              <Link to="/dashboard" className="breadcrumb-link active">
-                Dashboard
-              </Link>
-              <IoMdArrowDropright />
-              <span className="breadcrumb-text">Coupon List</span>
-            </div>
-          </div>
-          <button className="primary-btn dashboard-add-product-btn">
-            <HiOutlinePlus /> Create Coupon
-          </button>
-        </div>
-
+        <Breadcrumb
+          title="Coupon"
+          breadcrumbText="Coupon List"
+          button={{ link: "/admin/coupon", text: "Create Coupon" }}
+        />
         <div className="admin-panel-header-tabs">
           <button
             className={`admin-panel-header-tab 

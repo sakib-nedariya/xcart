@@ -11,6 +11,7 @@ import { IoMdArrowDropright, IoIosEye } from "react-icons/io";
 import DashboardProImage from "../../../assets/image/dashboard_product_img.png";
 import { MdDeleteForever } from "react-icons/md";
 import { IoPencil } from "react-icons/io5";
+import Breadcrumb from "../layout/Breadcrumb";
 
 const Order = () => {
   const [activeTab, setActiveTab] = useState("All Status");
@@ -20,21 +21,12 @@ const Order = () => {
       <Sidebar />
       <Navbar />
       <main className="admin-panel-header-div">
-        <div className="admin-dashboard-main-header">
-          <div>
-            <h5>Order</h5>
-            <div className="admin-panel-breadcrumb">
-              <Link to="/dashboard" className="breadcrumb-link active">
-                Dashboard
-              </Link>
-              <IoMdArrowDropright />
-              <span className="breadcrumb-text">Order List</span>
-            </div>
-          </div>
-          <button className="primary-btn dashboard-add-product-btn">
-            <HiOutlinePlus /> Add Order
-          </button>
-        </div>
+
+        <Breadcrumb
+          title="Order"
+          breadcrumbText="Order List"
+          button={{ link: "/admin/orders", text: "Add Order" }}
+        />
 
         <div className="admin-panel-header-tabs">
           <button
