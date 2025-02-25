@@ -1,16 +1,14 @@
 import React from "react";
 import Navbar from "../layout/Navbar";
 import Sidebar from "../layout/Sidebar";
-import { Link } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 import DashboardProImage from "../../../assets/image/dashboard_product_img.png";
 import { IoPencil } from "react-icons/io5";
 import {
-  HiOutlinePlus,
   HiOutlineArrowLeft,
   HiOutlineArrowRight,
 } from "react-icons/hi";
-import { IoMdArrowDropright, IoIosEye } from "react-icons/io";
+import { IoIosEye } from "react-icons/io";
 import Breadcrumb from "../layout/Breadcrumb";
 
 const Category = () => {
@@ -22,7 +20,7 @@ const Category = () => {
         <Breadcrumb
           title="Categories"
           breadcrumbText="Categories"
-          button={{ link: "/admin/category", text: "Add Category" }}
+          button={{ link: "/admin/add-category", text: "Add Category" }}
         />
 
         <div className="dashboard-table-container full-height">

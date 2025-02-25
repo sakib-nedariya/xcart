@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import Navbar from "../layout/Navbar";
 import Sidebar from "../layout/Sidebar";
 import {
-  HiOutlinePlus,
   HiOutlineArrowLeft,
   HiOutlineArrowRight,
 } from "react-icons/hi";
-import { IoMdArrowDropright } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
 import { IoPencil } from "react-icons/io5";
 import Breadcrumb from "../layout/Breadcrumb";
@@ -23,7 +20,7 @@ const Coupon = () => {
         <Breadcrumb
           title="Coupon"
           breadcrumbText="Coupon List"
-          button={{ link: "/admin/coupon", text: "Create Coupon" }}
+          button={{ link: "/admin/create-coupon", text: "Create Coupon" }}
         />
         <div className="admin-panel-header-tabs">
           <button
@@ -42,6 +39,13 @@ const Coupon = () => {
           </button>
           <button
             className={`admin-panel-header-tab 
+                ${activeTab === "Disable" ? "active" : ""}`}
+            onClick={() => setActiveTab("Disable")}
+          >
+            Disable
+          </button>
+          <button
+            className={`admin-panel-header-tab 
                 ${activeTab === "Expired" ? "active" : ""}`}
             onClick={() => setActiveTab("Expired")}
           >
@@ -53,20 +57,20 @@ const Coupon = () => {
           <table>
             <thead>
               <tr>
-                <th style={{ width: "" }}>Coupon Code</th>
-                <th style={{ width: "" }}>Discount</th>
-                <th style={{ width: "" }}>Max</th>
-                <th style={{ width: "" }}>Min</th>
-                <th style={{ width: "" }}>Start</th>
-                <th style={{ width: "" }}>Expiry</th>
-                <th style={{ width: "" }}>Status</th>
-                <th style={{ width: "" }}>Created</th>
-                <th style={{ width: "" }}>Action</th>
+                <th>Coupon Code</th>
+                <th>Discount</th>
+                <th>Max</th>
+                <th>Min</th>
+                <th>Start</th>
+                <th>Expiry</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td style={{ color: "black" }} className="product-coupon-code">
+                <td className="product-coupon-code">
                   SOMERANDOMCODEHERE
                 </td>
                 <td className="product-stock-keeping-unit discount">15%</td>
@@ -84,7 +88,7 @@ const Coupon = () => {
                 </td>
               </tr>
               <tr>
-                <td style={{ color: "black" }} className="product-coupon-code">
+                <td className="product-coupon-code">
                   SOMERANDOMCODEHERE
                 </td>
                 <td className="product-stock-keeping-unit">15%</td>
@@ -102,7 +106,79 @@ const Coupon = () => {
                 </td>
               </tr>
               <tr>
-                <td style={{ color: "black" }} className="product-coupon-code">
+                <td className="product-coupon-code">
+                  SOMERANDOMCODEHERE
+                </td>
+                <td className="product-stock-keeping-unit">15%</td>
+                <td>₹2000</td>
+                <td>30000</td>
+                <td>01 Feb 2024</td>
+                <td>31 Oct 2024</td>
+                <td>
+                  <span className="status low-stock">Disable</span>
+                </td>
+                <td>24 Jan 2024</td>
+                <td className="actions">
+                  <IoPencil />
+                  <MdDeleteForever />
+                </td>
+              </tr>
+              <tr>
+                <td className="product-coupon-code">
+                  SOMERANDOMCODEHERE
+                </td>
+                <td className="product-stock-keeping-unit">15%</td>
+                <td>₹2000</td>
+                <td>30000</td>
+                <td>01 Feb 2024</td>
+                <td>31 Oct 2024</td>
+                <td>
+                  <span className="status published">Active</span>
+                </td>
+                <td>24 Jan 2024</td>
+                <td className="actions">
+                  <IoPencil />
+                  <MdDeleteForever />
+                </td>
+              </tr>
+              <tr>
+                <td className="product-coupon-code">
+                  SOMERANDOMCODEHERE
+                </td>
+                <td className="product-stock-keeping-unit">15%</td>
+                <td>₹2000</td>
+                <td>30000</td>
+                <td>01 Feb 2024</td>
+                <td>31 Oct 2024</td>
+                <td>
+                  <span className="status low-stock">Disable</span>
+                </td>
+                <td>24 Jan 2024</td>
+                <td className="actions">
+                  <IoPencil />
+                  <MdDeleteForever />
+                </td>
+              </tr>
+              <tr>
+                <td className="product-coupon-code">
+                  SOMERANDOMCODEHERE
+                </td>
+                <td className="product-stock-keeping-unit">15%</td>
+                <td>₹2000</td>
+                <td>30000</td>
+                <td>01 Feb 2024</td>
+                <td>31 Oct 2024</td>
+                <td>
+                  <span className="status published">Active</span>
+                </td>
+                <td>24 Jan 2024</td>
+                <td className="actions">
+                  <IoPencil />
+                  <MdDeleteForever />
+                </td>
+              </tr>
+              <tr>
+                <td className="product-coupon-code">
                   SOMERANDOMCODEHERE
                 </td>
                 <td className="product-stock-keeping-unit">15%</td>
@@ -120,7 +196,25 @@ const Coupon = () => {
                 </td>
               </tr>
               <tr>
-                <td style={{ color: "black" }} className="product-coupon-code">
+                <td className="product-coupon-code">
+                  SOMERANDOMCODEHERE
+                </td>
+                <td className="product-stock-keeping-unit">15%</td>
+                <td>₹2000</td>
+                <td>30000</td>
+                <td>01 Feb 2024</td>
+                <td>31 Oct 2024</td>
+                <td>
+                  <span className="status low-stock">Disable</span>
+                </td>
+                <td>24 Jan 2024</td>
+                <td className="actions">
+                  <IoPencil />
+                  <MdDeleteForever />
+                </td>
+              </tr>
+              <tr>
+                <td className="product-coupon-code">
                   SOMERANDOMCODEHERE
                 </td>
                 <td className="product-stock-keeping-unit">15%</td>
@@ -138,7 +232,7 @@ const Coupon = () => {
                 </td>
               </tr>
               <tr>
-                <td style={{ color: "black" }} className="product-coupon-code">
+                <td className="product-coupon-code">
                   SOMERANDOMCODEHERE
                 </td>
                 <td className="product-stock-keeping-unit">15%</td>
@@ -156,25 +250,7 @@ const Coupon = () => {
                 </td>
               </tr>
               <tr>
-                <td style={{ color: "black" }} className="product-coupon-code">
-                  SOMERANDOMCODEHERE
-                </td>
-                <td className="product-stock-keeping-unit">15%</td>
-                <td>₹2000</td>
-                <td>30000</td>
-                <td>01 Feb 2024</td>
-                <td>31 Oct 2024</td>
-                <td>
-                  <span className="status published">Active</span>
-                </td>
-                <td>24 Jan 2024</td>
-                <td className="actions">
-                  <IoPencil />
-                  <MdDeleteForever />
-                </td>
-              </tr>
-              <tr>
-                <td style={{ color: "black" }} className="product-coupon-code">
+                <td className="product-coupon-code">
                   SOMERANDOMCODEHERE
                 </td>
                 <td className="product-stock-keeping-unit">15%</td>
@@ -192,7 +268,7 @@ const Coupon = () => {
                 </td>
               </tr>
               <tr>
-                <td style={{ color: "black" }} className="product-coupon-code">
+                <td className="product-coupon-code">
                   SOMERANDOMCODEHERE
                 </td>
                 <td className="product-stock-keeping-unit">15%</td>
@@ -210,79 +286,7 @@ const Coupon = () => {
                 </td>
               </tr>
               <tr>
-                <td style={{ color: "black" }} className="product-coupon-code">
-                  SOMERANDOMCODEHERE
-                </td>
-                <td className="product-stock-keeping-unit">15%</td>
-                <td>₹2000</td>
-                <td>30000</td>
-                <td>01 Feb 2024</td>
-                <td>31 Oct 2024</td>
-                <td>
-                  <span className="status published">Active</span>
-                </td>
-                <td>24 Jan 2024</td>
-                <td className="actions">
-                  <IoPencil />
-                  <MdDeleteForever />
-                </td>
-              </tr>
-              <tr>
-                <td style={{ color: "black" }} className="product-coupon-code">
-                  SOMERANDOMCODEHERE
-                </td>
-                <td className="product-stock-keeping-unit">15%</td>
-                <td>₹2000</td>
-                <td>30000</td>
-                <td>01 Feb 2024</td>
-                <td>31 Oct 2024</td>
-                <td>
-                  <span className="status published">Active</span>
-                </td>
-                <td>24 Jan 2024</td>
-                <td className="actions">
-                  <IoPencil />
-                  <MdDeleteForever />
-                </td>
-              </tr>
-              <tr>
-                <td style={{ color: "black" }} className="product-coupon-code">
-                  SOMERANDOMCODEHERE
-                </td>
-                <td className="product-stock-keeping-unit">15%</td>
-                <td>₹2000</td>
-                <td>30000</td>
-                <td>01 Feb 2024</td>
-                <td>31 Oct 2024</td>
-                <td>
-                  <span className="status out-of-stock">Expired</span>
-                </td>
-                <td>24 Jan 2024</td>
-                <td className="actions">
-                  <IoPencil />
-                  <MdDeleteForever />
-                </td>
-              </tr>
-              <tr>
-                <td style={{ color: "black" }} className="product-coupon-code">
-                  SOMERANDOMCODEHERE
-                </td>
-                <td className="product-stock-keeping-unit">15%</td>
-                <td>₹2000</td>
-                <td>30000</td>
-                <td>01 Feb 2024</td>
-                <td>31 Oct 2024</td>
-                <td>
-                  <span className="status published">Active</span>
-                </td>
-                <td>24 Jan 2024</td>
-                <td className="actions">
-                  <IoPencil />
-                  <MdDeleteForever />
-                </td>
-              </tr>
-              <tr>
-                <td style={{ color: "black" }} className="product-coupon-code">
+                <td className="product-coupon-code">
                   SOMERANDOMCODEHERE
                 </td>
                 <td className="product-stock-keeping-unit">15%</td>

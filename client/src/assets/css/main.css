@@ -250,6 +250,9 @@ button {
   width: 100%;
   border-collapse: collapse;
 }
+.dashboard-table-container .product-coupon-code {
+  color: var(--black-color) !important;
+}
 .admin-panel-header-div .dashboard-table-container thead {
   position: sticky;
   top: 0;
@@ -363,4 +366,18 @@ button {
   font-family: var(--info-font);
   padding-bottom: 5px;
 }
+.coupon-code-input-max-min-price,
+.coupon-code-start-expity-date,
+.coupon-code-input-profile {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 10px;
+  gap: 20px;
+}
+.coupon-code-input-max-min-price input,
+.coupon-code-start-expity-date input,
+.coupon-code-input-profile input {
+  margin-top: 5px;
+}
+
 /* dashboard-add-content-css */

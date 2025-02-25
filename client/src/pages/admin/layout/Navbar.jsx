@@ -13,16 +13,18 @@ const Navbar = () => {
           <input type="text" placeholder="Search..." />
           <GoSearch />
         </div>
-        <div className="dashboard-nav-notification-bell">
-          <LuBellRing />
-        </div>
-        <div className="dashboard-nav-profile">
-          <img src={DashboardProfile} alt="profile-logo" />
-          <div className="dashboard-nav-profile-name">
-            <span>Sakib Nedariya</span>
-            <p>Admin</p>
+        <div className="dashboard-nav-notification-bell-profile">
+          <div className="dashboard-nav-notification-bell">
+            <LuBellRing />
           </div>
-          <TiArrowSortedDown />
+          <div className="dashboard-nav-profile">
+            <img src={DashboardProfile} alt="profile-logo" />
+            <div className="dashboard-nav-profile-name">
+              <span>Sakib Nedariya</span>
+              <p>Admin</p>
+            </div>
+            <TiArrowSortedDown />
+          </div>
         </div>
       </nav>
     </>

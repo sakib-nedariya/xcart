@@ -107,7 +107,7 @@ const Checkout = () => {
 
               <div className="checkout-section-shipping-option">
                 <input type="checkbox" id="ship-different" />
-                <label for="ship-different">Ship into different address</label>
+                <label htmlFor="ship-different">Ship into different address</label>
               </div>
             </form>
 

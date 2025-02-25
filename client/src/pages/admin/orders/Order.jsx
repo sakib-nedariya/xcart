@@ -25,7 +25,7 @@ const Order = () => {
         <Breadcrumb
           title="Order"
           breadcrumbText="Order List"
-          button={{ link: "/admin/orders", text: "Add Order" }}
+          // button={{ link: "/admin/orders", text: "Add Order" }}
         />
 
         <div className="admin-panel-header-tabs">

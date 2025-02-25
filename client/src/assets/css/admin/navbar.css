@@ -30,10 +30,15 @@
   border-radius: 6px;
   border: 2px solid var(--primary-border-color);
 }
+.dashboard-nav-notification-bell-profile{
+  display: flex;
+  align-items: center;
+}
 .dashboard-nav-notification-bell svg {
   font-size: 24px;
   cursor: pointer;
   margin-top: 6px;
+  margin-right: 25px;
   color: var(--light-gray-color);
 }
 .dashboard-nav-profile img {

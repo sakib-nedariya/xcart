@@ -23,7 +23,7 @@ const ManageAdmin = () => {
         <Breadcrumb
           title="Admin"
           breadcrumbText="Admin List"
-          button={{ link: "/admin/manage-admins", text: "Add New Admin" }}
+          button={{ link: "/admin/add-new_admin", text: "Add New Admin" }}
         />
         <div className="admin-panel-header-tabs">
           <button

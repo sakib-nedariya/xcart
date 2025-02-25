@@ -20,13 +20,13 @@
 
 /* dashboard-add-product-css */
 
-.dashboard-add-contenr-left-side {
+.dashboard-add-content-left-side {
   width: 75%;
   overflow: scroll;
   height: calc(100vh - 185px);
   scrollbar-width: none;
 }
-.dashboard-add-contenr-right-side {
+.dashboard-add-content-right-side {
   width: 25%;
 }
 

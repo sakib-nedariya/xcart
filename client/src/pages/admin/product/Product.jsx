@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
 import { IoIosEye } from "react-icons/io";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import DashboardProImage from "../../../assets/image/dashboard_product_img.png";
@@ -23,7 +22,6 @@ const Product = () => {
           breadcrumbText="Product List"
           button={{ link: "/admin/add-product", text: "Add Product" }}
         />
-
         <div className="admin-panel-header-tabs">
           <button
             className={`admin-panel-header-tab 

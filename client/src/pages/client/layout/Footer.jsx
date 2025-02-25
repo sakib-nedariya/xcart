@@ -17,11 +17,11 @@ const Footer = () => {
               team
             </h3>
             <div className="input-container">
-              <label for="name">YOUR NAME</label>
+              <label htmlFor="name">YOUR NAME</label>
               <input type="text" id="name" placeholder="" />
             </div>
             <div className="input-container">
-              <label for="phone">PHONE NUMBER</label>
+              <label htmlFor="phone">PHONE NUMBER</label>
               <input type="tel" id="phone" placeholder="" />
             </div>
             <button className="primary-btn footer-request-btn">

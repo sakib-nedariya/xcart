@@ -1,7 +1,6 @@
 import React from "react";
 import Sidebar from "../layout/Sidebar";
 import Navbar from "../layout/Navbar";
-// import "../../../assets/css/admin/product.css"
 import { IoMdArrowDropright } from "react-icons/io";
 import { MdSave } from "react-icons/md";
 import { HiXMark } from "react-icons/hi2";
@@ -19,9 +18,9 @@ const AddProduct = () => {
         <div
           className="admin-dashboard-main-header"
           style={{ marginBottom: "24px" }}
-        >
+           >
           <div>
-            <h5>Product</h5>
+            <h5>Add Product</h5>
             <div className="admin-panel-breadcrumb">
               <Link to="/admin/dashboard" className="breadcrumb-link active">
                 Dashboard
@@ -48,11 +47,11 @@ const AddProduct = () => {
         </div>
 
         <div className="dashboard-add-content-card-div">
-          <div className="dashboard-add-contenr-left-side">
+          <div className="dashboard-add-content-left-side">
             <div className="dashboard-add-content-card">
               <h6>General Information</h6>
               <div className="add-product-form-container">
-                <label for="label-for-input-textarea product-name">
+                <label htmlFor="label-for-input-textarea product-name">
                   Product Name
                 </label>
                 <input
@@ -60,7 +59,7 @@ const AddProduct = () => {
                   id="product-name"
                   placeholder="Type product name here..."
                 />
-                <label for="label-for-input-textarea description">
+                <label htmlFor="label-for-input-textarea description">
                   Description
                 </label>
                 <textarea
@@ -73,7 +72,7 @@ const AddProduct = () => {
             <div className="dashboard-add-content-card">
               <h6>Media</h6>
               <div className="add-product-form-container">
-                <label for="label-for-input-textarea photo">Photo</label>
+                <label htmlFor="label-for-input-textarea photo">Photo</label>
                 <div className="add-product-upload-container">
                   <div className="add-product-upload-icon">
                     <img
@@ -108,7 +107,7 @@ const AddProduct = () => {
             <div className="dashboard-add-content-card">
               <h6>Pricing</h6>
               <div className="add-product-form-container">
-                <label for="label-for-input-textarea product-name">
+                <label htmlFor="label-for-input-textarea product-name">
                   Base Price
                 </label>
                 <input
@@ -116,7 +115,7 @@ const AddProduct = () => {
                   id="product-name"
                   placeholder="Type base price here..."
                 />
-                <label for="label-for-input-textarea product-name">
+                <label htmlFor="label-for-input-textarea product-name">
                   Discount Percentage (%)
                 </label>
                 <input
@@ -124,7 +123,7 @@ const AddProduct = () => {
                   id="product-name"
                   placeholder="Type discount percentage..."
                 />
-                <label for="label-for-input-textarea product-name">
+                <label htmlFor="label-for-input-textarea product-name">
                   Stock Keeping Unit
                 </label>
                 <input
@@ -136,11 +135,11 @@ const AddProduct = () => {
             </div>
           </div>
 
-          <div className="dashboard-add-contenr-right-side">
+          <div className="dashboard-add-content-right-side">
             <div className="dashboard-add-content-card">
               <h6>Brand & Category</h6>
               <div className="add-product-form-container">
-                <label for="label-for-input-textarea product-name">
+                <label htmlFor="label-for-input-textarea product-name">
                   Select Brand
                 </label>
                 <select id="courses" name="courses">
@@ -151,7 +150,7 @@ const AddProduct = () => {
                 </select>
               </div>
               <div className="add-product-form-container">
-                <label for="label-for-input-textarea product-name">
+                <label htmlFor="label-for-input-textarea product-name">
                   Select Category
                 </label>
                 <select id="courses" name="courses">
@@ -166,7 +165,7 @@ const AddProduct = () => {
             <div className="dashboard-add-content-card">
               <h6>Status</h6>
               <div className="add-product-form-container">
-                <label for="label-for-input-textarea product-name">
+                <label htmlFor="label-for-input-textarea product-name">
                   Product Status
                 </label>
                 <select id="courses" name="courses">

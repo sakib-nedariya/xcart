@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import {
-  HiOutlinePlus,
   HiOutlineArrowLeft,
   HiOutlineArrowRight,
 } from "react-icons/hi";
 import Navbar from "../layout/Navbar";
 import Sidebar from "../layout/Sidebar";
-import { IoMdArrowDropright, IoIosEye } from "react-icons/io";
+import { IoIosEye } from "react-icons/io";
 import AdminProfile from "../../../assets/image/dash-profile.png";
 import { MdDeleteForever } from "react-icons/md";
 import { IoPencil } from "react-icons/io5";
@@ -24,7 +22,7 @@ const Customer = () => {
         <Breadcrumb
           title="Customers"
           breadcrumbText="Customers List"
-          button={{ link: "/admin/customers", text: "Add New Customer" }}
+          button={{ link: "/admin/add-new_customer", text: "Add New Customer" }}
         />
 
         <div className="admin-panel-header-tabs">
