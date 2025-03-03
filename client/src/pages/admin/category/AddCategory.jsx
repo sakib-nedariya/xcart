@@ -41,7 +41,7 @@ const AddCategory = () => {
             >
               <HiXMark /> Cancel
             </NavLink>
-            <button className="primary-btn dashboard-add-product-btn">
+            <button type="button" className="primary-btn dashboard-add-product-btn">
               <MdSave /> Save Category
             </button>
           </div>
@@ -58,15 +58,11 @@ const AddCategory = () => {
                       src="https://cdn-icons-png.flaticon.com/512/1829/1829586.png"
                       alt="Upload Icon"
                     />
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/1829/1829586.png"
-                      alt="Upload Icon"
-                    />
                   </div>
                   <p className="add-product-upload-text">
                     Drag and drop image here, or click add image
                   </p>
-                  <button
+                  <button 
                     type="button"
                     className="add-product-upload-btn secondary-btn"
                     onClick={handleButtonClick}

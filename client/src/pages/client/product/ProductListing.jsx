@@ -26,11 +26,14 @@ const ProductListing = () => {
             </label>
           </div>
 
+          <div className="price-range">
           <p>Price Range Slider</p>
           <div className="input">
             <input type="text" name="min-price" placeholder="Min Price" />
             <input type="text" name="min-price" placeholder="Min Price" />
           </div>
+          </div>
+          
           <div class="radio-group">
             <label>
               <input type="radio" name="price" />
@@ -61,6 +64,7 @@ const ProductListing = () => {
 
         <div className="products-with-searchbar">
           <nav className="product-navbar">
+            <div className="search-select"> 
             <input
               type="text"
               placeholder="Search..."
@@ -71,10 +75,13 @@ const ProductListing = () => {
               <option value="price-low">Price: Low to High</option>
               <option value="price-high">Price: High to Low</option>
             </select>
+            </div>
 
+            <div>
             <p className="result">
               <strong>20/400</strong> Results Loaded
             </p>
+            </div>
           </nav>
 
           <div className="product-items">

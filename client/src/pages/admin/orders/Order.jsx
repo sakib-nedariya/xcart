@@ -29,35 +29,35 @@ const Order = () => {
         />
 
         <div className="admin-panel-header-tabs">
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "All Status" ? "active" : ""}`}
             onClick={() => setActiveTab("All Status")}
           >
             All Status
           </button>
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Processing" ? "active" : ""}`}
             onClick={() => setActiveTab("Processing")}
           >
             Processing
           </button>
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Shipped" ? "active" : ""}`}
             onClick={() => setActiveTab("Shipped")}
           >
             Shipped
           </button>
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Delivered" ? "active" : ""}`}
             onClick={() => setActiveTab("Delivered")}
           >
             Delivered
           </button>
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Cancelled" ? "active" : ""}`}
             onClick={() => setActiveTab("Cancelled")}

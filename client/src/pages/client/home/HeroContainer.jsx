@@ -21,7 +21,7 @@ const HeroContainer = () => {
             <div className="hero-product-search-input">
               <FaSearch className="search-icon" />
               <input type="text" placeholder="Find the best product" className="search-input"/>
-              <button className="search-button primary-btn">Search</button>
+              <button type="button" className="search-button primary-btn">Search</button>
             </div>
           </div>
           <div className="hero-container-image">

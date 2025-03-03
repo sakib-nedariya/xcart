@@ -4,7 +4,7 @@ import { RxDashboard } from "react-icons/rx";
 import { RiAdminLine, RiCoupon2Line, RiProductHuntLine } from "react-icons/ri";
 import { LuUsers } from "react-icons/lu";
 import { FiLogOut } from "react-icons/fi";
-import {  IoGiftOutline } from "react-icons/io5";
+import { IoGiftOutline } from "react-icons/io5";
 import { MdOutlineCategory } from "react-icons/md";
 import "../../../assets/css/admin/sidebar.css";
 

@@ -22,7 +22,7 @@
   top: 25%;
 }
 .dashboard-navbar-seach-input input {
-  width: 10in;
+  width: 9in;
   outline: none;
   padding: 12px;
   color: var(--light-gray-color);
@@ -30,7 +30,7 @@
   border-radius: 6px;
   border: 2px solid var(--primary-border-color);
 }
-.dashboard-nav-notification-bell-profile{
+.dashboard-nav-notification-bell-profile {
   display: flex;
   align-items: center;
 }
@@ -62,8 +62,17 @@
   font-family: var(--info-font);
   font-weight: 500;
 }
-.dashboard-nav-profile svg{
+.dashboard-nav-profile svg {
   font-size: 20px;
   margin-left: 6px;
   color: var(--light-gray-color);
+}
+
+@media screen and (max-width: 1350px) {
+  .dashboard-navbar-seach-input input {
+    width: 7.7in;
+  }
+  .dashboard-navbar-seach-input svg {
+    left: 95.3%;
+  }
 }

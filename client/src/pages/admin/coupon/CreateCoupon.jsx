@@ -37,7 +37,7 @@ const CreateCoupon = () => {
             >
               <HiXMark /> Cancel
             </NavLink>
-            <button className="primary-btn dashboard-add-product-btn">
+            <button type="button" className="primary-btn dashboard-add-product-btn">
               <MdSave /> Save Coupon
             </button>
           </div>

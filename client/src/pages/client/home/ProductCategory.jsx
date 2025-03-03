@@ -54,7 +54,7 @@ const handleNavigateProducts = () =>{
                 </div>
               </div>
             </div>
-            <button className="product-view-button primary-btn" onClick={()=> handleNavigateProducts()} >
+            <button type="button" className="product-view-button primary-btn" onClick={()=> handleNavigateProducts()} >
               View All Products
             </button>
           </div>

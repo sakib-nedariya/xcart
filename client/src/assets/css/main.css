@@ -13,6 +13,7 @@
   --light-white-color: #f5f5f7;
   --light-gray-color: #8b8e99;
   --black-color: #000;
+  --red-color: #ed4f32;
   --sidebar-bg-color: #ebebee;
   --light-black-color: #747477;
   --placeholder-color: #929fa5;
@@ -347,11 +348,11 @@ button {
 
 /* dashboard-add-content-css */
 
-.dashboard-add-content-card-div{
+.dashboard-add-content-card-div {
   display: flex;
   gap: 25px;
 }
-.dashboard-add-content-card{
+.dashboard-add-content-card {
   background-color: var(--white-color);
   padding: 24px;
   height: fit-content;
@@ -359,9 +360,9 @@ button {
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.02);
 }
 .dashboard-add-content-card:not(:first-child) {
-  margin-top: 24px; 
+  margin-top: 24px;
 }
-.dashboard-add-content-card h6{
+.dashboard-add-content-card h6 {
   font-size: 18px;
   font-family: var(--info-font);
   padding-bottom: 5px;
@@ -381,3 +382,88 @@ button {
 }
 
 /* dashboard-add-content-css */
+
+/* ----delete-modal-container---- */
+
+.delete-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 50;
+}
+
+.delete-modal-container .modal {
+  font-family: var(--secondary-font);
+  width: 480px;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: white;
+}
+
+.delete-modal-container .modal h6 {
+  font-family: var(--info-font);
+  margin-bottom: 10px;
+}
+.delete-modal-container .modal span {
+  color: var(--red-color);
+  font-size: 13px;
+}
+.delete-modal-container .modal label {
+  font-size: 15px;
+}
+.delete-modal-container .modal input {
+  width: 100%;
+  font-size: 15px;
+  margin-top: 5px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid var(--primary-border-color);
+}
+.delete-modal-container .modal input:focus-visible {
+  outline: none;
+}
+.delete-modal-container .modal .modal-container-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+.delete-modal-container .modal .modal-container-buttons button {
+  display: flex;
+  align-items: center;
+}
+.delete-modal-container .modal .modal-container-buttons button svg {
+  margin-right: 5px;
+  font-size: 18px;
+}
+
+.delete-modal-container .modal .modal-container-buttons .delete-btn {
+  color: var(--white-color);
+  background-color: var(--red-color);
+  border: 2px solid var(--red-color);
+}
+.delete-modal-container .modal .modal-container-buttons .delete-btn:hover {
+  background-color: transparent;
+  color: var(--red-color);
+  border: 2px solid var(--red-color);
+}
+.delete-modal-container .modal .modal-container-buttons .cancel-btn {
+  color: var(--red-color);
+  background-color: transparent;
+  border: 2px solid var(--red-color);
+}
+.delete-modal-container .modal .modal-container-buttons .cancel-btn:hover {
+  background-color: var(--red-color);
+  color: var(--white-color);
+  border: 2px solid var(--red-color);
+}
+.required_field {
+  color: var(--red-color);
+  font-weight: 600;
+}
+/* ----delete-modal-container---- */

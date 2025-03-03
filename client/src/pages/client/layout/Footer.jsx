@@ -24,7 +24,7 @@ const Footer = () => {
               <label htmlFor="phone">PHONE NUMBER</label>
               <input type="tel" id="phone" placeholder="" />
             </div>
-            <button className="primary-btn footer-request-btn">
+            <button type="button" className="primary-btn footer-request-btn">
               Send Request
             </button>
             <div className="privacy-button">

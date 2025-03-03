@@ -74,8 +74,8 @@
 .add-product-form-container .add-product-upload-container:hover {
   border-color: var(--primary-btn-bg);
 }
-.add-product-form-container .add-product-upload-icon img{
-  width: 70px;
+.add-product-form-container .add-product-upload-icon img {
+  width: 80px;
   height: 80px;
   margin: 0 15px;
 }

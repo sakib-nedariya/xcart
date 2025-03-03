@@ -23,24 +23,24 @@ const ManageAdmin = () => {
         <Breadcrumb
           title="Admin"
           breadcrumbText="Admin List"
-          button={{ link: "/admin/add-new_admin", text: "Add New Admin" }}
+          button={{ link: "/admin/add-new-admin", text: "Add New Admin" }}
         />
         <div className="admin-panel-header-tabs">
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                      ${activeTab === "All" ? "active" : ""}`}
             onClick={() => setActiveTab("All")}
           >
             All
           </button>
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                      ${activeTab === "Active" ? "active" : ""}`}
             onClick={() => setActiveTab("Active")}
           >
             Active
           </button>
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                      ${activeTab === "Blocked" ? "active" : ""}`}
             onClick={() => setActiveTab("Blocked")}

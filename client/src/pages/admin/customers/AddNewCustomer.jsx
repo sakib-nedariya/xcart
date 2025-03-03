@@ -40,7 +40,7 @@ const AddNewCustomer = () => {
             >
               <HiXMark /> Cancel
             </NavLink>
-            <button className="primary-btn dashboard-add-product-btn">
+            <button type="button" className="primary-btn dashboard-add-product-btn">
               <MdSave /> Save Customer
             </button>
           </div>

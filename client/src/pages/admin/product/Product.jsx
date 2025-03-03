@@ -23,35 +23,35 @@ const Product = () => {
           button={{ link: "/admin/add-product", text: "Add Product" }}
         />
         <div className="admin-panel-header-tabs">
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "All Products" ? "active" : ""}`}
             onClick={() => setActiveTab("All Products")}
           >
             All Products
           </button>
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Published" ? "active" : ""}`}
             onClick={() => setActiveTab("Published")}
           >
             Published
           </button>
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Low Stock" ? "active" : ""}`}
             onClick={() => setActiveTab("Low Stock")}
           >
             Low Stock
           </button>
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Draft" ? "active" : ""}`}
             onClick={() => setActiveTab("Draft")}
           >
             Draft
           </button>
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Out Of Stock" ? "active" : ""}`}
             onClick={() => setActiveTab("Out Of Stock")}

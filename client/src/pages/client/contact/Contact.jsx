@@ -72,7 +72,7 @@ const Contact = () => {
                 <div className="form-group">
                   <label>Phone Number</label>
                   <input
-                    type="number"
+                    type="text"
                     name="phonenumber"
                     placeholder="+91 73569 88456"
                   />
@@ -113,11 +113,11 @@ const Contact = () => {
                 <textarea
                   type="email"
                   name="email"
-                  placeholder="Write your message here"
+                  placeholder="Write your message... "
                 />
               </div>
 
-              <button className="btn primary-btn">Send Message</button>
+              <button type="button" className="btn primary-btn">Send Message</button>
             </form>
           </div>
           </div>

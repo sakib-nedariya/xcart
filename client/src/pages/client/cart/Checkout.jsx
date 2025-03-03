@@ -233,7 +233,7 @@ const Checkout = () => {
                   <b>₹123,999</b>
                 </span>
               </div>
-              <button className="shopping-cartcheckout-btn primary-btn">
+              <button type="button" className="shopping-cartcheckout-btn primary-btn">
                 Place Order
               </button>
             </div>

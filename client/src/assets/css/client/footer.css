@@ -76,6 +76,11 @@
   line-height: 1.8em;
   font-weight: 600;
 }
+.footer-info-about-content .about_us ul li:hover,
+.footer-info-about-content .info ul li:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
 .footer-middle-info-socialmedia-link {
   width: 30%;
   display: flex;

@@ -16,7 +16,7 @@ const Contact = () => {
                   placeholder="Enter Email Address"
                   className="search-input"
                 />
-                <button className="subscribe-button primary-btn">Subscribe</button>
+                <button type="button" className="subscribe-button primary-btn">Subscribe</button>
               </div>
             </div>
             <div className="subscribe-newsletter image">

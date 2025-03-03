@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import {
-  HiOutlineArrowLeft,
-  HiOutlineArrowRight,
-} from "react-icons/hi";
+import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import Navbar from "../layout/Navbar";
 import Sidebar from "../layout/Sidebar";
+import DeleteModal from "../layout/DeleteModal";
 import { IoIosEye } from "react-icons/io";
 import AdminProfile from "../../../assets/image/dash-profile.png";
 import { MdDeleteForever } from "react-icons/md";
@@ -13,7 +11,15 @@ import Breadcrumb from "../layout/Breadcrumb";
 
 const Customer = () => {
   const [activeTab, setActiveTab] = useState("All");
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+  const openDeleteModal = () => setIsDeleteModalOpen(true);
+  const closeDeleteModal = () => setIsDeleteModalOpen(false);
+
+  const handleCustomerDelete = () => {
+    console.log("Customer deleted successfully!");
+    closeDeleteModal();
+  };
   return (
     <>
       <Navbar />
@@ -26,21 +32,21 @@ const Customer = () => {
         />
 
         <div className="admin-panel-header-tabs">
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                      ${activeTab === "All" ? "active" : ""}`}
             onClick={() => setActiveTab("All")}
           >
             All
           </button>
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                      ${activeTab === "Active" ? "active" : ""}`}
             onClick={() => setActiveTab("Active")}
           >
             Active
           </button>
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                      ${activeTab === "Blocked" ? "active" : ""}`}
             onClick={() => setActiveTab("Blocked")}
@@ -78,7 +84,7 @@ const Customer = () => {
                 <td className="actions">
                   <IoPencil />
                   <IoIosEye />
-                  <MdDeleteForever />
+                  <MdDeleteForever onClick={openDeleteModal} />
                 </td>
               </tr>
               <tr>
@@ -318,6 +324,13 @@ const Customer = () => {
           </div>
         </div>
       </main>
+      {isDeleteModalOpen && (
+        <DeleteModal
+          title="Customer"
+          onCancel={closeDeleteModal}
+          onDelete={handleCustomerDelete}
+        />
+      )}
     </>
   );
 };

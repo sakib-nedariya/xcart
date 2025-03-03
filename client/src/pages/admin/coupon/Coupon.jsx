@@ -23,28 +23,28 @@ const Coupon = () => {
           button={{ link: "/admin/create-coupon", text: "Create Coupon" }}
         />
         <div className="admin-panel-header-tabs">
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "All" ? "active" : ""}`}
             onClick={() => setActiveTab("All")}
           >
             All
           </button>
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Active" ? "active" : ""}`}
             onClick={() => setActiveTab("Active")}
           >
             Active
           </button>
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Disable" ? "active" : ""}`}
             onClick={() => setActiveTab("Disable")}
           >
             Disable
           </button>
-          <button
+          <button type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Expired" ? "active" : ""}`}
             onClick={() => setActiveTab("Expired")}

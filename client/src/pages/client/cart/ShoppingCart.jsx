@@ -107,7 +107,7 @@ const ShoppingCart = () => {
                   <b>₹123,999</b>
                 </span>
               </div>
-              <button className="shopping-cartcheckout-btn primary-btn" onClick={()=>handlecheckoutpagenavigate()}>
+              <button type="button" className="shopping-cartcheckout-btn primary-btn" onClick={()=>handlecheckoutpagenavigate()}>
                 PROCEED TO CHECKOUT
               </button>
             </div>
@@ -118,7 +118,7 @@ const ShoppingCart = () => {
                 className="coupon-input"
                 placeholder="Coupon Code"
               />
-              <button className="apply-coupon-btn secondary-btn">
+              <button type="button" className="apply-coupon-btn secondary-btn">
                 APPLY COUPON
               </button>
             </div>
