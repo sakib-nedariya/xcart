@@ -21,7 +21,6 @@ const Order = () => {
       <Sidebar />
       <Navbar />
       <main className="admin-panel-header-div">
-
         <Breadcrumb
           title="Order"
           breadcrumbText="Order List"
@@ -29,35 +28,40 @@ const Order = () => {
         />
 
         <div className="admin-panel-header-tabs">
-          <button type="button"
+          <button
+            type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "All Status" ? "active" : ""}`}
             onClick={() => setActiveTab("All Status")}
           >
             All Status
           </button>
-          <button type="button"
+          <button
+            type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Processing" ? "active" : ""}`}
             onClick={() => setActiveTab("Processing")}
           >
             Processing
           </button>
-          <button type="button"
+          <button
+            type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Shipped" ? "active" : ""}`}
             onClick={() => setActiveTab("Shipped")}
           >
             Shipped
           </button>
-          <button type="button"
+          <button
+            type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Delivered" ? "active" : ""}`}
             onClick={() => setActiveTab("Delivered")}
           >
             Delivered
           </button>
-          <button type="button"
+          <button
+            type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Cancelled" ? "active" : ""}`}
             onClick={() => setActiveTab("Cancelled")}
@@ -70,14 +74,14 @@ const Order = () => {
           <table>
             <thead>
               <tr>
-                <th style={{ width: "8%" }}>Order ID</th>
-                <th style={{ width: "28%" }}>Product</th>
-                <th style={{ width: "10%" }}>Date</th>
-                <th style={{ width: "12%" }}>Customer</th>
-                <th style={{ width: "9%" }}>Total</th>
-                <th style={{ width: "10%" }}>Payment</th>
-                <th style={{ width: "11%" }}>Status</th>
-                <th style={{ width: "12%" }}>Action</th>
+                <th>Order ID</th>
+                <th>Product</th>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Total</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>

@@ -27,11 +27,11 @@ const Category = () => {
           <table>
             <thead>
               <tr>
-                <th style={{ width: "52%" }}>Category Name</th>
-                <th style={{ width: "12%" }}>Sold</th>
-                <th style={{ width: "12%" }}>Stock</th>
-                <th style={{ width: "12%" }}>Added</th>
-                <th style={{ width: "12%" }}>Action</th>
+                <th style={{ width: "48%" }}>Category Name</th>
+                <th style={{ width: "13%" }}>Sold</th>
+                <th style={{ width: "13%" }}>Stock</th>
+                <th style={{ width: "13%" }}>Added</th>
+                <th style={{ width: "13%" }}>Action</th>
               </tr>
             </thead>
             <tbody>

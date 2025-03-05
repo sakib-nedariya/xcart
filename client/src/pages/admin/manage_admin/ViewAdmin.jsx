@@ -1,20 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
+import { HiXMark } from "react-icons/hi2";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { MdSave } from "react-icons/md";
+import { IoMdArrowDropright } from "react-icons/io";
+import default_profile from "../../../assets/image/default_profile.png";
 import Sidebar from "../layout/Sidebar";
 import Navbar from "../layout/Navbar";
-import { MdSave } from "react-icons/md";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { HiXMark } from "react-icons/hi2";
-import { IoMdArrowDropright } from "react-icons/io";
-import { Link, NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { notifyWarning } from "../layout/ToastMessage";
-import default_profile from "../../../assets/image/default_profile.png";
 const port = import.meta.env.VITE_SERVER_URL;
 
-const AddNewAdmin = () => {
-  const navigate = useNavigate();
-  const [passwordViewOrHide, setPasswordViewOrHide] = useState(false);
-  const [addAdminData, setAddAdminData] = useState({
+const ViewAdmin = () => {
+  const { id } = useParams();
+  const [adminData, setAdminData] = useState({
     first_name: "",
     middle_name: "",
     last_name: "",
@@ -28,124 +26,26 @@ const AddNewAdmin = () => {
     status: 1,
   });
 
-  const handleChangeInput = (e) => {
-    const { name, value } = e.target;
-    setAddAdminData({
-      ...addAdminData,
-      [name]: value,
-    });
-  };
+  const [passwordViewOrHide, setPasswordViewOrHide] = useState(false);
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setAddAdminData({
-        ...addAdminData,
-        profile: file,
-        profilePreview: URL.createObjectURL(file),
+  const getAdminData = async () => {
+    try {
+      const res = await axios.get(`${port}getadmindatawithid/${id}`);
+      const fetchedData = res.data[0];
+
+      setAdminData({
+        ...fetchedData,
+        dob: fetchedData.dob ? fetchedData.dob.split("T")[0] : "", // Format DOB correctly
       });
+    } catch (error) {
+      console.log("Error fetching data:", error);
     }
   };
 
-  const saveAdminData = async (e) => {
-    e.preventDefault();
-    const nameRegex = /^[A-Za-z]+$/;
-    const usernameRegex = /^[A-Za-z0-9_.-]+$/;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordRegex =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-    const phoneRegex = /^[0-9]+$/;
+  useEffect(() => {
+    getAdminData();
+  }, [id]);
 
-    if (!addAdminData.first_name.trim()) {
-      notifyWarning("First name is required");
-      return;
-    }
-    if (!nameRegex.test(addAdminData.first_name.trim())) {
-      notifyWarning("First name should only contain alphabets");
-      return;
-    }
-    if (!addAdminData.last_name.trim()) {
-      notifyWarning("Last name is required");
-      return;
-    }
-    if (!nameRegex.test(addAdminData.last_name.trim())) {
-      notifyWarning("Last name should only contain alphabets");
-      return;
-    }
-    if (
-      addAdminData.middle_name.trim() &&
-      !nameRegex.test(addAdminData.middle_name.trim())
-    ) {
-      notifyWarning("Middle name should only contain alphabets");
-      return;
-    }
-    if (!addAdminData.user_name.trim()) {
-      notifyWarning("Username is required");
-      return;
-    }
-    if (!usernameRegex.test(addAdminData.user_name.trim())) {
-      notifyWarning(
-        "Username can only contain letters, numbers, underscores, dots, and hyphens"
-      );
-      return;
-    }
-    if (!addAdminData.email.trim()) {
-      notifyWarning("Email is required");
-      return;
-    }
-    if (!emailRegex.test(addAdminData.email.trim())) {
-      notifyWarning("Enter a valid email address");
-      return;
-    }
-    if (!addAdminData.password.trim()) {
-      notifyWarning("Password is required");
-      return;
-    }
-    if (!passwordRegex.test(addAdminData.password.trim())) {
-      notifyWarning(
-        "Password must be at least 6 characters long and include a letter, a number, and a special character"
-      );
-      return;
-    }
-    if (
-      addAdminData.mobile_number.trim() &&
-      !phoneRegex.test(addAdminData.mobile_number.trim())
-    ) {
-      notifyWarning("Phone number should only contain numbers");
-      return;
-    }
-    if (addAdminData.password !== addAdminData.confirm_password) {
-      notifyWarning("Passwords do not match");
-      return;
-    }
-    const formData = new FormData();
-    formData.append("first_name", addAdminData.first_name);
-    formData.append("middle_name", addAdminData.middle_name);
-    formData.append("last_name", addAdminData.last_name);
-    formData.append("user_name", addAdminData.user_name);
-    formData.append("email", addAdminData.email);
-    formData.append("mobile_number", addAdminData.mobile_number);
-    formData.append("dob", addAdminData.dob);
-    formData.append("password", addAdminData.password);
-    if (addAdminData.profile) {
-      formData.append("profile", addAdminData.profile);
-    }
-    formData.append("status", addAdminData.status);
-    await axios
-      .post(`${port}addadmindata`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-      .then(() => {
-        navigate("/admin/manage-admins");
-      })
-      .catch((error) => {
-        console.log("Error adding admin data:", error);
-      });
-  };
-
-  const handleButtonClick = () => {
-    document.getElementById("imageInputFile").click();
-  };
   return (
     <>
       <Sidebar />
@@ -156,7 +56,7 @@ const AddNewAdmin = () => {
           style={{ marginBottom: "24px" }}
         >
           <div>
-            <h5>Add Admin</h5>
+            <h5>View Admin</h5>
             <div className="admin-panel-breadcrumb">
               <Link to="/admin/dashboard" className="breadcrumb-link active">
                 Dashboard
@@ -169,7 +69,7 @@ const AddNewAdmin = () => {
                 Admin List
               </Link>
               <IoMdArrowDropright />
-              <span className="breadcrumb-text">Add Admin</span>
+              <span className="breadcrumb-text">View Admin</span>
             </div>
           </div>
           <div className="admin-panel-header-add-buttons">
@@ -181,7 +81,6 @@ const AddNewAdmin = () => {
             </NavLink>
             <button
               type="button"
-              onClick={(e) => saveAdminData(e)}
               className="primary-btn dashboard-add-product-btn"
             >
               <MdSave /> Save Admin
@@ -200,10 +99,10 @@ const AddNewAdmin = () => {
                     <input
                       type="text"
                       name="first_name"
-                      value={addAdminData.first_name}
-                      onChange={handleChangeInput}
                       id="first-name"
                       placeholder="Type your first name here..."
+                      value={adminData.first_name}
+                      disabled
                     />
                   </div>
                   <div>
@@ -211,10 +110,10 @@ const AddNewAdmin = () => {
                     <input
                       type="text"
                       name="middle_name"
-                      value={addAdminData.middle_name}
-                      onChange={handleChangeInput}
                       id="middle-name"
                       placeholder="Type your middle name here..."
+                      value={adminData.middle_name}
+                      disabled
                     />
                   </div>
                   <div>
@@ -224,9 +123,9 @@ const AddNewAdmin = () => {
                       type="text"
                       name="last_name"
                       id="last-name"
-                      value={addAdminData.last_name}
-                      onChange={handleChangeInput}
                       placeholder="Type your last name here..."
+                      value={adminData.last_name}
+                      disabled
                     />
                   </div>
                 </div>
@@ -238,9 +137,9 @@ const AddNewAdmin = () => {
                       type="text"
                       name="user_name"
                       id="username"
-                      value={addAdminData.user_name}
-                      onChange={handleChangeInput}
                       placeholder="Type your username here..."
+                      value={adminData.user_name}
+                      disabled
                     />
                   </div>
                   <div>
@@ -250,9 +149,9 @@ const AddNewAdmin = () => {
                       type="text"
                       name="email"
                       id="email"
-                      value={addAdminData.email}
-                      onChange={handleChangeInput}
                       placeholder="Type your email here..."
+                      value={adminData.email}
+                      disabled
                     />
                   </div>
                   <div>
@@ -261,9 +160,9 @@ const AddNewAdmin = () => {
                       type="text"
                       name="mobile_number"
                       id="phone-number"
-                      value={addAdminData.mobile_number}
-                      onChange={handleChangeInput}
                       placeholder="Type your phone number here..."
+                      value={adminData.mobile_number}
+                      disabled
                     />
                   </div>
                 </div>
@@ -273,10 +172,10 @@ const AddNewAdmin = () => {
                     <input
                       type="date"
                       name="dob"
-                      value={addAdminData.dob}
-                      onChange={handleChangeInput}
                       id="date-of-birth"
                       placeholder="Type your last name here..."
+                      value={adminData.dob}
+                      disabled
                     />
                   </div>
                   <div style={{ position: "relative" }}>
@@ -286,9 +185,9 @@ const AddNewAdmin = () => {
                       type={passwordViewOrHide ? "text" : "password"}
                       name="password"
                       id="password"
-                      value={addAdminData.password}
-                      onChange={handleChangeInput}
                       placeholder="Password..."
+                      value={adminData.password}
+                      disabled
                     />
                     <span
                       style={{
@@ -310,10 +209,10 @@ const AddNewAdmin = () => {
                     <input
                       type="password"
                       name="confirm_password"
-                      value={addAdminData.confirm_password}
-                      onChange={handleChangeInput}
                       id="confirm-password"
                       placeholder="Confirm Password..."
+                      value={adminData.password}
+                      disabled
                     />
                   </div>
                 </div>
@@ -327,25 +226,26 @@ const AddNewAdmin = () => {
                 <label htmlFor="photo">Photo</label>
                 <div className="add-product-upload-container">
                   <div className="add-product-upload-icon">
-                    <img
-                      src={addAdminData.profilePreview || default_profile}
-                      alt="Selected Profile"
-                      width="100"
-                    />
+                    {adminData.profile ? (
+                      // Show the existing profile image if available
+                      <img
+                        src={`/upload/${adminData.profile}`}
+                        alt="Selected Profile"
+                        width="100"
+                      />
+                    ) : (
+                      // Show default profile image if no profile is set
+                      <img
+                        src={default_profile}
+                        alt="Default Profile"
+                        width="100"
+                      />
+                    )}
                   </div>
-                  <p className="add-product-upload-text">Click to add image</p>
-                  <button
-                    type="button"
-                    className="add-product-upload-btn secondary-btn"
-                    onClick={handleButtonClick}
-                  >
-                    Add Image
-                  </button>
                   <input
                     type="file"
                     id="imageInputFile"
                     name="profile"
-                    onChange={handleFileChange}
                     style={{ display: "none" }}
                   />
                 </div>
@@ -358,8 +258,8 @@ const AddNewAdmin = () => {
                 <select
                   id="status"
                   name="status"
-                  value={addAdminData.status}
-                  onChange={handleChangeInput}
+                  value={adminData.status}
+                  disabled
                 >
                   <option value="1">Active</option>
                   <option value="0">Blocked</option>
@@ -373,4 +273,4 @@ const AddNewAdmin = () => {
   );
 };
 
-export default AddNewAdmin;
+export default ViewAdmin;

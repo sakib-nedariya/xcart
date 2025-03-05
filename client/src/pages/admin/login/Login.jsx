@@ -30,7 +30,7 @@ const Login = () => {
                 style={{
                   position: "absolute",
                   right: "4%",
-                  top: "40%",
+                  top: "33%",
                   cursor: "pointer",
                   color: "gray",
                 }}

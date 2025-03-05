@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import "../../assets/css/main.css"
+import "../../assets/css/main.css";
 import Dashboard from "../../pages/admin/dashboard/Dashboard";
 import Product from "../../pages/admin/product/Product";
 import Category from "../../pages/admin/category/Category";
@@ -14,7 +14,8 @@ import CreateCoupon from "../../pages/admin/coupon/CreateCoupon";
 import AddNewAdmin from "../../pages/admin/manage_admin/AddNewAdmin";
 import AddNewCustomer from "../../pages/admin/customers/AddNewCustomer";
 import Login from "../../pages/admin/login/Login";
-
+import EditAdmin from "../../pages/admin/manage_admin/EditAdmin";
+import ViewAdmin from "../../pages/admin/manage_admin/ViewAdmin";
 
 const DashboardRoute = () => {
   return (
@@ -25,14 +26,16 @@ const DashboardRoute = () => {
         <Route path="/admin/product" element={<Product />} />
         <Route path="/admin/category" element={<Category />} />
         <Route path="/admin/orders" element={<Order />} />
-        <Route path="/admin/coupon" element={<Coupon/>} />
-        <Route path="/admin/manage-admins" element={<ManageAdmin/>} />
-        <Route path="/admin/customers" element={<Customer/>} />
-        <Route path="/admin/add-product" element={<AddProduct/>} />
-        <Route path="/admin/add-category" element={<AddCategory/>} />
-        <Route path="/admin/create-coupon" element={<CreateCoupon/>} />
-        <Route path="/admin/add-new-admin" element={<AddNewAdmin/>} />
-        <Route path="/admin/add-new_customer" element={<AddNewCustomer/>} />
+        <Route path="/admin/coupon" element={<Coupon />} />
+        <Route path="/admin/manage-admins" element={<ManageAdmin />} />
+        <Route path="/admin/customers" element={<Customer />} />
+        <Route path="/admin/add-product" element={<AddProduct />} />
+        <Route path="/admin/add-category" element={<AddCategory />} />
+        <Route path="/admin/create-coupon" element={<CreateCoupon />} />
+        <Route path="/admin/add-new-admin" element={<AddNewAdmin />} />
+        <Route path="/admin/add-new_customer" element={<AddNewCustomer />} />
+        <Route path="/admin/edit-admin/:id" element={<EditAdmin />} />
+        <Route path="/admin/view-admin/:id" element={<ViewAdmin />} />
       </Routes>
     </>
   );

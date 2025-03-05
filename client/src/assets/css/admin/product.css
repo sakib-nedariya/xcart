@@ -1,7 +1,7 @@
 .admin-panel-header-div .dashboard-table-container td img {
   width: 44px;
   height: 44px;
-  border-radius: 6px;
+  border-radius: 50%;
   object-fit: cover;
   margin-right: 10px;
 }
@@ -77,7 +77,8 @@
 .add-product-form-container .add-product-upload-icon img {
   width: 80px;
   height: 80px;
-  margin: 0 15px;
+  object-fit: contain;
+  margin-bottom: 5px;
 }
 .add-product-form-container .add-product-upload-text {
   color: var(--primary-font-color);

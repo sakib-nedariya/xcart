@@ -59,13 +59,13 @@ const Customer = () => {
           <table>
             <thead>
               <tr>
-                <th style={{ width: "25%" }}>Name</th>
-                <th style={{ width: "16%" }}>Email</th>
-                <th style={{ width: "15%" }}>Phone No</th>
-                <th style={{ width: "11%" }}>DOB</th>
-                <th style={{ width: "10%" }}>Status</th>
-                <th style={{ width: "11%" }}>Added</th>
-                <th style={{ width: "12%" }}>Action</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone No</th>
+                <th>DOB</th>
+                <th>Status</th>
+                <th>Added</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>

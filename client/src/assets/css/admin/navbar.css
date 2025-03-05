@@ -68,7 +68,7 @@
   color: var(--light-gray-color);
 }
 
-@media screen and (max-width: 1350px) {
+@media screen and (max-width: 1370px) {
   .dashboard-navbar-seach-input input {
     width: 7.7in;
   }

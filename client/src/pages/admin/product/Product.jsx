@@ -23,35 +23,40 @@ const Product = () => {
           button={{ link: "/admin/add-product", text: "Add Product" }}
         />
         <div className="admin-panel-header-tabs">
-          <button type="button"
+          <button
+            type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "All Products" ? "active" : ""}`}
             onClick={() => setActiveTab("All Products")}
           >
             All Products
           </button>
-          <button type="button"
+          <button
+            type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Published" ? "active" : ""}`}
             onClick={() => setActiveTab("Published")}
           >
             Published
           </button>
-          <button type="button"
+          <button
+            type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Low Stock" ? "active" : ""}`}
             onClick={() => setActiveTab("Low Stock")}
           >
             Low Stock
           </button>
-          <button type="button"
+          <button
+            type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Draft" ? "active" : ""}`}
             onClick={() => setActiveTab("Draft")}
           >
             Draft
           </button>
-          <button type="button"
+          <button
+            type="button"
             className={`admin-panel-header-tab 
                 ${activeTab === "Out Of Stock" ? "active" : ""}`}
             onClick={() => setActiveTab("Out Of Stock")}
@@ -64,14 +69,14 @@ const Product = () => {
           <table>
             <thead>
               <tr>
-                <th style={{ width: "24%" }}>Product</th>
-                <th style={{ width: "10%" }}>SKU</th>
-                <th style={{ width: "12%" }}>Category</th>
-                <th style={{ width: "8%" }}>Stock</th>
-                <th style={{ width: "8%" }}>Price</th>
-                <th style={{ width: "14%" }}>Status</th>
-                <th style={{ width: "12%" }}>Added</th>
-                <th style={{ width: "12%" }}>Action</th>
+                <th>Product</th>
+                <th>SKU</th>
+                <th>Category</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Added</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
