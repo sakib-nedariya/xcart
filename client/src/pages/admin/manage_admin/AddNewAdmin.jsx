@@ -7,7 +7,7 @@ import { HiXMark } from "react-icons/hi2";
 import { IoMdArrowDropright } from "react-icons/io";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { notifyWarning } from "../layout/ToastMessage";
+import { notifyWarning, notifySuccess } from "../layout/ToastMessage";
 import default_profile from "../../../assets/image/default_profile.png";
 const port = import.meta.env.VITE_SERVER_URL;
 
@@ -137,6 +137,7 @@ const AddNewAdmin = () => {
       })
       .then(() => {
         navigate("/admin/manage-admins");
+         notifySuccess("Data Added Successfully");
       })
       .catch((error) => {
         console.log("Error adding admin data:", error);

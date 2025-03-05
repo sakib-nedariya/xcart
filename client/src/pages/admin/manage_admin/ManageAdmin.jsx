@@ -46,7 +46,7 @@ const ManageAdmin = () => {
     try {
       await axios.delete(`${port}deleteadmindata/${deleteId}`);
       getAdminData();
-      notifySuccess("Deleted");
+      notifySuccess("Data Deleted Successfully");
     } catch {
       console.log(error);
     }

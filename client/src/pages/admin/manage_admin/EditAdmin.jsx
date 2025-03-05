@@ -8,7 +8,7 @@ import default_profile from "../../../assets/image/default_profile.png";
 import Sidebar from "../layout/Sidebar";
 import Navbar from "../layout/Navbar";
 import axios from "axios";
-import { notifyWarning } from "../layout/ToastMessage";
+import { notifyWarning, notifySuccess } from "../layout/ToastMessage";
 const port = import.meta.env.VITE_SERVER_URL;
 
 const EditAdmin = () => {
@@ -152,6 +152,7 @@ const EditAdmin = () => {
       })
       .then((res) => {
         navigate("/admin/manage-admins");
+          notifySuccess("Data Updated Successfully");
       })
       .catch((error) => {
         console.log("Error adding admin data:", error);
