@@ -1,10 +1,16 @@
 .product-container input,
 .product-container textarea,
 .product-container select {
-  font-family: var(--secondary-font);
+  font-family: var(--primary-font);
   padding: 12px;
   border-radius: 6px;
-  border: 1px solid var(--primary-border-color);
+  border: 1px solid var(--primary-border-color); 
+}
+
+.product-container option{
+  font-size: 14px;
+  font-weight: 500;
+  width: 100%;
 }
 .product-container input::placeholder,
 .product-container textarea::placeholder,
@@ -43,7 +49,8 @@
   text-transform: uppercase;
   font-weight: 500;
   color: var(--primary-font-color);
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 
 .product-container .sidebar .radio-group {
@@ -89,6 +96,10 @@
 
 .product-container .sidebar .price-range p{
   margin-bottom: 5px;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--primary-font-color);
 }
 
 .product-container .sidebar .input {
@@ -124,7 +135,7 @@
   text-align: center;
 }
 .product-container .product-items .product-card .product-img img {
-  width: 65%;
+  width: 60%;
 }
 
 .product-container .product-items .product-info {
@@ -133,6 +144,7 @@
 
 .product-container .product-items .product-info h6 {
   margin: 20px 0 10px 0;
+  font-size: 16px;
 }
 
 .product-container .product-items .product-info .old-price {
@@ -155,13 +167,14 @@
   font-family: var(--primary-font);
 }
 .product-container .product-navbar input {
-  width: 80%;
+  width: 100%;
 }
 
 .product-container .product-navbar select {
   background-color: transparent;
   outline: none;
-  border: 1px solid var(--primary-font-color);
+  /* border: 1px solid var(--primary-font-color); */
+  border: none;
 }
 
 .product-container .product-navbar {
@@ -172,8 +185,8 @@
 }
 .product-container .product-navbar .search-select{
   display: flex;
-  gap: 20px;
-  width: 55%;
+  gap: 10px;
+  width: 60%;
 }
 
 .product-container .product-navbar .result {
@@ -182,4 +195,23 @@
 
 .product-container .product-navbar .result strong {
   color: var(--black-color);
+  font-weight: 500;
+}
+
+.product-container .product-navbar .select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  border: 1px solid var(--light-gray-color);
+  width: 65%;
+  border-radius: 6px;
+}
+
+
+.product-container .product-navbar .select h6{
+  font-size: 14px;
+  font-family: var(--primary-font);
+  color: var(--primary-font-color);
+  font-weight: 500;
 }

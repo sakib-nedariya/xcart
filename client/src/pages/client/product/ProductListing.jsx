@@ -27,7 +27,7 @@ const ProductListing = () => {
           </div>
 
           <div className="price-range">
-          <p>Price Range Slider</p>
+          <p>Price Range</p>
           <div className="input">
             <input type="text" name="min-price" placeholder="Min Price" />
             <input type="text" name="min-price" placeholder="Min Price" />
@@ -70,11 +70,15 @@ const ProductListing = () => {
               placeholder="Search..."
               className="search-input"
             />
-            <select className="sort-dropdown">
+            <div className="select">
+              <h6>Sort By:</h6>
+              <select className="sort-dropdown">
               <option value="popular">Popular</option>
               <option value="price-low">Price: Low to High</option>
               <option value="price-high">Price: High to Low</option>
             </select>
+            </div>
+            
             </div>
 
             <div>
