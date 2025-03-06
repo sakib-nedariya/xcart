@@ -1,6 +1,6 @@
 .admin-panel-header-div .dashboard-table-container td img {
-  width: 44px;
-  height: 44px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 10px;
@@ -56,7 +56,7 @@
 }
 .add-product-form-container textarea {
   height: 150px;
-  resize: none;
+  resize: vertical;
 }
 .add-product-form-container input::placeholder,
 .add-product-form-container textarea::placeholder {

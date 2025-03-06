@@ -2,10 +2,10 @@ const connection = require("../../config/connection");
 
 
 const getAdminData = (req, res) => {
-  const sql = "SELECT * FROM admin";
+  const sql = "SELECT * FROM admin ORDER BY id DESC";
   connection.query(sql, (error, result) => {
     if (error) {
-      console.log("Error Getting Data Brand Table in server.js" + error);
+      console.log("Error Getting Data Admin Table in server.js" + error);
     }
     return res.json(result);
   });
@@ -17,7 +17,7 @@ const getAdminDataWithId = (req, res) => {
   const sql = `SELECT * FROM admin WHERE id=${id}`;
   connection.query(sql, (error, result) => {
     if (error) {
-      console.log("Error Getting Data Brand Table in server.js" + error);
+      console.log("Error Getting Data Admin Table in server.js" + error);
     }
     return res.json(result);
   });
