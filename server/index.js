@@ -15,6 +15,14 @@ const ManageAdminRoute = require("./routes/admin/ManageAdminRoute.js");
 
 app.use("/", ManageAdminRoute);
 
+const CustomerRoute = require("./routes/customer/CustomerRoute.js");
+
+app.use("/", CustomerRoute);
+
+const CouponRoute = require("./routes/coupon/CouponRoute.js");
+
+app.use("/", CouponRoute);
+
 app.get("/", (req, res) => {
   return res.json("XCART server");
 });

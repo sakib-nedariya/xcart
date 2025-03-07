@@ -57,13 +57,6 @@ const ManageAdmin = () => {
     getAdminData();
   }, []);
 
-  // Pagination logic
-  const totalItems = adminData.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentData = adminData.slice(startIndex, endIndex);
-
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
@@ -75,6 +68,21 @@ const ManageAdmin = () => {
   const handleNavigateView = (id) => {
     navigate(`/admin/view-admin/${id}`);
   };
+
+    // Filter data based on active tab
+    const filteredData = adminData.filter((admin) => {
+      if (activeTab === "All") return true;
+      if (activeTab === "Active") return admin.status === 1;
+      if (activeTab === "Blocked") return admin.status === 0;
+      return true;
+    });
+  
+    // Pagination logic on filtered data
+    const totalItems = filteredData.length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentData = filteredData.slice(startIndex, endIndex);
   return (
     <>
       <Sidebar />
@@ -119,13 +127,13 @@ const ManageAdmin = () => {
           <table>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone No</th>
-                <th>DOB</th>
-                <th>Status</th>
-                <th>Added</th>
-                <th>Action</th>
+                <th style={{ width: "20%" }}>Name</th>
+                <th style={{ width: "20%" }}>Email</th>
+                <th style={{ width: "10%" }}>Phone No</th>
+                <th style={{ width: "10%" }}>DOB</th>
+                <th style={{ width: "10%" }}>Status</th>
+                <th style={{ width: "10%" }}>Added</th>
+                <th style={{ width: "20%" }}>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -134,8 +142,7 @@ const ManageAdmin = () => {
                   <td className="product-info admin-profile">
                     <img src={`/upload/${admin.profile}`} alt="profile_image" />
                     <span>
-                      {admin.first_name}&nbsp;
-                      {admin.last_name}
+                      {admin.user_name}
                     </span>
                   </td>
                   <td>{admin.email}</td>
