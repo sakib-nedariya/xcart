@@ -6,7 +6,7 @@ import { HiXMark } from "react-icons/hi2";
 import { MdSave } from "react-icons/md";
 import { IoMdArrowDropright } from "react-icons/io";
 
-const AddCategory = () => {
+const AddBrand = () => {
   const handleButtonClick = () => {
     document.getElementById("imageInputFile").click();
   };
@@ -21,58 +21,59 @@ const AddCategory = () => {
           style={{ marginBottom: "24px" }}
         >
           <div>
-            <h5>Add Category</h5>
+            <h5>Add Brand</h5>
             <div className="admin-panel-breadcrumb">
               <Link to="/admin/dashboard" className="breadcrumb-link active">
                 Dashboard
               </Link>
               <IoMdArrowDropright />
-              <Link to="/admin/category" className="breadcrumb-link active">
-                Category List
+              <Link to="/admin/brand" className="breadcrumb-link active">
+                Brand List
               </Link>
               <IoMdArrowDropright />
-              <span className="breadcrumb-text">Add Category</span>
+              <span className="breadcrumb-text">Add Brand</span>
             </div>
           </div>
           <div className="admin-panel-header-add-buttons">
             <NavLink
-              to="/admin/category"
+              to="/admin/brand"
               className="cancel-btn dashboard-add-product-btn"
             >
               <HiXMark /> Cancel
             </NavLink>
-            <button type="button" className="primary-btn dashboard-add-product-btn">
-              <MdSave /> Save Category
+            <button
+              type="button"
+              className="primary-btn dashboard-add-product-btn"
+            >
+              <MdSave /> Save Brand
             </button>
           </div>
         </div>
         <div className="dashboard-add-content-card-div">
-          
           <div className="dashboard-add-content-left-side">
             <div className="dashboard-add-content-card">
               <h6>General Information</h6>
               <div className="add-product-form-container">
                 <label htmlFor="label-for-input-textarea product-name">
-                  Category Name
+                  Brand Name
                 </label>
                 <input
                   type="text"
                   id="product-name"
-                  placeholder="Type category name here..."
+                  placeholder="Type brand name here..."
                 />
                 <label htmlFor="label-for-input-textarea description">
                   Description
                 </label>
                 <textarea
                   id="description"
-                  placeholder="Type category description here..."
+                  placeholder="Type brand description here..."
                 ></textarea>
               </div>
             </div>
-            
           </div>
           <div className="dashboard-add-content-right-side">
-          <div className="dashboard-add-content-card">
+            <div className="dashboard-add-content-card">
               <h6>Thumbnail</h6>
               <div className="add-product-form-container">
                 <label htmlFor="label-for-input-textarea photo">Photo</label>
@@ -86,7 +87,7 @@ const AddCategory = () => {
                   <p className="add-product-upload-text">
                     Drag and drop image here, or click add image
                   </p>
-                  <button 
+                  <button
                     type="button"
                     className="add-product-upload-btn secondary-btn"
                     onClick={handleButtonClick}
@@ -105,11 +106,8 @@ const AddCategory = () => {
             <div className="dashboard-add-content-card">
               <h6>Status</h6>
               <div className="add-product-form-container">
-                <label htmlFor="status">Category Status</label>
-                <select
-                  id="status"
-                  name="status"
-                >
+                <label htmlFor="status">Brand Status</label>
+                <select id="status" name="status">
                   <option value="1">Active</option>
                   <option value="0">Disable</option>
                 </select>
@@ -122,4 +120,4 @@ const AddCategory = () => {
   );
 };
 
-export default AddCategory;
+export default AddBrand;

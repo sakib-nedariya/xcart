@@ -54,7 +54,6 @@ const Customer = () => {
     }
     closeDeleteModal();
   };
-  <div></div>
 
   useEffect(() => {
     getCustomerData();

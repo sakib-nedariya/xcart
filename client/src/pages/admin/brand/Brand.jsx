@@ -4,14 +4,11 @@ import Sidebar from "../layout/Sidebar";
 import { MdDeleteForever } from "react-icons/md";
 import DashboardProImage from "../../../assets/image/dashboard_product_img.png";
 import { IoPencil } from "react-icons/io5";
-import {
-  HiOutlineArrowLeft,
-  HiOutlineArrowRight,
-} from "react-icons/hi";
+import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import { IoIosEye } from "react-icons/io";
 import Breadcrumb from "../layout/Breadcrumb";
 
-const Category = () => {
+const Brand = () => {
   const [activeTab, setActiveTab] = useState("All");
   return (
     <>
@@ -19,12 +16,12 @@ const Category = () => {
       <Sidebar />
       <main className="admin-panel-header-div">
         <Breadcrumb
-          title="Categories"
-          breadcrumbText="Categories"
-          button={{ link: "/admin/add-category", text: "Add Category" }}
+          title="Brands"
+          breadcrumbText="Brand List"
+          button={{ link: "/admin/add-brand", text: "Add Brand" }}
         />
 
-<div className="admin-panel-header-tabs">
+        <div className="admin-panel-header-tabs">
           <button
             type="button"
             className={`admin-panel-header-tab 
@@ -55,7 +52,7 @@ const Category = () => {
           <table>
             <thead>
               <tr>
-                <th>Category Name</th>
+                <th>Brand Name</th>
                 <th>Description</th>
                 <th>Created Date</th>
                 <th>Status</th>
@@ -68,10 +65,13 @@ const Category = () => {
                   <img src={DashboardProImage} alt="iPhone 11 Pro" />
                   <span>iPhone 11 Pro</span>
                 </td>
-                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                <td>29/09/2003</td>
                 <td>
-                  <span className="status published">Delivered</span>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Ratione, repudiandae!
+                </td>
+                <td>2499</td>
+                <td>
+                  <span className="status out-of-stock">Disable</span>
                 </td>
                 <td className="actions">
                   <IoPencil />
@@ -84,8 +84,8 @@ const Category = () => {
                   <img src={DashboardProImage} alt="iPhone 11 Pro" />
                   <span>iPhone 11 Pro</span>
                 </td>
-                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                <td>29/09/2003</td>
+                <td>10</td>
+                <td>2499</td>
                 <td>
                   <span className="status published">Delivered</span>
                 </td>
@@ -120,4 +120,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default Brand;

@@ -4,11 +4,14 @@ import "../../assets/css/main.css";
 import Login from "../../pages/admin/login/Login";
 import Dashboard from "../../pages/admin/dashboard/Dashboard";
 
-import Category from "../../pages/admin/category/Category";
-import AddCategory from "../../pages/admin/category/AddCategory";
-
 import Product from "../../pages/admin/product/Product";
 import AddProduct from "../../pages/admin/product/AddProduct";
+
+import Brand from "../../pages/admin/brand/Brand";
+import AddBrand from "../../pages/admin/brand/AddBrand";
+
+import Category from "../../pages/admin/category/Category";
+import AddCategory from "../../pages/admin/category/AddCategory";
 
 import Order from "../../pages/admin/orders/Order";
 
@@ -36,6 +39,9 @@ const DashboardRoute = () => {
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/product" element={<Product />} />
         <Route path="/admin/add-product" element={<AddProduct />} />
+
+        <Route path="/admin/brand" element={<Brand />} />
+        <Route path="/admin/add-brand" element={<AddBrand />} />
 
         <Route path="/admin/category" element={<Category />} />
         <Route path="/admin/add-category" element={<AddCategory />} />
