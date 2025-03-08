@@ -245,7 +245,7 @@ button {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   scrollbar-width: none;
-  height: calc(100% - 130px);
+  max-height: calc(100% - 130px);
 }
 .admin-panel-header-div .dashboard-table-container.full-height {
   height: calc(100% - 70px);

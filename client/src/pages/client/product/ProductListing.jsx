@@ -27,13 +27,13 @@ const ProductListing = () => {
           </div>
 
           <div className="price-range">
-          <p>Price Range</p>
-          <div className="input">
-            <input type="text" name="min-price" placeholder="Min Price" />
-            <input type="text" name="min-price" placeholder="Min Price" />
+            <p>Price Range</p>
+            <div className="input">
+              <input type="text" name="min-price" placeholder="Min Price" />
+              <input type="text" name="min-price" placeholder="Min Price" />
+            </div>
           </div>
-          </div>
-          
+
           <div class="radio-group">
             <label>
               <input type="radio" name="price" />
@@ -64,27 +64,29 @@ const ProductListing = () => {
 
         <div className="products-with-searchbar">
           <nav className="product-navbar">
-            <div className="search-select"> 
-            <input
-              type="text"
-              placeholder="Search..."
-              className="search-input"
-            />
-            <div className="select">
-              <h6>Sort By:</h6>
-              <select className="sort-dropdown">
-              <option value="popular">Popular</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-            </select>
-            </div>
-            
+            <div className="search-select">
+              <input
+                type="text"
+                placeholder="Search..."
+                className="search-input"
+              />
+              <div className="select">
+                <h6>Sort By:</h6>
+                <div className="custom-dropdown">
+                  <select className="sort-dropdown">
+                    <option value="popular">Popular</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="new">New</option>
+                  </select>
+                </div>
+              </div>
             </div>
 
             <div>
-            <p className="result">
-              <strong>20/400</strong> Results Loaded
-            </p>
+              <p className="result">
+                <strong>20/400</strong> Results Loaded
+              </p>
             </div>
           </nav>
 

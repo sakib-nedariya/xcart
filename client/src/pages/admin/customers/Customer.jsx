@@ -54,6 +54,7 @@ const Customer = () => {
     }
     closeDeleteModal();
   };
+  <div></div>
 
   useEffect(() => {
     getCustomerData();
@@ -132,13 +133,13 @@ const Customer = () => {
           <table>
             <thead>
               <tr>
-                <th style={{ width: "20%" }}>Name</th>
-                <th style={{ width: "25%" }}>Email</th>
-                <th style={{ width: "10%" }}>Phone No</th>
-                <th style={{ width: "10%" }}>DOB</th>
-                <th style={{ width: "10%" }}>Status</th>
-                <th style={{ width: "10%" }}>Added</th>
-                <th style={{ width: "15%" }}>Action</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone No</th>
+                <th>DOB</th>
+                <th>Status</th>
+                <th>Added</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -150,7 +151,8 @@ const Customer = () => {
                       alt="profile_image"
                     />
                     <span>
-                      {customer.user_name}
+                      {customer.first_name}&nbsp;
+                      {customer.last_name}
                     </span>
                   </td>
                   <td>{customer.email}</td>

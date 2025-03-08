@@ -127,13 +127,13 @@ const ManageAdmin = () => {
           <table>
             <thead>
               <tr>
-                <th style={{ width: "20%" }}>Name</th>
-                <th style={{ width: "20%" }}>Email</th>
-                <th style={{ width: "10%" }}>Phone No</th>
-                <th style={{ width: "10%" }}>DOB</th>
-                <th style={{ width: "10%" }}>Status</th>
-                <th style={{ width: "10%" }}>Added</th>
-                <th style={{ width: "20%" }}>Action</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone No</th>
+                <th>DOB</th>
+                <th>Status</th>
+                <th>Added</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -142,7 +142,8 @@ const ManageAdmin = () => {
                   <td className="product-info admin-profile">
                     <img src={`/upload/${admin.profile}`} alt="profile_image" />
                     <span>
-                      {admin.user_name}
+                      {admin.first_name}&nbsp;
+                      {admin.last_name}
                     </span>
                   </td>
                   <td>{admin.email}</td>
