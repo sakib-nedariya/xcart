@@ -179,7 +179,7 @@ const Customer = () => {
                     />
                     <IoIosEye
                       title="View"
-                      onClick={() => handleNavigateView(customer.id)}
+                      onClick={() =>  handleNavigateView(customer.id)}
                     />
                     <MdDeleteForever
                       title="Delete"

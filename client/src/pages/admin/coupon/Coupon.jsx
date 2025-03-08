@@ -3,18 +3,22 @@ import Navbar from "../layout/Navbar";
 import Sidebar from "../layout/Sidebar";
 import axios from "axios";
 import DeleteModal from "../layout/DeleteModal";
-import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import { MdDeleteForever } from "react-icons/md";
 import { notifySuccess } from "../layout/ToastMessage";
 import { IoPencil } from "react-icons/io5";
 import { IoIosEye } from "react-icons/io";
 import Breadcrumb from "../layout/Breadcrumb";
+import Pagination from "../../../pages/admin/layout/Pagination";
+import { useNavigate } from "react-router-dom";
 
 const port = import.meta.env.VITE_SERVER_URL;
 
 const Coupon = () => {
   const [activeTab, setActiveTab] = useState("All");
   const [couponData, setCouponData] = useState([]);
+  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const getCouponData = async () => {
     try {
@@ -25,31 +29,30 @@ const Coupon = () => {
     }
   };
 
+  // Delete coupon
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
 
-    // Delete coupon
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-    const [deleteId, setDeleteId] = useState(null);
-  
-    const openDeleteModal = (id) => {
-      setIsDeleteModalOpen(true);
-      setDeleteId(id);
-    };
-  
-    const closeDeleteModal = () => {
-      setIsDeleteModalOpen(false);
-      setDeleteId(null);
-    };
-  
-    const handleCouponDelete = async () => {
-      try {
-        await axios.delete(`${port}deletecoupondata/${deleteId}`);
-        getCouponData();
-        notifySuccess("Coupon Deleted Successfully");
-      } catch (error) {
-        console.error("Error deleting customer:", error);
-      }
-      closeDeleteModal();
-    };
+  const openDeleteModal = (id) => {
+    setIsDeleteModalOpen(true);
+    setDeleteId(id);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setDeleteId(null);
+  };
+
+  const handleCouponDelete = async () => {
+    try {
+      await axios.delete(`${port}deletecoupondata/${deleteId}`);
+      getCouponData();
+      notifySuccess("Coupon Deleted Successfully");
+    } catch (error) {
+      console.error("Error deleting coupon:", error);
+    }
+    closeDeleteModal();
+  };
 
   useEffect(() => {
     getCouponData();
@@ -62,6 +65,31 @@ const Coupon = () => {
     if (activeTab === "Expired") return coupon.status === 0;
     return true;
   });
+
+  // Reset page when tab changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab]);
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayedData = filteredData.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+  const handleNavigateEdit = (id) => {
+    navigate(`/admin/edit-coupon/${id}`);
+  };
+
+  const handleNavigateView = (id) => {
+    navigate(`/admin/view-coupon/${id}`);
+  };
 
   return (
     <>
@@ -76,27 +104,21 @@ const Coupon = () => {
         <div className="admin-panel-header-tabs">
           <button
             type="button"
-            className={`admin-panel-header-tab ${
-              activeTab === "All" ? "active" : ""
-            }`}
+            className={`admin-panel-header-tab ${activeTab === "All" ? "active" : ""}`}
             onClick={() => setActiveTab("All")}
           >
             All
           </button>
           <button
             type="button"
-            className={`admin-panel-header-tab ${
-              activeTab === "Active" ? "active" : ""
-            }`}
+            className={`admin-panel-header-tab ${activeTab === "Active" ? "active" : ""}`}
             onClick={() => setActiveTab("Active")}
           >
             Active
           </button>
           <button
             type="button"
-            className={`admin-panel-header-tab ${
-              activeTab === "Expired" ? "active" : ""
-            }`}
+            className={`admin-panel-header-tab ${activeTab === "Expired" ? "active" : ""}`}
             onClick={() => setActiveTab("Expired")}
           >
             Expired
@@ -119,7 +141,7 @@ const Coupon = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredData.map((coupon, index) => (
+              {displayedData.map((coupon, index) => (
                 <tr key={index}>
                   <td className="product-coupon-code">{coupon.coupon_code}</td>
                   <td className="product-stock-keeping-unit discount">
@@ -127,50 +149,43 @@ const Coupon = () => {
                   </td>
                   <td>₹{coupon.max_price}</td>
                   <td>₹{coupon.min_price}</td>
-                  <td>
-                    {new Date(coupon.start_date).toLocaleDateString("en-GB")}
-                  </td>
-                  <td>
-                    {new Date(coupon.expiry_date).toLocaleDateString("en-GB")}
-                  </td>
+                  <td>{new Date(coupon.start_date).toLocaleDateString("en-GB")}</td>
+                  <td>{new Date(coupon.expiry_date).toLocaleDateString("en-GB")}</td>
                   <td>
                     <span
-                      className={`status ${
-                        coupon.status === 1 ? "published" : "out-of-stock"
-                      }`}
+                      className={`status ${coupon.status === 1 ? "published" : "out-of-stock"}`}
                     >
                       {coupon.status === 1 ? "Active" : "Expired"}
                     </span>
                   </td>
-                  <td>
-                    {new Date(coupon.created_date).toLocaleDateString("en-GB")}
-                  </td>
+                  <td>{new Date(coupon.created_date).toLocaleDateString("en-GB")}</td>
                   <td className="actions">
-                    <IoPencil
-                      title="Edit"
-                      onClick={() => handleEdit(coupon.id)}
-                    />
-                    <IoIosEye
-                      title="View"
-                      onClick={() => handleView(coupon.id)}
-                    />
-                    <MdDeleteForever
-                      title="Delete"
-                      onClick={() => openDeleteModal(coupon.id)}
-                    />
+                    <IoPencil title="Edit" onClick={() => handleNavigateEdit(coupon.id)} />
+                    <IoIosEye title="View" onClick={() => handleNavigateView(coupon.id)} />
+                    <MdDeleteForever title="Delete" onClick={() => openDeleteModal(coupon.id)} />
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+
+          {/* Pagination Component */}
+          {filteredData.length > itemsPerPage && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+              startIndex={startIndex}
+              endIndex={endIndex}
+              totalItems={filteredData.length}
+            />
+          )}
         </div>
       </main>
+
+      {/* Delete Modal */}
       {isDeleteModalOpen && (
-        <DeleteModal
-          title="Customer"
-          onCancel={closeDeleteModal}
-          onDelete={handleCouponDelete}
-        />
+        <DeleteModal title="Coupon" onCancel={closeDeleteModal} onDelete={handleCouponDelete} />
       )}
     </>
   );

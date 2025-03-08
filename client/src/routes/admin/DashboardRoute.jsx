@@ -14,6 +14,8 @@ import Order from "../../pages/admin/orders/Order";
 
 import Coupon from "../../pages/admin/coupon/Coupon";
 import CreateCoupon from "../../pages/admin/coupon/CreateCoupon";
+import EditCoupon from "../../pages/admin/coupon/EditCoupon";
+import ViewCoupon from "../../pages/admin/coupon/ViewCoupon";
 
 import ManageAdmin from "../../pages/admin/manage_admin/ManageAdmin";
 import AddNewAdmin from "../../pages/admin/manage_admin/AddNewAdmin";
@@ -24,6 +26,7 @@ import Customer from "../../pages/admin/customers/Customer";
 import AddNewCustomer from "../../pages/admin/customers/AddNewCustomer";
 import EditCustomer from "../../pages/admin/customers/EditCustomer";
 import ViewCustomer from "../../pages/admin/customers/ViewCustomer";
+
 
 const DashboardRoute = () => {
   return (
@@ -41,6 +44,8 @@ const DashboardRoute = () => {
 
         <Route path="/admin/coupon" element={<Coupon />} />
         <Route path="/admin/create-coupon" element={<CreateCoupon />} />
+        <Route path="/admin/edit-coupon/:id" element={<EditCoupon />} />
+        <Route path="/admin/view-coupon/:id" element={<ViewCoupon />} />
 
         <Route path="/admin/manage-admins" element={<ManageAdmin />} />
         <Route path="/admin/add-new-admin" element={<AddNewAdmin />} />

@@ -49,20 +49,30 @@ const ViewCustomer = () => {
       <Sidebar />
       <Navbar />
       <main className="admin-panel-header-div">
-        <div className="admin-dashboard-main-header" style={{ marginBottom: "24px" }}>
+        <div
+          className="admin-dashboard-main-header"
+          style={{ marginBottom: "24px" }}
+        >
           <div>
             <h5>View Customer</h5>
             <div className="admin-panel-breadcrumb">
-              <Link to="/admin/dashboard" className="breadcrumb-link active">Dashboard</Link>
+              <Link to="/admin/dashboard" className="breadcrumb-link active">
+                Dashboard
+              </Link>
               <IoMdArrowDropright />
-              <Link to="/admin/customers" className="breadcrumb-link active">Customer List</Link>
+              <Link to="/admin/customers" className="breadcrumb-link active">
+                Customer List
+              </Link>
               <IoMdArrowDropright />
               <span className="breadcrumb-text">View Customer</span>
             </div>
           </div>
           <div className="admin-panel-header-add-buttons">
-            <NavLink to="/admin/customers" className="primary-btn dashboard-add-product-btn">
-            <IoArrowBackSharp /> Back
+            <NavLink
+              to="/admin/customers"
+              className="primary-btn dashboard-add-product-btn"
+            >
+              <IoArrowBackSharp /> Back
             </NavLink>
           </div>
         </div>
@@ -75,42 +85,99 @@ const ViewCustomer = () => {
                   <div>
                     <label htmlFor="first-name">First Name</label>
                     <span className="required_field">*</span>
-                    <input type="text" name="first_name" id="first-name" value={customerData.first_name} disabled />
+                    <input
+                      type="text"
+                      name="first_name"
+                      id="first-name"
+                      value={customerData.first_name}
+                      disabled
+                    />
                   </div>
                   <div>
                     <label htmlFor="middle-name">Middle Name</label>
-                    <input type="text" name="middle_name" id="middle-name" value={customerData.middle_name} disabled />
+                    <input
+                      type="text"
+                      name="middle_name"
+                      id="middle-name"
+                      value={customerData.middle_name}
+                      disabled
+                    />
                   </div>
                   <div>
                     <label htmlFor="last-name">Last Name</label>
                     <span className="required_field">*</span>
-                    <input type="text" name="last_name" id="last-name" value={customerData.last_name} disabled />
+                    <input
+                      type="text"
+                      name="last_name"
+                      id="last-name"
+                      value={customerData.last_name}
+                      disabled
+                    />
                   </div>
                 </div>
                 <div className="coupon-code-input-profile">
                   <div>
                     <label htmlFor="username">UserName</label>
-                    <input type="text" name="user_name" id="username" value={customerData.user_name} disabled />
+                    <input
+                      type="text"
+                      name="user_name"
+                      id="username"
+                      value={customerData.user_name}
+                      disabled
+                    />
                   </div>
                   <div>
                     <label htmlFor="email">Email</label>
                     <span className="required_field">*</span>
-                    <input type="text" name="email" id="email" value={customerData.email} disabled />
+                    <input
+                      type="text"
+                      name="email"
+                      id="email"
+                      value={customerData.email}
+                      disabled
+                    />
                   </div>
                   <div>
                     <label htmlFor="phone-number">Phone Number</label>
-                    <input type="text" name="mobile_number" id="phone-number" value={customerData.mobile_number} disabled />
+                    <input
+                      type="text"
+                      name="mobile_number"
+                      id="phone-number"
+                      value={customerData.mobile_number}
+                      disabled
+                    />
                   </div>
                 </div>
                 <div className="coupon-code-input-profile">
                   <div>
                     <label htmlFor="date-of-birth">DOB</label>
-                    <input type="date" name="dob" id="date-of-birth" value={customerData.dob} disabled />
+                    <input
+                      type="date"
+                      name="dob"
+                      id="date-of-birth"
+                      value={customerData.dob}
+                      disabled
+                    />
                   </div>
                   <div style={{ position: "relative" }}>
                     <label htmlFor="password">Password</label>
-                    <input type={passwordViewOrHide ? "text" : "password"} name="password" id="password" value={customerData.password} disabled />
-                    <span style={{ position: "absolute", right: "4%", top: "55%", cursor: "pointer", color: "gray" }} onClick={() => setPasswordViewOrHide(!passwordViewOrHide)}>
+                    <input
+                      type={passwordViewOrHide ? "text" : "password"}
+                      name="password"
+                      id="password"
+                      value={customerData.password}
+                      disabled
+                    />
+                    <span
+                      style={{
+                        position: "absolute",
+                        right: "4%",
+                        top: "55%",
+                        cursor: "pointer",
+                        color: "gray",
+                      }}
+                      onClick={() => setPasswordViewOrHide(!passwordViewOrHide)}
+                    >
                       {passwordViewOrHide ? <FaEyeSlash /> : <FaEye />}
                     </span>
                   </div>
@@ -139,9 +206,17 @@ const ViewCustomer = () => {
                 <div className="add-product-upload-container">
                   <div className="add-product-upload-icon">
                     {customerData.profile ? (
-                      <img src={`/upload/${customerData.profile}`} alt="Profile" width="100" />
+                      <img
+                        src={`/upload/${customerData.profile}`}
+                        alt="Profile"
+                        width="100"
+                      />
                     ) : (
-                      <img src={default_profile} alt="Default Profile" width="100" />
+                      <img
+                        src={default_profile}
+                        alt="Default Profile"
+                        width="100"
+                      />
                     )}
                   </div>
                 </div>
@@ -151,7 +226,12 @@ const ViewCustomer = () => {
               <h6>Status</h6>
               <div className="add-product-form-container">
                 <label htmlFor="status">Customer Status</label>
-                <select id="status" name="status" value={customerData.status} disabled>
+                <select
+                  id="status"
+                  name="status"
+                  value={customerData.status}
+                  disabled
+                >
                   <option value="1">Active</option>
                   <option value="0">Blocked</option>
                 </select>
