@@ -1,12 +1,78 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../layout/Sidebar";
 import Navbar from "../layout/Navbar";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { HiXMark } from "react-icons/hi2";
 import { MdSave } from "react-icons/md";
 import { IoMdArrowDropright } from "react-icons/io";
+import axios from "axios";
+import { notifyWarning, notifySuccess } from "../layout/ToastMessage";
+import default_profile from "../../../assets/image/default_profile.png";
+const port = import.meta.env.VITE_SERVER_URL;
 
 const AddBrand = () => {
+  const navigate = useNavigate();
+  const [addBrandData, setAddBrandData] = useState({
+    name: "",
+    description: "",
+    image: null,
+    status: 1,
+  });
+
+  const handleChangeInput = (e) => {
+    const { name, value } = e.target;
+    setAddBrandData({
+      ...addBrandData,
+      [name]: value,
+    });
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setAddBrandData({
+        ...addBrandData,
+        image: file,
+        profilePreview: URL.createObjectURL(file),
+      });
+    }
+  };
+
+  const saveBrandData = async (e) => {
+    e.preventDefault();
+    const nameRegex = /^[A-Za-z]+$/;
+
+    if (!addBrandData.name.trim()) {
+      notifyWarning("Brand name is required");
+      return;
+    }
+    if (!nameRegex.test(addBrandData.name.trim())) {
+      notifyWarning("Brand name should only contain alphabets");
+      return;
+    }
+    if (!addBrandData.description.trim()) {
+      notifyWarning("Description is required");
+      return;
+    }
+    const formData = new FormData();
+    formData.append("name", addBrandData.name);
+    formData.append("description", addBrandData.description);
+    if (addBrandData.image) {
+      formData.append("image", addBrandData.image);
+    }
+    formData.append("status", addBrandData.status);
+    await axios
+      .post(`${port}addbranddata`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then(() => {
+        navigate("/admin/brand");
+        notifySuccess("Data Added Successfully");
+      })
+      .catch((error) => {
+        console.log("Error adding brand data:", error);
+      });
+  };
   const handleButtonClick = () => {
     document.getElementById("imageInputFile").click();
   };
@@ -43,6 +109,7 @@ const AddBrand = () => {
             </NavLink>
             <button
               type="button"
+              onClick={(e) => saveBrandData(e)}
               className="primary-btn dashboard-add-product-btn"
             >
               <MdSave /> Save Brand
@@ -54,19 +121,22 @@ const AddBrand = () => {
             <div className="dashboard-add-content-card">
               <h6>General Information</h6>
               <div className="add-product-form-container">
-                <label htmlFor="label-for-input-textarea product-name">
-                  Brand Name
-                </label>
+                <label htmlFor="name">Brand Name</label>
                 <input
                   type="text"
-                  id="product-name"
+                  name="name"
+                  value={addBrandData.name}
+                  onChange={handleChangeInput}
+                  id="name"
                   placeholder="Type brand name here..."
                 />
-                <label htmlFor="label-for-input-textarea description">
-                  Description
-                </label>
+                <label htmlFor="description">Description</label>
                 <textarea
                   id="description"
+                  type="text"
+                  name="description"
+                  value={addBrandData.description}
+                  onChange={handleChangeInput}
                   placeholder="Type brand description here..."
                 ></textarea>
               </div>
@@ -80,8 +150,9 @@ const AddBrand = () => {
                 <div className="add-product-upload-container">
                   <div className="add-product-upload-icon">
                     <img
-                      src="https://cdn-icons-png.flaticon.com/512/1829/1829586.png"
-                      alt="Upload Icon"
+                      src={addBrandData.profilePreview || default_profile}
+                      alt="Selected Profile"
+                      width="100"
                     />
                   </div>
                   <p className="add-product-upload-text">
@@ -98,6 +169,7 @@ const AddBrand = () => {
                     type="file"
                     id="imageInputFile"
                     name="profile"
+                    onChange={handleFileChange}
                     style={{ display: "none" }}
                   />
                 </div>
@@ -107,7 +179,12 @@ const AddBrand = () => {
               <h6>Status</h6>
               <div className="add-product-form-container">
                 <label htmlFor="status">Brand Status</label>
-                <select id="status" name="status">
+                <select 
+                id="status"
+                name="status"
+                  value={addBrandData.status}
+                  onChange={handleChangeInput}
+                  >
                   <option value="1">Active</option>
                   <option value="0">Disable</option>
                 </select>

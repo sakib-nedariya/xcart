@@ -23,6 +23,18 @@ const CouponRoute = require("./routes/coupon/CouponRoute.js");
 
 app.use("/", CouponRoute);
 
+const BrandRoute = require("./routes/brand/BrandRoute.js");
+
+app.use("/", BrandRoute);
+
+const CategoryRoute = require("./routes/category/CategoryRoute.js");
+
+app.use("/", CategoryRoute);
+
+const ProductRoute = require("./routes/product/ProductRoute.js");
+
+app.use("/", ProductRoute);
+
 app.get("/", (req, res) => {
   return res.json("XCART server");
 });
