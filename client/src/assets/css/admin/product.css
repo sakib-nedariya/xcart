@@ -22,12 +22,15 @@
 
 .dashboard-add-content-left-side {
   width: 75%;
-  overflow: scroll;
-  height: calc(100vh - 185px);
-  scrollbar-width: none;
 }
 .dashboard-add-content-right-side {
   width: 25%;
+}
+.dashboard-add-content-left-side,
+.dashboard-add-content-right-side {
+  overflow: scroll;
+  height: calc(100vh - 180px);
+  scrollbar-width: none;
 }
 
 /* dashboard-add-product-css */

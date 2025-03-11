@@ -1,5 +1,5 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { RiAdminLine, RiCoupon2Line, RiProductHuntLine } from "react-icons/ri";
 import { LuUsers } from "react-icons/lu";
@@ -9,6 +9,18 @@ import { MdOutlineCategory } from "react-icons/md";
 import "../../../assets/css/admin/sidebar.css";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+  const logout = async (e) => {
+    e.preventDefault();
+    localStorage.removeItem("adminToken");
+    navigate("/admin");
+  };
+  useEffect(() => {
+    const token = localStorage.getItem("adminToken");
+    if (!token) {
+      navigate("/admin");
+    }
+  }, []);
   return (
     <>
       <aside className="admin-dashboard-sidebar">
@@ -77,7 +89,7 @@ const Sidebar = () => {
           <h6>OTHERS</h6>
           <ul>
             <li>
-              <NavLink to="/logout">
+              <NavLink onClick={(e) => logout(e)} to="/logout">
                 <FiLogOut />
                 Logout
               </NavLink>
