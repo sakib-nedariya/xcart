@@ -2,7 +2,7 @@
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  object-fit: cover;
+  object-fit: contain;
   margin-right: 10px;
 }
 .admin-panel-header-div .dashboard-table-container .product-info {

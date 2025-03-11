@@ -247,9 +247,6 @@ button {
   scrollbar-width: none;
   max-height: calc(100% - 130px);
 }
-.admin-panel-header-div .dashboard-table-container.full-height {
-  height: calc(100% - 70px);
-}
 .admin-panel-header-div .dashboard-table-container table {
   width: 100%;
   border-collapse: collapse;

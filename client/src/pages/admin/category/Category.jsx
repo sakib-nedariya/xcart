@@ -39,7 +39,6 @@ const Category = () => {
     }
   };
 
-
   // Delete customer
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -160,13 +159,11 @@ const Category = () => {
                     <span>{category.name}</span>
                   </td>
                   <td>{category.description.slice(0, 40)}</td>
-                  <td>
-                    {brandData.map((brand) => {
-                      if (brand.id === category.brand_id) {
-                        return <td>{brand.name}</td>;
-                      }
-                    })}
-                  </td>
+                  {brandData.map((brand) => {
+                    if (brand.id === category.brand_id) {
+                      return <td>{brand.name}</td>;
+                    }
+                  })}
                   <td>
                     {new Date(category.created_date).toLocaleDateString(
                       "en-GB"
@@ -182,17 +179,17 @@ const Category = () => {
                     </span>
                   </td>
                   <td className="actions">
-                    <IoPencil 
-                       title="Edit"
-                       onClick={() => handleNavigateEdit(category.id)}
+                    <IoPencil
+                      title="Edit"
+                      onClick={() => handleNavigateEdit(category.id)}
                     />
                     <IoIosEye
                       title="View"
                       onClick={() => handleNavigateView(category.id)}
                     />
                     <MdDeleteForever
-                    title="Delete"
-                    onClick={() => openDeleteModal(category.id)}
+                      title="Delete"
+                      onClick={() => openDeleteModal(category.id)}
                     />
                   </td>
                 </tr>

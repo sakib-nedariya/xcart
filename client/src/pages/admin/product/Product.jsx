@@ -70,9 +70,9 @@ const Product = () => {
             <thead>
               <tr>
                 <th>Product</th>
-                <th>SKU</th>
+                <th>Brand</th>
                 <th>Category</th>
-                <th>Stock</th>
+                <th>Discount</th>
                 <th>Price</th>
                 <th>Status</th>
                 <th>Added</th>
@@ -85,9 +85,9 @@ const Product = () => {
                   <img src={DashboardProImage} alt="iPhone 11 Pro" />
                   <span>iPhone 11 Pro</span>
                 </td>
-                <td className="product-stock-keeping-unit">302012</td>
+                <td>HP</td>
                 <td>iPhone</td>
-                <td>10</td>
+                <td>20%</td>
                 <td>₹59000</td>
                 <td>
                   <span className="status published">Published</span>
@@ -104,223 +104,14 @@ const Product = () => {
                   <img src={DashboardProImage} alt="iPhone 11 Pro" />
                   <span>iPhone 11 Pro</span>
                 </td>
-                <td className="product-stock-keeping-unit">302012</td>
+                <td>HP</td>
                 <td>iPhone</td>
-                <td>10</td>
-                <td>₹59000</td>
-                <td>
-                  <span className="status draft">Draft</span>
-                </td>
-                <td>24 Jun 2023</td>
-                <td className="actions">
-                  <IoPencil />
-                  <IoIosEye />
-                  <MdDeleteForever />
-                </td>
-              </tr>
-              <tr>
-                <td className="product-info">
-                  <img src={DashboardProImage} alt="iPhone 11 Pro" />
-                  <span>iPhone 11 Pro</span>
-                </td>
-                <td className="product-stock-keeping-unit">302012</td>
-                <td>iPhone</td>
-                <td>10</td>
-                <td>₹59000</td>
-                <td>
-                  <span className="status out-of-stock">Out of Stock</span>
-                </td>
-                <td>24 Jun 2023</td>
-                <td className="actions">
-                  <IoPencil />
-                  <IoIosEye />
-                  <MdDeleteForever />
-                </td>
-              </tr>
-              <tr>
-                <td className="product-info">
-                  <img src={DashboardProImage} alt="iPhone 11 Pro" />
-                  <span>iPhone 11 Pro</span>
-                </td>
-                <td className="product-stock-keeping-unit">302012</td>
-                <td>iPhone</td>
-                <td>10</td>
-                <td>₹59000</td>
-                <td>
-                  <span className="status low-stock">Low Stock</span>
-                </td>
-                <td>24 Jun 2023</td>
-                <td className="actions">
-                  <IoPencil />
-                  <IoIosEye />
-                  <MdDeleteForever />
-                </td>
-              </tr>
-              <tr>
-                <td className="product-info">
-                  <img src={DashboardProImage} alt="iPhone 11 Pro" />
-                  <span>iPhone 11 Pro</span>
-                </td>
-                <td className="product-stock-keeping-unit">302012</td>
-                <td>iPhone</td>
-                <td>10</td>
+                <td>20%</td>
                 <td>₹59000</td>
                 <td>
                   <span className="status published">Published</span>
                 </td>
                 <td>24 Jun 2023</td>
-                <td className="actions">
-                  <IoPencil />
-                  <IoIosEye />
-                  <MdDeleteForever />
-                </td>
-              </tr>
-              <tr>
-                <td className="product-info">
-                  <img src={DashboardProImage} alt="iPhone 11 Pro" />
-                  <span>iPhone 11 Pro</span>
-                </td>
-                <td className="product-stock-keeping-unit">302012</td>
-                <td>iPhone</td>
-                <td>10</td>
-                <td>₹59000</td>
-                <td>
-                  <span className="status draft">Draft</span>
-                </td>
-                <td>24 Jun 2023</td>
-                <td className="actions">
-                  <IoPencil />
-                  <IoIosEye />
-                  <MdDeleteForever />
-                </td>
-              </tr>
-              <tr>
-                <td className="product-info">
-                  <img src={DashboardProImage} alt="iPhone 11 Pro" />
-                  <span>iPhone 11 Pro</span>
-                </td>
-                <td className="product-stock-keeping-unit">302012</td>
-                <td>iPhone</td>
-                <td>10</td>
-                <td>₹59000</td>
-                <td>
-                  <span className="status out-of-stock">Out of Stock</span>
-                </td>
-                <td>24 Jun 2023</td>
-                <td className="actions">
-                  <IoPencil />
-                  <IoIosEye />
-                  <MdDeleteForever />
-                </td>
-              </tr>
-              <tr>
-                <td className="product-info">
-                  <img src={DashboardProImage} alt="iPhone 11 Pro" />
-                  <span>iPhone 11 Pro</span>
-                </td>
-                <td className="product-stock-keeping-unit">302012</td>
-                <td>iPhone</td>
-                <td>10</td>
-                <td>₹59000</td>
-                <td>
-                  <span className="status low-stock">Low Stock</span>
-                </td>
-                <td>24 Jun 2023</td>
-                <td className="actions">
-                  <IoPencil />
-                  <IoIosEye />
-                  <MdDeleteForever />
-                </td>
-              </tr>
-              <tr>
-                <td className="product-info">
-                  <img src={DashboardProImage} alt="iPhone 11 Pro" />
-                  <span>iPhone 11 Pro</span>
-                </td>
-                <td className="product-stock-keeping-unit">302012</td>
-                <td>iPhone</td>
-                <td>10</td>
-                <td>₹59000</td>
-                <td>
-                  <span className="status published">Published</span>
-                </td>
-                <td>24 Jun 2023</td>
-                <td className="actions">
-                  <IoPencil />
-                  <IoIosEye />
-                  <MdDeleteForever />
-                </td>
-              </tr>
-              <tr>
-                <td className="product-info">
-                  <img src={DashboardProImage} alt="iPhone 11 Pro" />
-                  <span>iPhone 11 Pro</span>
-                </td>
-                <td className="product-stock-keeping-unit">302012</td>
-                <td>iPhone</td>
-                <td>10</td>
-                <td>₹59000</td>
-                <td>
-                  <span className="status draft">Draft</span>
-                </td>
-                <td>24 Jun 2023</td>
-                <td className="actions">
-                  <IoPencil />
-                  <IoIosEye />
-                  <MdDeleteForever />
-                </td>
-              </tr>
-              <tr>
-                <td className="product-info">
-                  <img src={DashboardProImage} alt="iPhone 11 Pro" />
-                  <span>iPhone 11 Pro</span>
-                </td>
-                <td className="product-stock-keeping-unit">302012</td>
-                <td>iPhone</td>
-                <td>10</td>
-                <td>₹59000</td>
-                <td>
-                  <span className="status out-of-stock">Out of Stock</span>
-                </td>
-                <td>24 Jun 2023</td>
-                <td className="actions">
-                  <IoPencil />
-                  <IoIosEye />
-                  <MdDeleteForever />
-                </td>
-              </tr>
-              <tr>
-                <td className="product-info">
-                  <img src={DashboardProImage} alt="iPhone 11 Pro" />
-                  <span>iPhone 11 Pro</span>
-                </td>
-                <td className="product-stock-keeping-unit">302012</td>
-                <td>iPhone</td>
-                <td>10</td>
-                <td>₹59000</td>
-                <td>
-                  <span className="status low-stock">Low Stock</span>
-                </td>
-                <td>24 Jun 2023</td>
-                <td className="actions">
-                  <IoPencil />
-                  <IoIosEye />
-                  <MdDeleteForever />
-                </td>
-              </tr>
-              <tr>
-                <td className="product-info">
-                  <img src={DashboardProImage} alt="iPhone 11 Pro" />
-                  <span>iPhone 11 Pro</span>
-                </td>
-                <td className="product-stock-keeping-unit">302012</td>
-                <td>iPhone</td>
-                <td>10</td>
-                <td>₹59000</td>
-                <td>
-                  <span className="status low-stock">Low Stock</span>
-                </td>
-                <td>28 Jun 2023</td>
                 <td className="actions">
                   <IoPencil />
                   <IoIosEye />

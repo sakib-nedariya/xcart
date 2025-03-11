@@ -59,6 +59,14 @@ const AddProduct = () => {
                   id="product-name"
                   placeholder="Type product name here..."
                 />
+                <label htmlFor="label-for-input-textarea product-slogan">
+                  Slogan
+                </label>
+                <input
+                  type="text"
+                  id="product-slogan"
+                  placeholder="Type product slogan here..."
+                />
                 <label htmlFor="label-for-input-textarea description">
                   Description
                 </label>
@@ -75,11 +83,7 @@ const AddProduct = () => {
                 <label htmlFor="label-for-input-textarea photo">Photo</label>
                 <div className="add-product-upload-container">
                   <div className="add-product-upload-icon">
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/1829/1829586.png"
-                      alt="Upload Icon"
-                    />
-                    <img
+                    <img style={{margin:"0 6px"}}
                       src="https://cdn-icons-png.flaticon.com/512/1829/1829586.png"
                       alt="Upload Icon"
                     />
@@ -123,14 +127,6 @@ const AddProduct = () => {
                   id="product-name"
                   placeholder="Type discount percentage..."
                 />
-                <label htmlFor="label-for-input-textarea product-name">
-                  Stock Keeping Unit
-                </label>
-                <input
-                  type="text"
-                  id="product-name"
-                  placeholder="Type Stock keeping unit here..."
-                />
               </div>
             </div>
           </div>
@@ -159,6 +155,28 @@ const AddProduct = () => {
                   <option value="keyboard">Keyboard</option>
                   <option value="laptop">Laptop</option>
                 </select>
+              </div>
+            </div>
+
+            <div className="dashboard-add-content-card">
+              <h6>Memory & Storage</h6>
+              <div className="add-product-form-container">
+                <label htmlFor="memory">
+                   Memory (RAM)
+                </label>
+                <input
+                  type="text"
+                  id="memory"
+                  placeholder="Memory"
+                />
+                <label htmlFor="storage">
+                   Storage
+                </label>
+                <input
+                  type="text"
+                  id="storage"
+                  placeholder="Storage"
+                />
               </div>
             </div>
 
