@@ -9,9 +9,14 @@ import AddProduct from "../../pages/admin/product/AddProduct";
 
 import Brand from "../../pages/admin/brand/Brand";
 import AddBrand from "../../pages/admin/brand/AddBrand";
+import EditBrand from "../../pages/admin/brand/EditBrand";
+import ViewBrand from "../../pages/admin/brand/ViewBrand";
 
 import Category from "../../pages/admin/category/Category";
 import AddCategory from "../../pages/admin/category/AddCategory";
+import EditCategory from "../../pages/admin/category/EditCategory";
+import ViewCategory from "../../pages/admin/category/ViewCategory";
+
 
 import Order from "../../pages/admin/orders/Order";
 
@@ -42,9 +47,13 @@ const DashboardRoute = () => {
 
         <Route path="/admin/brand" element={<Brand />} />
         <Route path="/admin/add-brand" element={<AddBrand />} />
-
+        <Route path="/admin/edit-brand/:id" element={<EditBrand />} />
+        <Route path="/admin/view-brand/:id" element={<ViewBrand />} />
+        
         <Route path="/admin/category" element={<Category />} />
         <Route path="/admin/add-category" element={<AddCategory />} />
+        <Route path="/admin/edit-category/:id" element={<EditCategory />} />
+        <Route path="/admin/view-category/:id" element={<ViewCategory />} />
 
         <Route path="/admin/orders" element={<Order />} />
 
