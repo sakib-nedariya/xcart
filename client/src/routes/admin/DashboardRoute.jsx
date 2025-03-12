@@ -6,6 +6,8 @@ import Dashboard from "../../pages/admin/dashboard/Dashboard";
 
 import Product from "../../pages/admin/product/Product";
 import AddProduct from "../../pages/admin/product/AddProduct";
+import EditProduct from "../../pages/admin/product/Editproduct";
+import ViewProduct from "../../pages/admin/product/ViewProduct";
 
 import Brand from "../../pages/admin/brand/Brand";
 import AddBrand from "../../pages/admin/brand/AddBrand";
@@ -42,8 +44,11 @@ const DashboardRoute = () => {
       <Routes>
         <Route path="/admin" element={<Login />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
+
         <Route path="/admin/product" element={<Product />} />
         <Route path="/admin/add-product" element={<AddProduct />} />
+        <Route path="/admin/edit-product/:id" element={<EditProduct />} />
+        <Route path="/admin/view-product/:id" element={<ViewProduct />} />
 
         <Route path="/admin/brand" element={<Brand />} />
         <Route path="/admin/add-brand" element={<AddBrand />} />

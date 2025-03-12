@@ -1,24 +1,34 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
+import { HiXMark } from "react-icons/hi2";
+import { MdSave } from "react-icons/md";
+import { IoMdArrowDropright } from "react-icons/io";
+import default_profile from "../../../assets/image/default_profile.png";
 import Sidebar from "../layout/Sidebar";
 import Navbar from "../layout/Navbar";
-import { IoMdArrowDropright } from "react-icons/io";
-import { MdSave } from "react-icons/md";
-import { HiXMark } from "react-icons/hi2";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { use } from "react";
 import axios from "axios";
-import {
-  notifyWarning,
-  notifySuccess,
-  notifyError,
-} from "../layout/ToastMessage";
-import default_profile from "../../../assets/image/default_profile.png";
+import { notifyWarning, notifySuccess } from "../layout/ToastMessage";
 const port = import.meta.env.VITE_SERVER_URL;
 
-const AddProduct = () => {
+const EditProduct = () => {
+  const { id } = useParams();
   const [brandData, setBrandData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const navigate = useNavigate();
+  const [productData, setProductData] = useState({
+    brand_id: "",
+    cate_id: "",
+    slogan: "",
+    name: "",
+    description: "",
+    image: "",
+    price: "",
+    discount: "",
+    memory: "",
+    storage: "",
+    status: "",
+  });
+
   const getBrandData = async () => {
     try {
       const res = await axios.get(`${port}getbranddata`);
@@ -36,24 +46,11 @@ const AddProduct = () => {
       console.error("Error fetching data:", error);
     }
   };
-  const [addProductData, setAddProductData] = useState({
-    brand_id: "",
-    cate_id: "",
-    slogan: "",
-    name: "",
-    description: "",
-    image: "",
-    price: "",
-    discount: "",
-    memory: "",
-    storage: "",
-    status: "",
-  });
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
-    setAddProductData({
-      ...addProductData,
+    setProductData({
+      ...productData,
       [name]: value,
     });
   };
@@ -61,37 +58,54 @@ const AddProduct = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setAddProductData({
-        ...addProductData,
+      setProductData({
+        ...productData,
         image: file,
         profilePreview: URL.createObjectURL(file),
       });
     }
   };
+  const handleButtonClick = () => {
+    document.getElementById("imageInputFile").click();
+  };
 
+  const getProductData = async () => {
+    try {
+      const res = await axios.get(`${port}getproductdatawithid/${id}`);
+      const fetchedData = res.data[0];
+
+      setProductData({
+        ...fetchedData,
+      });
+    } catch (error) {
+      console.log("Error fetching data:", error);
+    }
+  };
+
+  //edit data
   const saveProductData = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("brand_id", addProductData.brand_id);
-    formData.append("cate_id", addProductData.cate_id);
-    formData.append("name", addProductData.name);
-    formData.append("slogan", addProductData.slogan);
-    formData.append("description", addProductData.description);
-    formData.append("price", addProductData.price);
-    formData.append("discount", addProductData.discount);
-    formData.append("memory", addProductData.memory);
-    formData.append("storage", addProductData.storage);
-    if (addProductData.image) {
-      formData.append("image", addProductData.image);
+    formData.append("brand_id", productData.brand_id);
+    formData.append("cate_id", productData.cate_id);
+    formData.append("name", productData.name);
+    formData.append("slogan", productData.slogan);
+    formData.append("description", productData.description);
+    formData.append("price", productData.price);
+    formData.append("discount", productData.discount);
+    formData.append("memory", productData.memory);
+    formData.append("storage", productData.storage);
+    if (productData.image) {
+      formData.append("image", productData.image);
     }
-    formData.append("status", addProductData.status);
+    formData.append("status", productData.status);
     await axios
-      .post(`${port}addproductdata`, formData, {
+      .put(`${port}editproductData/${id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
-      .then(() => {
+      .then((res) => {
         navigate("/admin/product");
-        notifySuccess("Data Added Successfully");
+        notifySuccess("Data Updated Successfully");
       })
       .catch((error) => {
         console.log("Error adding product data:", error);
@@ -99,13 +113,11 @@ const AddProduct = () => {
   };
 
   useEffect(() => {
+    getProductData();
     getBrandData();
     getCategoryData();
-  }, []);
+  }, [id]);
 
-  const handleButtonClick = () => {
-    document.getElementById("imageInputFile").click();
-  };
   return (
     <>
       <Sidebar />
@@ -116,17 +128,17 @@ const AddProduct = () => {
           style={{ marginBottom: "24px" }}
         >
           <div>
-            <h5>Add Product</h5>
+            <h5>Edit Product</h5>
             <div className="admin-panel-breadcrumb">
               <Link to="/admin/dashboard" className="breadcrumb-link active">
                 Dashboard
               </Link>
               <IoMdArrowDropright />
               <Link to="/admin/product" className="breadcrumb-link active">
-                Product List
+                Category List
               </Link>
               <IoMdArrowDropright />
-              <span className="breadcrumb-text">Add Product</span>
+              <span className="breadcrumb-text">Edit Product</span>
             </div>
           </div>
           <div className="admin-panel-header-add-buttons">
@@ -138,14 +150,13 @@ const AddProduct = () => {
             </NavLink>
             <button
               type="button"
-              onClick={(e) => saveProductData(e)}
+              onClick={saveProductData}
               className="primary-btn dashboard-add-product-btn"
             >
               <MdSave /> Save Product
             </button>
           </div>
         </div>
-
         <div className="dashboard-add-content-card-div">
           <div className="dashboard-add-content-left-side">
             <div className="dashboard-add-content-card">
@@ -156,7 +167,7 @@ const AddProduct = () => {
                   type="text"
                   id="product-name"
                   name="name"
-                  value={addProductData.name}
+                  value={productData.name}
                   onChange={handleChangeInput}
                   placeholder="Type product name here..."
                 />
@@ -165,7 +176,7 @@ const AddProduct = () => {
                   type="text"
                   id="product-slogan"
                   name="slogan"
-                  value={addProductData.slogan}
+                  value={productData.slogan}
                   onChange={handleChangeInput}
                   placeholder="Type product slogan here..."
                 />
@@ -173,7 +184,7 @@ const AddProduct = () => {
                 <textarea
                   id="product-description"
                   name="description"
-                  value={addProductData.description}
+                  value={productData.description}
                   onChange={handleChangeInput}
                   placeholder="Type product description here..."
                 ></textarea>
@@ -186,22 +197,36 @@ const AddProduct = () => {
                 <label htmlFor="label-for-input-textarea photo">Photo</label>
                 <div className="add-product-upload-container">
                   <div className="add-product-upload-icon">
-                    <img
-                      style={{ margin: "0 6px" }}
-                      src={addProductData.profilePreview || default_profile}
-                      alt="Selected Profile"
-                      width="100"
-                    />
+                    {productData.profilePreview ? (
+                      // Show the newly selected image preview
+                      <img
+                        src={productData.profilePreview}
+                        alt="Selected Profile"
+                        width="100"
+                      />
+                    ) : productData.image ? (
+                      // Show the existing profile image if available
+                      <img
+                        src={`/upload/${productData.image}`}
+                        alt="Selected Profile"
+                        width="100"
+                      />
+                    ) : (
+                      // Show default profile image if no profile is set
+                      <img
+                        src={default_profile}
+                        alt="Default Profile"
+                        width="100"
+                      />
+                    )}
                   </div>
-                  <p className="add-product-upload-text">
-                    Drag and drop image here, or click add image
-                  </p>
+                  <p className="add-product-upload-text">Click to edit image</p>
                   <button
                     type="button"
                     className="add-product-upload-btn secondary-btn"
                     onClick={handleButtonClick}
                   >
-                    Add Image
+                    Edit Image
                   </button>
                   <input
                     type="file"
@@ -222,7 +247,7 @@ const AddProduct = () => {
                   type="text"
                   id="product-price"
                   name="price"
-                  value={addProductData.price}
+                  value={productData.price}
                   onChange={handleChangeInput}
                   placeholder="Type base price here..."
                 />
@@ -233,7 +258,7 @@ const AddProduct = () => {
                   type="text"
                   id="product-discount"
                   name="discount"
-                  value={addProductData.discount}
+                  value={productData.discount}
                   onChange={handleChangeInput}
                   placeholder="Type discount percentage..."
                 />
@@ -249,7 +274,7 @@ const AddProduct = () => {
                 <select
                   id="brand_id"
                   name="brand_id"
-                  value={addProductData.brand_id}
+                  value={productData.brand_id}
                   onChange={handleChangeInput}
                 >
                   <option value="">Select Brand</option>
@@ -267,7 +292,7 @@ const AddProduct = () => {
                 <select
                   id="category_id"
                   name="cate_id"
-                  value={addProductData.cate_id}
+                  value={productData.cate_id}
                   onChange={handleChangeInput}
                 >
                   <option value="">Select Category</option>
@@ -288,7 +313,7 @@ const AddProduct = () => {
                   type="text"
                   id="memory"
                   name="memory"
-                  value={addProductData.memory}
+                  value={productData.memory}
                   onChange={handleChangeInput}
                   placeholder="Memory"
                 />
@@ -297,7 +322,7 @@ const AddProduct = () => {
                   type="text"
                   id="storage"
                   name="storage"
-                  value={addProductData.storage}
+                  value={productData.storage}
                   onChange={handleChangeInput}
                   placeholder="Storage"
                 />
@@ -311,7 +336,7 @@ const AddProduct = () => {
                 <select
                   id="status"
                   name="status"
-                  value={addProductData.status}
+                  value={productData.status}
                   onChange={handleChangeInput}
                 >
                   <option value="1">Published</option>
@@ -328,4 +353,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default EditProduct;
