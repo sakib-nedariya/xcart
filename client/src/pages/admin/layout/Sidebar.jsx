@@ -8,6 +8,7 @@ import { IoGiftOutline, IoPricetagsOutline } from "react-icons/io5";
 import { MdOutlineCategory } from "react-icons/md";
 import "../../../assets/css/admin/sidebar.css";
 
+
 const Sidebar = () => {
   const navigate = useNavigate();
   const logout = async (e) => {
