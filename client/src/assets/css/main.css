@@ -486,15 +486,21 @@ button {
 
 .admin-panel-header-div .stats-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 22px;
   padding: 12px 0;
 }
 .admin-panel-header-div .stats-container .stats-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background: var(--white-color);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.admin-panel-header-div .stats-container .stats-box svg {
+  font-size: 35px;
 }
 .admin-panel-header-div .stats-container .stats-title {
   font-size: 14px;
@@ -505,7 +511,7 @@ button {
   font-family: var(--info-font);
   font-size: 24px;
   font-weight: 600;
-  margin: 8px 0;
+  margin-top: 8px;
 }
 .admin-panel-header-div .stats-container .stats-description {
   font-size: 14px;
