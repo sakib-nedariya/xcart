@@ -232,6 +232,13 @@ button {
 /* ----Dashboard-design-global-class--- */
 
 /* ----Dashboard-design-table-global-class--- */
+#dashboard-title-container-header {
+  border-bottom: 1px solid var(--white-color);
+  font-size: 17px;
+  font-weight: 600;
+  padding: 10px 0 10px 20px;
+  background-color: var(--sidebar-bg-color);
+}
 
 .admin-panel-header-div .dashboard-table-container {
   display: flex;
@@ -242,7 +249,7 @@ button {
   font-weight: 500;
   border-radius: 10px;
   margin-top: 20px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   scrollbar-width: none;
   max-height: calc(100% - 130px);
@@ -295,6 +302,10 @@ button {
 .admin-panel-header-div .dashboard-table-container .low-stock {
   background: #fff0ea;
   color: #f86624;
+}
+.admin-panel-header-div .dashboard-table-container .processing {
+  background: #feecee;
+  color: #3d44eb;
 }
 .admin-panel-header-div .dashboard-table-container .actions svg {
   font-size: 20px;
@@ -404,15 +415,13 @@ button {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 50;
 }
-
 .delete-modal-container .modal {
   font-family: var(--secondary-font);
   width: 480px;
   border-radius: 10px;
   padding: 20px;
-  background-color: white;
+  background-color: var(--white-color);
 }
-
 .delete-modal-container .modal h6 {
   font-family: var(--info-font);
   margin-bottom: 10px;
@@ -448,7 +457,6 @@ button {
   margin-right: 5px;
   font-size: 18px;
 }
-
 .delete-modal-container .modal .modal-container-buttons .delete-btn {
   color: var(--white-color);
   background-color: var(--red-color);
@@ -474,3 +482,32 @@ button {
   font-weight: 600;
 }
 /* ----delete-modal-container---- */
+
+.admin-panel-header-div .stats-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  padding: 12px 0;
+}
+.admin-panel-header-div .stats-container .stats-box {
+  background: var(--white-color);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.admin-panel-header-div .stats-container .stats-title {
+  font-size: 14px;
+  color: var(--light-gray-color);
+  font-weight: 600;
+}
+.admin-panel-header-div .stats-container .stats-value {
+  font-family: var(--info-font);
+  font-size: 24px;
+  font-weight: 600;
+  margin: 8px 0;
+}
+.admin-panel-header-div .stats-container .stats-description {
+  font-size: 14px;
+  color: var(--light-gray-color);
+  font-weight: 400;
+}
