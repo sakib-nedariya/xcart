@@ -1,24 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useParams } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { IoMdArrowDropright } from "react-icons/io";
+import { IoArrowBackSharp } from "react-icons/io5";
+import default_profile from "../../../assets/image/default_profile.png";
 import Sidebar from "../layout/Sidebar";
 import Navbar from "../layout/Navbar";
-import { IoMdArrowDropright } from "react-icons/io";
-import { MdSave } from "react-icons/md";
-import { HiXMark } from "react-icons/hi2";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { use } from "react";
 import axios from "axios";
-import {
-  notifyWarning,
-  notifySuccess,
-  notifyError,
-} from "../layout/ToastMessage";
-import default_profile from "../../../assets/image/default_profile.png";
 const port = import.meta.env.VITE_SERVER_URL;
 
-const AddProduct = () => {
+const ViewProduct = () => {
+  const { id } = useParams();
   const [brandData, setBrandData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
-  const navigate = useNavigate();
+  const [productData, setProductData] = useState({
+    brand_id: "",
+    cate_id: "",
+    slogan: "",
+    name: "",
+    description: "",
+    image: "",
+    price: "",
+    discount: "",
+    memory: "",
+    storage: "",
+    status: "",
+  });
+
   const getBrandData = async () => {
     try {
       const res = await axios.get(`${port}getbranddata`);
@@ -36,76 +44,26 @@ const AddProduct = () => {
       console.error("Error fetching data:", error);
     }
   };
-  const [addProductData, setAddProductData] = useState({
-    brand_id: "",
-    cate_id: "",
-    slogan: "",
-    name: "",
-    description: "",
-    image: "",
-    price: "",
-    discount: "",
-    memory: "",
-    storage: "",
-    status: "",
-  });
 
-  const handleChangeInput = (e) => {
-    const { name, value } = e.target;
-    setAddProductData({
-      ...addProductData,
-      [name]: value,
-    });
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setAddProductData({
-        ...addProductData,
-        image: file,
-        profilePreview: URL.createObjectURL(file),
+  const getProductData = async () => {
+    try {
+      const res = await axios.get(`${port}getproductdatawithid/${id}`);
+      const fetchedData = res.data[0];
+      setProductData({
+        ...fetchedData,
       });
+      console.log(productData);
+    } catch (error) {
+      console.log("Error fetching data:", error);
     }
-  };
-
-  const saveProductData = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("brand_id", addProductData.brand_id);
-    formData.append("cate_id", addProductData.cate_id);
-    formData.append("name", addProductData.name);
-    formData.append("slogan", addProductData.slogan);
-    formData.append("description", addProductData.description);
-    formData.append("price", addProductData.price);
-    formData.append("discount", addProductData.discount);
-    formData.append("memory", addProductData.memory);
-    formData.append("storage", addProductData.storage);
-    if (addProductData.image) {
-      formData.append("image", addProductData.image);
-    }
-    formData.append("status", addProductData.status);
-    await axios
-      .post(`${port}addproductdata`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-      .then(() => {
-        navigate("/admin/product");
-        notifySuccess("Data Added Successfully");
-      })
-      .catch((error) => {
-        console.log("Error adding product data:", error);
-      });
   };
 
   useEffect(() => {
-    getBrandData();
     getCategoryData();
-  }, []);
+    getBrandData();
+    getProductData();
+  }, [id]);
 
-  const handleButtonClick = () => {
-    document.getElementById("imageInputFile").click();
-  };
   return (
     <>
       <Sidebar />
@@ -116,36 +74,28 @@ const AddProduct = () => {
           style={{ marginBottom: "24px" }}
         >
           <div>
-            <h5>Add Product</h5>
+            <h5>View Category</h5>
             <div className="admin-panel-breadcrumb">
               <Link to="/admin/dashboard" className="breadcrumb-link active">
                 Dashboard
               </Link>
               <IoMdArrowDropright />
-              <Link to="/admin/product" className="breadcrumb-link active">
-                Product List
+              <Link to="/admin/category" className="breadcrumb-link active">
+                Category List
               </Link>
               <IoMdArrowDropright />
-              <span className="breadcrumb-text">Add Product</span>
+              <span className="breadcrumb-text">View Category</span>
             </div>
           </div>
           <div className="admin-panel-header-add-buttons">
             <NavLink
               to="/admin/product"
-              className="cancel-btn dashboard-add-product-btn"
-            >
-              <HiXMark /> Cancel
-            </NavLink>
-            <button
-              type="button"
-              onClick={(e) => saveProductData(e)}
               className="primary-btn dashboard-add-product-btn"
             >
-              <MdSave /> Save Product
-            </button>
+              <IoArrowBackSharp /> Back
+            </NavLink>
           </div>
         </div>
-
         <div className="dashboard-add-content-card-div">
           <div className="dashboard-add-content-left-side">
             <div className="dashboard-add-content-card">
@@ -156,8 +106,7 @@ const AddProduct = () => {
                   type="text"
                   id="product-name"
                   name="name"
-                  value={addProductData.name}
-                  onChange={handleChangeInput}
+                  value={productData.name}
                   placeholder="Type product name here..."
                 />
                 <label htmlFor="product-slogan">Slogan</label>
@@ -165,16 +114,14 @@ const AddProduct = () => {
                   type="text"
                   id="product-slogan"
                   name="slogan"
-                  value={addProductData.slogan}
-                  onChange={handleChangeInput}
+                  value={productData.slogan}
                   placeholder="Type product slogan here..."
                 />
                 <label htmlFor="product-description">Description</label>
                 <textarea
                   id="product-description"
                   name="description"
-                  value={addProductData.description}
-                  onChange={handleChangeInput}
+                  value={productData.description}
                   placeholder="Type product description here..."
                 ></textarea>
               </div>
@@ -186,30 +133,20 @@ const AddProduct = () => {
                 <label htmlFor="label-for-input-textarea photo">Photo</label>
                 <div className="add-product-upload-container">
                   <div className="add-product-upload-icon">
-                    <img
-                      style={{ margin: "0 6px" }}
-                      src={addProductData.profilePreview || default_profile}
-                      alt="Selected Profile"
-                      width="100"
-                    />
+                    {productData.image ? (
+                      <img
+                        src={`/upload/${productData.image}`}
+                        alt="Image"
+                        width="100"
+                      />
+                    ) : (
+                      <img
+                        src={default_profile}
+                        alt="Default Profile"
+                        width="100"
+                      />
+                    )}
                   </div>
-                  <p className="add-product-upload-text">
-                    Drag and drop image here, or click add image
-                  </p>
-                  <button
-                    type="button"
-                    className="add-product-upload-btn secondary-btn"
-                    onClick={handleButtonClick}
-                  >
-                    Add Image
-                  </button>
-                  <input
-                    type="file"
-                    id="imageInputFile"
-                    name="profile"
-                    onChange={handleFileChange}
-                    style={{ display: "none" }}
-                  />
                 </div>
               </div>
             </div>
@@ -222,8 +159,7 @@ const AddProduct = () => {
                   type="text"
                   id="product-price"
                   name="price"
-                  value={addProductData.price}
-                  onChange={handleChangeInput}
+                  value={productData.price}
                   placeholder="Type base price here..."
                 />
                 <label htmlFor="product-discount">
@@ -233,8 +169,7 @@ const AddProduct = () => {
                   type="text"
                   id="product-discount"
                   name="discount"
-                  value={addProductData.discount}
-                  onChange={handleChangeInput}
+                  value={productData.discount}
                   placeholder="Type discount percentage..."
                 />
               </div>
@@ -245,12 +180,12 @@ const AddProduct = () => {
             <div className="dashboard-add-content-card">
               <h6>Brand & Category</h6>
               <div className="add-product-form-container">
-                <label htmlFor="brand">Select Brand</label>
+                <label htmlFor="brand">Selected Brand</label>
                 <select
                   id="brand_id"
                   name="brand_id"
-                  value={addProductData.brand_id}
-                  onChange={handleChangeInput}
+                  value={productData.brand_id}
+                  disabled
                 >
                   <option value="">Select Brand</option>
                   {brandData.map((brand) => (
@@ -262,13 +197,13 @@ const AddProduct = () => {
               </div>
               <div className="add-product-form-container">
                 <label htmlFor="label-for-input-textarea product-name">
-                  Select Category
+                  Selected Category
                 </label>
                 <select
                   id="category_id"
                   name="cate_id"
-                  value={addProductData.cate_id}
-                  onChange={handleChangeInput}
+                  value={productData.cate_id}
+                disabled
                 >
                   <option value="">Select Category</option>
                   {categoryData.map((category) => (
@@ -288,8 +223,7 @@ const AddProduct = () => {
                   type="text"
                   id="memory"
                   name="memory"
-                  value={addProductData.memory}
-                  onChange={handleChangeInput}
+                  value={productData.memory}
                   placeholder="Memory"
                 />
                 <label htmlFor="storage">Storage</label>
@@ -297,8 +231,7 @@ const AddProduct = () => {
                   type="text"
                   id="storage"
                   name="storage"
-                  value={addProductData.storage}
-                  onChange={handleChangeInput}
+                  value={productData.storage}
                   placeholder="Storage"
                 />
               </div>
@@ -308,12 +241,7 @@ const AddProduct = () => {
               <h6>Status</h6>
               <div className="add-product-form-container">
                 <label htmlFor="status">Product Status</label>
-                <select
-                  id="status"
-                  name="status"
-                  value={addProductData.status}
-                  onChange={handleChangeInput}
-                >
+                <select id="status" name="status" value={productData.status}>
                   <option value="1">Published</option>
                   <option value="2">Low Stock</option>
                   <option value="3">Draft</option> {/* Fixed from "Draf" */}
@@ -328,4 +256,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default ViewProduct;
