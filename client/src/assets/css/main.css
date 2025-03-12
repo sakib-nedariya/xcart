@@ -260,6 +260,7 @@ button {
 }
 .dashboard-table-container .product-coupon-code {
   color: var(--black-color) !important;
+  text-transform: uppercase;
 }
 .admin-panel-header-div .dashboard-table-container thead {
   position: sticky;

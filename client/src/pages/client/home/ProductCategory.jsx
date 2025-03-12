@@ -53,6 +53,13 @@ const handleNavigateProducts = () =>{
                   <span className="product-price">₹67000</span>
                 </div>
               </div>
+              <div class="category-products">
+                <img src={ProductImage} alt="Image" />
+                <div className="about-categorty-products">
+                  <h5 className="product-name">iphone 14pro</h5>
+                  <span className="product-price">₹67000</span>
+                </div>
+              </div>
             </div>
             <button type="button" className="product-view-button primary-btn" onClick={()=> handleNavigateProducts()} >
               View All Products

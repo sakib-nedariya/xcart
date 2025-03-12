@@ -132,6 +132,11 @@
   border-right: 10px solid transparent;
   border-top: 10px solid var(--primary-btn-bg);
 }
+.product-category-image-with-price .category-products img{
+  width: 170px;
+  height: 170px;
+  object-fit: contain;
+}
 .product-category-image-with-price {
   display: flex;
   justify-content: space-between;
