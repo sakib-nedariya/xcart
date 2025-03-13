@@ -316,7 +316,7 @@ const AddProduct = () => {
                 >
                   <option value="1">Published</option>
                   <option value="2">Low Stock</option>
-                  <option value="3">Draft</option> {/* Fixed from "Draf" */}
+                  <option value="3">Draft</option> 
                   <option value="0">Out of Stock</option>
                 </select>
               </div>
