@@ -4,10 +4,11 @@ import Sidebar from "../layout/Sidebar";
 import DashboardProImage from "../../../assets/image/dashboard_product_img.png";
 import { FaUsers } from "react-icons/fa";
 import { CgProductHunt } from "react-icons/cg";
+import { BiDollar } from "react-icons/bi";
 import { IoPricetagsOutline } from "react-icons/io5";
 import { MdOutlineCategory } from "react-icons/md";
+import { use } from "react";
 import axios from "axios";
-
 const port = import.meta.env.VITE_SERVER_URL;
 
 const Dashboard = () => {
@@ -58,7 +59,6 @@ const Dashboard = () => {
     getCategoryData();
     getProductData();
   }, []);
-
   return (
     <>
       <Navbar />
@@ -106,73 +106,58 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+        <div className="dashboard-table-container">
+          <h6 id="dashboard-title-container-header">Latest Orders</h6>
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Product</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="product-stock-keeping-unit">302012</td>
+                <td className="product-info">
+                  <img src={DashboardProImage} alt="iPhone 11 Pro" />
+                  <span>iPhone 11 Pro</span>
+                </td>
+                <td>Josh Wisley</td>
+                <td>20 Feb 2024</td>
 
-        <div className="dashboard-content-wrapper">
-          <div className="dashboard-table-container">
-            <h6 id="dashboard-title-container-header">Latest Orders</h6>
-            <table>
-              <thead>
-                <tr>
-                  <th>Order ID</th>
-                  <th>Product</th>
-                  <th>Customer</th>
-                  <th>Date</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="product-stock-keeping-unit">302012</td>
-                  <td className="product-info">
-                    <img src={DashboardProImage} alt="iPhone 11 Pro" />
-                    <span>iPhone 11 Pro</span>
-                  </td>
-                  <td>Josh Wisley</td>
-                  <td>20 Feb 2024</td>
-
-                  <td>
-                    <span className="status processing">Processing</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="product-stock-keeping-unit">302012</td>
-                  <td className="product-info">
-                    <img src={DashboardProImage} alt="iPhone 11 Pro" />
-                    <span>iPhone 11 Pro</span>
-                  </td>
-                  <td>Josh Wisley</td>
-                  <td>20 Feb 2024</td>
-                  <td>
-                    <span className="status processing">Processing</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="product-stock-keeping-unit">302012</td>
-                  <td className="product-info">
-                    <img src={DashboardProImage} alt="iPhone 11 Pro" />
-                    <span>iPhone 11 Pro</span>
-                  </td>
-                  <td>Josh Wisley</td>
-                  <td>20 Feb 2024</td>
-                  <td>
-                    <span className="status processing">Processing</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="product-stock-keeping-unit">302012</td>
-                  <td className="product-info">
-                    <img src={DashboardProImage} alt="iPhone 11 Pro" />
-                    <span>iPhone 11 Pro</span>
-                  </td>
-                  <td>Josh Wisley</td>
-                  <td>20 Feb 2024</td>
-                  <td>
-                    <span className="status processing">Processing</span>
-                  </td>
-                </tr> 
-              </tbody>
-            </table>
-          </div>
+                <td>
+                  <span className="status processing">Processing</span>
+                </td>
+              </tr>
+              <tr>
+                <td className="product-stock-keeping-unit">302012</td>
+                <td className="product-info">
+                  <img src={DashboardProImage} alt="iPhone 11 Pro" />
+                  <span>iPhone 11 Pro</span>
+                </td>
+                <td>Josh Wisley</td>
+                <td>20 Feb 2024</td>
+                <td>
+                  <span className="status processing">Processing</span>
+                </td>
+              </tr>
+              <tr>
+                <td className="product-stock-keeping-unit">302012</td>
+                <td className="product-info">
+                  <img src={DashboardProImage} alt="iPhone 11 Pro" />
+                  <span>iPhone 11 Pro</span>
+                </td>
+                <td>Josh Wisley</td>
+                <td>20 Feb 2024</td>
+                <td>
+                  <span className="status processing">Processing</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </main>
     </>
