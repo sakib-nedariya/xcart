@@ -44,7 +44,13 @@ const ViewProduct = () => {
       console.error("Error fetching data:", error);
     }
   };
-
+  const handleChangeInput = (e) => {
+    const { name, value } = e.target;
+    setProductData({
+      ...productData,
+      [name]: value,
+    });
+  };
   const getProductData = async () => {
     try {
       const res = await axios.get(`${port}getproductdatawithid/${id}`);
@@ -74,17 +80,17 @@ const ViewProduct = () => {
           style={{ marginBottom: "24px" }}
         >
           <div>
-            <h5>View Category</h5>
+            <h5>View Product</h5>
             <div className="admin-panel-breadcrumb">
               <Link to="/admin/dashboard" className="breadcrumb-link active">
                 Dashboard
               </Link>
               <IoMdArrowDropright />
-              <Link to="/admin/category" className="breadcrumb-link active">
-                Category List
+              <Link to="/admin/product" className="breadcrumb-link active">
+                Product List
               </Link>
               <IoMdArrowDropright />
-              <span className="breadcrumb-text">View Category</span>
+              <span className="breadcrumb-text">View Product</span>
             </div>
           </div>
           <div className="admin-panel-header-add-buttons">
@@ -107,6 +113,7 @@ const ViewProduct = () => {
                   id="product-name"
                   name="name"
                   value={productData.name}
+                  onChange={handleChangeInput}
                   placeholder="Type product name here..."
                 />
                 <label htmlFor="product-slogan">Slogan</label>
@@ -115,6 +122,7 @@ const ViewProduct = () => {
                   id="product-slogan"
                   name="slogan"
                   value={productData.slogan}
+                  onChange={handleChangeInput}
                   placeholder="Type product slogan here..."
                 />
                 <label htmlFor="product-description">Description</label>
@@ -122,6 +130,7 @@ const ViewProduct = () => {
                   id="product-description"
                   name="description"
                   value={productData.description}
+                  onChange={handleChangeInput}
                   placeholder="Type product description here..."
                 ></textarea>
               </div>
@@ -130,7 +139,7 @@ const ViewProduct = () => {
             <div className="dashboard-add-content-card">
               <h6>Media</h6>
               <div className="add-product-form-container">
-                <label htmlFor="label-for-input-textarea photo">Photo</label>
+                <label htmlFor="product-image">Photo</label>
                 <div className="add-product-upload-container">
                   <div className="add-product-upload-icon">
                     {productData.image ? (
@@ -160,6 +169,7 @@ const ViewProduct = () => {
                   id="product-price"
                   name="price"
                   value={productData.price}
+                  onChange={handleChangeInput}
                   placeholder="Type base price here..."
                 />
                 <label htmlFor="product-discount">
@@ -170,6 +180,7 @@ const ViewProduct = () => {
                   id="product-discount"
                   name="discount"
                   value={productData.discount}
+                  onChange={handleChangeInput}
                   placeholder="Type discount percentage..."
                 />
               </div>
@@ -182,9 +193,10 @@ const ViewProduct = () => {
               <div className="add-product-form-container">
                 <label htmlFor="brand">Selected Brand</label>
                 <select
-                  id="brand_id"
+                  id="brand"
                   name="brand_id"
                   value={productData.brand_id}
+                  onChange={handleChangeInput}
                   disabled
                 >
                   <option value="">Select Brand</option>
@@ -196,14 +208,13 @@ const ViewProduct = () => {
                 </select>
               </div>
               <div className="add-product-form-container">
-                <label htmlFor="label-for-input-textarea product-name">
-                  Selected Category
-                </label>
+                <label htmlFor="category">Selected Category</label>
                 <select
-                  id="category_id"
+                  id="category"
                   name="cate_id"
                   value={productData.cate_id}
-                disabled
+                  onChange={handleChangeInput}
+                  disabled
                 >
                   <option value="">Select Category</option>
                   {categoryData.map((category) => (
@@ -224,6 +235,7 @@ const ViewProduct = () => {
                   id="memory"
                   name="memory"
                   value={productData.memory}
+                  onChange={handleChangeInput}
                   placeholder="Memory"
                 />
                 <label htmlFor="storage">Storage</label>
@@ -232,6 +244,7 @@ const ViewProduct = () => {
                   id="storage"
                   name="storage"
                   value={productData.storage}
+                  onChange={handleChangeInput}
                   placeholder="Storage"
                 />
               </div>
@@ -241,7 +254,12 @@ const ViewProduct = () => {
               <h6>Status</h6>
               <div className="add-product-form-container">
                 <label htmlFor="status">Product Status</label>
-                <select id="status" name="status" value={productData.status}>
+                <select
+                  id="status"
+                  name="status"
+                  onChange={handleChangeInput}
+                  value={productData.status}
+                >
                   <option value="1">Published</option>
                   <option value="2">Low Stock</option>
                   <option value="3">Draft</option> {/* Fixed from "Draf" */}

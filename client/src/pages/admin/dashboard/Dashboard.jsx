@@ -4,7 +4,6 @@ import Sidebar from "../layout/Sidebar";
 import DashboardProImage from "../../../assets/image/dashboard_product_img.png";
 import { FaUsers } from "react-icons/fa";
 import { CgProductHunt } from "react-icons/cg";
-import { BiDollar } from "react-icons/bi";
 import { IoPricetagsOutline } from "react-icons/io5";
 import { MdOutlineCategory } from "react-icons/md";
 import { use } from "react";
@@ -65,43 +64,43 @@ const Dashboard = () => {
       <Sidebar />
       <main className="admin-panel-header-div">
         <h5>Dashboard</h5>
-        <div class="stats-container">
-          <div class="stats-box">
-            <div class="stats-info">
-              <div class="stats-title">CUSTOMERS</div>
-              <div class="stats-value">{customers.length}</div>
+        <div className="stats-container">
+          <div className="stats-box">
+            <div className="stats-info">
+              <div className="stats-title">CUSTOMERS</div>
+              <div className="stats-value">{customers.length}</div>
             </div>
-            <div class="stats-logo">
+            <div className="stats-logo">
               <FaUsers />
             </div>
           </div>
 
-          <div class="stats-box">
-            <div class="stats-info">
-              <div class="stats-title">BRANDS</div>
-              <div class="stats-value">{brands.length}</div>
+          <div className="stats-box">
+            <div className="stats-info">
+              <div className="stats-title">BRANDS</div>
+              <div className="stats-value">{brands.length}</div>
             </div>
-            <div class="stats-logo">
+            <div className="stats-logo">
               <IoPricetagsOutline />
             </div>
           </div>
 
-          <div class="stats-box">
-            <div class="stats-info">
-              <div class="stats-title">CATEGORIES</div>
-              <div class="stats-value">{category.length}</div>
+          <div className="stats-box">
+            <div className="stats-info">
+              <div className="stats-title">CATEGORIES</div>
+              <div className="stats-value">{category.length}</div>
             </div>
-            <div class="stats-logo">
+            <div className="stats-logo">
               <MdOutlineCategory />
             </div>
           </div>
 
-          <div class="stats-box">
-            <div class="stats-info">
-              <div class="stats-title">PRODUCTS</div>
-              <div class="stats-value">{products.length}</div>
+          <div className="stats-box">
+            <div className="stats-info">
+              <div className="stats-title">PRODUCTS</div>
+              <div className="stats-value">{products.length}</div>
             </div>
-            <div class="stats-logo">
+            <div className="stats-logo">
               <CgProductHunt />
             </div>
           </div>

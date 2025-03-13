@@ -183,7 +183,7 @@ const AddProduct = () => {
             <div className="dashboard-add-content-card">
               <h6>Media</h6>
               <div className="add-product-form-container">
-                <label htmlFor="label-for-input-textarea photo">Photo</label>
+                <label htmlFor="imageInputFile">Photo</label>
                 <div className="add-product-upload-container">
                   <div className="add-product-upload-icon">
                     <img
@@ -247,7 +247,7 @@ const AddProduct = () => {
               <div className="add-product-form-container">
                 <label htmlFor="brand">Select Brand</label>
                 <select
-                  id="brand_id"
+                  id="brand"
                   name="brand_id"
                   value={addProductData.brand_id}
                   onChange={handleChangeInput}
@@ -261,11 +261,11 @@ const AddProduct = () => {
                 </select>
               </div>
               <div className="add-product-form-container">
-                <label htmlFor="label-for-input-textarea product-name">
+                <label htmlFor="category">
                   Select Category
                 </label>
                 <select
-                  id="category_id"
+                  id="category"
                   name="cate_id"
                   value={addProductData.cate_id}
                   onChange={handleChangeInput}

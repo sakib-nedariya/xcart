@@ -187,12 +187,12 @@ const Product = () => {
                   </td>
                   {brandData.map((brand) => {
                     if (brand.id === product.brand_id) {
-                      return <td>{brand.name}</td>;
+                      return <td key={brand.id}>{brand.name}</td>;
                     }
                   })}
                   {categoryData.map((category) => {
                     if (category.id === product.cate_id) {
-                      return <td>{category.name}</td>;
+                      return <td key={category.id}>{category.name}</td>;
                     }
                   })}
                   <td>{product.discount}%</td>
@@ -223,9 +223,9 @@ const Product = () => {
                     {new Date(product.created_date).toLocaleDateString("en-GB")}
                   </td>
                   <td className="actions">
-                    <IoPencil 
-                       title="View"
-                       onClick={() => handleNavigateEdit(product.id)}
+                    <IoPencil
+                      title="View"
+                      onClick={() => handleNavigateEdit(product.id)}
                     />
                     <IoIosEye
                       title="View"

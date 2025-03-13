@@ -18,6 +18,13 @@ const ViewBrand = () => {
     status: 1,
   });
 
+  const handleChangeInput = (e) => {
+    const { name, value } = e.target;
+    setBrandData({
+      ...brandData,
+      [name]: value,
+    });
+  };
   const getBrandData = async () => {
     try {
       const res = await axios.get(`${port}getbranddatawithid/${id}`);
@@ -76,6 +83,7 @@ const ViewBrand = () => {
                   type="text"
                   name="name"
                   value={brandData.name}
+                  onChange={handleChangeInput}
                   id="name"
                   placeholder="Type brand name here..."
                 />
@@ -85,6 +93,7 @@ const ViewBrand = () => {
                   type="text"
                   name="description"
                   value={brandData.description}
+                  onChange={handleChangeInput}
                   placeholder="Type brand description here..."
                 ></textarea>
               </div>
@@ -118,7 +127,12 @@ const ViewBrand = () => {
               <h6>Status</h6>
               <div className="add-product-form-container">
                 <label htmlFor="status">Brand Status</label>
-                <select id="status" name="status" value={brandData.status}>
+                <select
+                  id="status"
+                  name="status"
+                  value={brandData.status}
+                  onChange={handleChangeInput}
+                >
                   <option value="1">Active</option>
                   <option value="0">Disable</option>
                 </select>
