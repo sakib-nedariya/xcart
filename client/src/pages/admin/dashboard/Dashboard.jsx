@@ -16,29 +16,6 @@ const Dashboard = () => {
   const [category, setCategory] = useState([]);
   const [products, setProducts] = useState([]);
 
-  const [popularProducts, setPopularProducts] = useState([
-    {
-      name: "iPhone 11 Pro",
-      image: DashboardProImage,
-      sales: 350,
-      revenue: 24500,
-    },
-    {
-      name: "MacBook Air M2",
-      image: DashboardProImage,
-      sales: 275,
-      revenue: 275000,
-    },
-    {
-      name: "MacBook Air M2",
-      image: DashboardProImage,
-      sales: 275,
-      revenue: 275000,
-    },
-    
-
-  ]);
-
   const getCustomerData = async () => {
     try {
       const res = await axios.get(`${port}getcustomerdata`);
@@ -196,23 +173,6 @@ const Dashboard = () => {
               </tbody>
             </table>
           </div>
-
-          {/* Most Popular Products Section */}
-          {/* <div className="dashboard-table-container most-popular-products" style={{ width: "30%", justifyContent: "start" }}>
-          <h6 id="dashboard-title-container-header">Most Popular Products</h6>
-            <div className="popular-products-grid">
-              {popularProducts.map((product, index) => (
-                <div key={index} className="popular-product-card">
-                  <img src={product.image} alt={product.name} />
-                  <div className="popular-product-info">
-                    <h5>{product.name}</h5>
-                    <p>Sales: <strong>{product.sales}</strong></p>
-                    <p>Revenue: <strong>${product.revenue}</strong></p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div> */}
         </div>
       </main>
     </>
