@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import Slider from "react-slick";
+import { IoMdArrowForward, IoMdArrowBack } from "react-icons/io";
 import axios from "axios";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 const port = import.meta.env.VITE_SERVER_URL;
 
 const BrandCollection = () => {
   const [brandData, setBrandData] = useState([]);
+  const sliderRef = useRef(null);
 
   const getBrandData = async () => {
     try {
@@ -16,20 +22,52 @@ const BrandCollection = () => {
 
   useEffect(() => {
     getBrandData();
-  })
+  }, []);
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 7,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: { slidesToShow: 5 },
+      },
+      {
+        breakpoint: 768,
+        settings: { slidesToShow: 3 },
+      },
+      {
+        breakpoint: 480,
+        settings: { slidesToShow: 2 },
+      },
+    ],
+  };
+
   return (
     <section className="brand_collection_section">
       <div className="container brand_collection padding-main">
-        <h2>Brand Collection Available</h2>
-
-        <div className="brands_collection_images">
-          {brandData.slice(0 , 7).map((brand) => (
-            <div className="brands-collection-with-name">
-            <img src={`/upload/${brand.image}`} alt="Image" />
+        <div className="brand_collection_header">
+          <h2>Brand Collection Available</h2>
+          <span className="brand-collection-slider-arrow">
+            <IoMdArrowBack onClick={() => sliderRef.current.slickPrev()} />
+            <IoMdArrowForward onClick={() => sliderRef.current.slickNext()} />
+          </span>
+        </div>
+        <Slider
+          ref={sliderRef}
+          {...settings}
+          className="brands_collection_slider"
+        >
+          {brandData.map((brand, index) => (
+            <div key={index} className="brands-collection-with-name">
+              <img src={`/upload/${brand.image}`} alt={brand.name} />
               <p>{brand.name}</p>
             </div>
           ))}
-        </div>
+        </Slider>
       </div>
     </section>
   );
