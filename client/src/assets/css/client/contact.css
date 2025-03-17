@@ -87,6 +87,10 @@
   justify-content: center;
   align-items: center;
 }
+.contact-container .contact-information .social-icons .so-icon:hover{
+  color: var(--light-black-color);
+  transition: 0.1s ease-in;
+}
 .contact-container .contact-form {
   padding: 30px 20px;
 }

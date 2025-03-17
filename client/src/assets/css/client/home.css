@@ -190,6 +190,10 @@
   color: var(--primary-btn-bg);
   font-weight: 500;
 }
+.homepage-add-to-cart-btn{
+  margin-top: 10px;
+  width: 100%;
+}
 .product-view-button {
   font-weight: 600;
   font-size: 18px;

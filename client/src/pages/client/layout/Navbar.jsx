@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import logo from "../../../assets/image/logo.png";
 import { NavLink } from "react-router-dom";
-import { FaBars, FaTimes } from "react-icons/fa"; // Icons for toggle button
+import { FaBars, FaTimes } from "react-icons/fa"; 
 import "../../../assets/css/client/navbar.css";
 
 const Navbar = () => {
@@ -14,8 +13,8 @@ const Navbar = () => {
     <>
       <nav className="container-fluid navbar">
         <div className="container padding-side">
-          <NavLink to="/">
-            <img className="nav-logo" src={logo} alt="Logo" />
+          <NavLink to="/" className={"navbar-logo"}>
+            <h4>XCART</h4>
           </NavLink>
 
           {/* Menu List */}

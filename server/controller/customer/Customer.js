@@ -1,6 +1,5 @@
 const connection = require("../../config/connection");
 
-
 const getCustomerData = (req, res) => {
   const sql = "SELECT * FROM user ORDER BY id DESC";
   connection.query(sql, (error, result) => {
@@ -10,7 +9,6 @@ const getCustomerData = (req, res) => {
     return res.json(result);
   });
 };
-
 
 const getCustomerDataWithId = (req, res) => {
   const id = req.params.id
@@ -22,7 +20,6 @@ const getCustomerDataWithId = (req, res) => {
     return res.json(result);
   });
 };
-
 
 const addCustomerData = (req, res) => {
   try {
@@ -66,7 +63,6 @@ const deleteCustomer = (req, res) => {
     return res.status(500).send("Internal server error");
   }
 }
-
 
 const editCustomerData = (req, res) => {
   try {
