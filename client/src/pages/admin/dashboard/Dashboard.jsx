@@ -9,7 +9,7 @@ import { IoPricetagsOutline } from "react-icons/io5";
 import { MdOutlineCategory } from "react-icons/md";
 import { use } from "react";
 import axios from "axios";
-const port = import.meta.env.VITE_SERVER_URL;
+const port = import.meta.env.VITE_SERVER_URL; 
 
 const Dashboard = () => {
   const [customers, setCustomers] = useState([]);
