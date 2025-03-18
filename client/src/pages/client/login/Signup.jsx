@@ -1,22 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../../assets/css/client/login.css";
 import login from "../../../assets/image/login-bg.png";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Navbar from "../layout/Navbar";
 import Footer from "../layout/Footer";
 
 const Signup = () => {
-
+  const [passwordViewOrHide, setPasswordViewOrHide] = useState(false);
   const navigate = useNavigate();
 
   const handleLoginNavigate = () => {
-    navigate("/login")
+    navigate("/login");
   };
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="container-fluid bg-color">
         <div className="container padding-main login-container">
           <div className="login">
@@ -27,11 +28,13 @@ const Signup = () => {
             <form>
               <div className="form-group">
                 <label>Username</label>
+                <span className="required_field">*</span>
                 <input type="text" name="username" placeholder="John Abraham" />
               </div>
 
               <div className="form-group">
                 <label>Email</label>
+                <span className="required_field">*</span>
                 <input
                   type="email"
                   name="email"
@@ -39,17 +42,26 @@ const Signup = () => {
                 />
               </div>
 
-              <div className="form-group">
+              <div className="form-group password-input">
                 <label>Password</label>
+                <span className="required_field">*</span>
                 <input
-                  type="password"
+                  type={passwordViewOrHide ? "text" : "password"}
                   name="password"
                   placeholder="Enter your password"
                 />
+                <span
+                  onClick={() => {
+                    setPasswordViewOrHide(!passwordViewOrHide);
+                  }}
+                >
+                  {passwordViewOrHide ? <FaEyeSlash /> : <FaEye />}
+                </span>
               </div>
 
               <div className="form-group">
                 <label>Confirm Password</label>
+                <span className="required_field">*</span>
                 <input
                   type="password"
                   name="password"
@@ -60,7 +72,7 @@ const Signup = () => {
               <div className="form-group">
                 <label>Phone Number(Optional)</label>
                 <input
-                  type="number"
+                  type="text"
                   name="number"
                   placeholder="Enter your phone number"
                 />
@@ -79,9 +91,9 @@ const Signup = () => {
                 </div>
 
                 <p className="sign-up">
-                  Already have an account?{" "}
+                  Already have an account? 
                   <Link to="/login">
-                    <span>Login Now</span>
+                    <span> Login Now</span>
                   </Link>
                 </p>
 
@@ -102,7 +114,7 @@ const Signup = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

@@ -28,7 +28,6 @@
 .login-container .login-form .form-group {
   margin-bottom: 15px;
 }
-
 .login-container {
   display: flex;
   align-items: center;
@@ -44,7 +43,6 @@
   width: 50%;
   border-radius: 15px;
 }
-
 .login-container .login-form h3 {
   font-family: var(--primary-font);
   color: var(--primary-font-color);
@@ -55,7 +53,6 @@
 .login-container .login img {
   width: 80%;
 }
-
 .login-container form p {
   font-size: 14px;
   color: var(--primary-btn-bg);
@@ -69,7 +66,16 @@
   margin-bottom: 20px;
   border-radius: 8px;
 }
-
+.login-form .password-input{
+  position: relative
+}
+.login-form .password-input svg{
+  position: absolute;
+  top: 56%;
+  right: 2%;
+  cursor: pointer;
+  color: var(--light-gray-color);
+}
 .login-container form .google-btn button {
   width: 100%;
   margin-bottom: 20px;

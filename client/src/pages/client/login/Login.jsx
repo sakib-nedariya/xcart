@@ -1,21 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../../assets/css/client/login.css";
 import login from "../../../assets/image/login-bg.png";
 import { Link } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import Navbar from "../layout/Navbar";
 import Footer from "../layout/Footer";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [passwordViewOrHide, setPasswordViewOrHide] = useState(false);
 
   const handleshoppingcartNavigate = () => {
     navigate("/shopping-cart");
   };
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="container-fluid bg-color">
         <div className="container padding-main login-container">
           <div className="login">
@@ -26,16 +28,25 @@ const Login = () => {
             <form>
               <div className="form-group">
                 <label>Username</label>
+                <span className="required_field">*</span>
                 <input type="text" name="username" placeholder="Feyz Ibrahim" />
               </div>
 
-              <div className="form-group">
+              <div className="form-group password-input">
                 <label>Password</label>
+                <span className="required_field">*</span>
                 <input
-                  type="password"
+                   type={passwordViewOrHide ? "text" : "password"}
                   name="password"
                   placeholder="Enter your password"
                 />
+                <span
+                  onClick={() => {
+                    setPasswordViewOrHide(!passwordViewOrHide);
+                  }}
+                >
+                  {passwordViewOrHide ? <FaEyeSlash /> : <FaEye />}
+                </span>
               </div>
               <div>
                 <p>Forget password?</p>
@@ -71,7 +82,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

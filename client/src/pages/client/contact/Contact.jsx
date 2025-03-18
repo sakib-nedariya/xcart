@@ -88,22 +88,22 @@ const Contact = () => {
                 >
                   Select Subject?
                 </label>
-                <div class="radio-group">
+                <div className="radio-group">
                   <label>
                     <input type="radio" name="subject" />
-                    <span class="custom-radio"></span> General Inquiry
+                    <span className="custom-radio"></span> General Inquiry
                   </label>
                   <label>
                     <input type="radio" name="subject" />
-                    <span class="custom-radio"></span> General Inquiry
+                    <span className="custom-radio"></span> General Inquiry
                   </label>
                   <label>
                     <input type="radio" name="subject" />
-                    <span class="custom-radio"></span> General Inquiry
+                    <span className="custom-radio"></span> General Inquiry
                   </label>
                   <label>
                     <input type="radio" name="subject" />
-                    <span class="custom-radio"></span> General Inquiry
+                    <span className="custom-radio"></span> General Inquiry
                   </label>
                 </div>
               </div>

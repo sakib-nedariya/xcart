@@ -1,6 +1,5 @@
 const connection = require("../../config/connection");
 
-
 const getBrandData = (req, res) => {
   const sql = "SELECT * FROM brand  ORDER BY id DESC";
   connection.query(sql, (error, result) => {
@@ -10,7 +9,6 @@ const getBrandData = (req, res) => {
     return res.json(result);
   });
 };
-
 
 const getBrandDataWithId = (req, res) => {
   const id = req.params.id
@@ -22,7 +20,6 @@ const getBrandDataWithId = (req, res) => {
     return res.json(result);
   });
 };
-
 
 const addBrandData = (req, res) => {
   try {

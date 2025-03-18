@@ -74,19 +74,19 @@ const ProductView = () => {
               </div>
 
               <div className="cart-actions">
-                <div class="product-actions">
-                  <div class="quantity-selector">
+                <div className="product-actions">
+                  <div className="quantity-selector">
                     <span>-</span>
                     <span>01</span>
                     <span>+</span>
                   </div>
 
-                  <button class="primary-btn">Add To Cart</button>
+                  <button className="primary-btn">Add To Cart</button>
                 </div>
 
                 <div className="buy-now-icon">
-                  <button class="primary-btn buy-now">Buy Now</button>
-                  <button class="bookmark-btn">
+                  <button className="primary-btn buy-now">Buy Now</button>
+                  <button className="bookmark-btn">
                     <BsBookmark size={18} />
                   </button>
                 </div>

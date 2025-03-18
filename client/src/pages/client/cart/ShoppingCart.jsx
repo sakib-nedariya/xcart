@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiMinusSm, HiPlusSm } from "react-icons/hi";
 import { MdOutlineCancel } from "react-icons/md";
@@ -8,20 +8,39 @@ import Navbar from "../layout/Navbar";
 import Footer from "../layout/Footer";
 
 const ShoppingCart = () => {
-
   const navigate = useNavigate();
 
-  const handlecheckoutpagenavigate = ()=>{
-    navigate('/checkout');
-  }
+  // State to manage product quantities
+  const [quantities, setQuantities] = useState({
+    macbook: 1,
+    iphone: 1,
+  });
+
+  const handleIncrement = (product) => {
+    setQuantities((prev) => ({
+      ...prev,
+      [product]: prev[product] + 1,
+    }));
+  };
+
+  const handleDecrement = (product) => {
+    setQuantities((prev) => ({
+      ...prev,
+      [product]: prev[product] > 1 ? prev[product] - 1 : 1, // Ensure quantity doesn't go below 1
+    }));
+  };
+
+  const handlecheckoutpagenavigate = () => {
+    navigate("/checkout");
+  };
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <section className="container-fluid shopping-cart-section">
         <div className="container padding-main shopping-cart">
           <div className="shopping-cart-container">
-            <h6>Shopping Card</h6>
+            <h6>Shopping Cart</h6>
             <table>
               <thead>
                 <tr>
@@ -37,7 +56,7 @@ const ShoppingCart = () => {
                     <span className="product-remove-btn">
                       <MdOutlineCancel />
                     </span>
-                    <img src={ShoppingCartProduct} alt="image" />
+                    <img src={ShoppingCartProduct} alt="MacBook" />
                     <span className="shopping-cart-product-name">
                       2020 Apple MacBook Pro with...
                     </span>
@@ -48,46 +67,51 @@ const ShoppingCart = () => {
                   </td>
                   <td>
                     <div className="product_quantity">
-                      <HiMinusSm />
-                      <span>01</span>
-                      <HiPlusSm />
+                      <HiMinusSm onClick={() => handleDecrement("macbook")} />
+                      <span>{quantities.macbook}</span>
+                      <HiPlusSm onClick={() => handleIncrement("macbook")} />
                     </div>
                   </td>
-                  <td className="product-last-price">₹89000</td>
+                  <td className="product-last-price">
+                    ₹{quantities.macbook * 89000}
+                  </td>
                 </tr>
                 <tr>
                   <td className="shopping-cart-container-product">
                     <span className="product-remove-btn">
                       <MdOutlineCancel />
                     </span>
-                    <img src={ShoppingCartProduct} alt="image" />
+                    <img src={ShoppingCartProduct} alt="iPhone" />
                     <span className="shopping-cart-product-name">
                       iPhone 11 Pro (256 GB) - Gray
                     </span>
                   </td>
                   <td>
                     <span className="product-old-price">₹120000</span>
-                    <span className="product-new-price">₹89000</span>
+                    <span className="product-new-price">₹32999</span>
                   </td>
                   <td>
                     <div className="product_quantity">
-                      <HiMinusSm />
-                      <span>01</span>
-                      <HiPlusSm />
+                      <HiMinusSm onClick={() => handleDecrement("iphone")} />
+                      <span>{quantities.iphone}</span>
+                      <HiPlusSm onClick={() => handleIncrement("iphone")} />
                     </div>
                   </td>
-                  <td className="product-last-price">₹32999</td>
+                  <td className="product-last-price">
+                    ₹{quantities.iphone * 32999}
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          
           <div className="shopping-cart-total-price-details">
             <div className="shopping-cart-price-card">
-              <h6>Card Totals</h6>
+              <h6>Cart Totals</h6>
               <div className="shopping-cart-price-row">
                 <span>Sub-total</span>
-                <span className="shopping-cart-price">₹121,999</span>
+                <span className="shopping-cart-price">
+                  ₹{quantities.macbook * 89000 + quantities.iphone * 32999}
+                </span>
               </div>
               <div className="shopping-cart-price-row">
                 <span>Shipping</span>
@@ -104,10 +128,20 @@ const ShoppingCart = () => {
               <div className="shopping-cart-price-row product-total-price">
                 <span>Total</span>
                 <span>
-                  <b>₹123,999</b>
+                  <b>
+                    ₹
+                    {quantities.macbook * 89000 +
+                      quantities.iphone * 32999 +
+                      2999 -
+                      999}
+                  </b>
                 </span>
               </div>
-              <button type="button" className="shopping-cartcheckout-btn primary-btn" onClick={()=>handlecheckoutpagenavigate()}>
+              <button
+                type="button"
+                className="shopping-cartcheckout-btn primary-btn"
+                onClick={handlecheckoutpagenavigate}
+              >
                 PROCEED TO CHECKOUT
               </button>
             </div>
@@ -123,10 +157,9 @@ const ShoppingCart = () => {
               </button>
             </div>
           </div>
-
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </>
   );
 };
