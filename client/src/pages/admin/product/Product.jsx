@@ -224,7 +224,7 @@ const Product = () => {
                   </td>
                   <td className="actions">
                     <IoPencil
-                      title="View"
+                      title="Edit"
                       onClick={() => handleNavigateEdit(product.id)}
                     />
                     <IoIosEye

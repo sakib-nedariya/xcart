@@ -52,7 +52,7 @@
 }
 .view-page-image-main-div .view-image img{
   object-fit: cover;
-  width: 100%;
+  width: fit-content;
   height: 400px;
 }
 
@@ -76,7 +76,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 5px;
-  width: 75%;
+  width: 85%;
 }
 .product-view-container .view-product-info p {
   font-family: var(--info-font);

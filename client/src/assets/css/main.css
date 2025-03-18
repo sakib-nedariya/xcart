@@ -316,18 +316,19 @@ button {
 
 /* table-bottom-pagination-css */
 
-.dashboard-table-container .table-footer-pagination {
+.table-footer-pagination {
   padding: 15px 22px;
+  font-family: var(--info-font);
   display: flex;
   color: var(--primary-font-color);
   justify-content: space-between;
   align-items: center;
 }
-.dashboard-table-container .table-footer-pagination .pagination {
+ .table-footer-pagination .pagination {
   display: flex;
   align-items: center;
 }
-.dashboard-table-container .table-footer-pagination .pagination li {
+.table-footer-pagination .pagination li {
   display: flex;
   justify-content: center;
   align-items: center;
