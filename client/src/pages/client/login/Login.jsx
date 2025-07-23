@@ -49,7 +49,7 @@ const Login = () => {
                 </span>
               </div>
               <div>
-                <p>Forget password?</p>
+                <p>Forgot password?</p>
                 <div className="login-btn">
                   <button
                     className="btn primary-btn"
@@ -72,7 +72,7 @@ const Login = () => {
                   </button>
                 </div>
                 <p className="sign-up">
-                  Don't have an account?{" "}
+                  Don't have an account?
                   <Link to="/signup">
                     <span>Sign up now</span>
                   </Link>

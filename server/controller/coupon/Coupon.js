@@ -34,6 +34,7 @@ const createCouponData = (req, res) => {
       if (error) {
         console.log("Error Adding coupon Data in server.js: ", error);
         return res.status(500).send("Error adding coupon data");
+  
 
       } else {
         return res.sendStatus(200);
@@ -45,26 +46,26 @@ const createCouponData = (req, res) => {
   }
 };
 
-const deleteCoupon = (req, res) => {
-  try {
-     
-    const id = req.params.id;
-    const sql =  `DELETE FROM coupon WHERE id= ${id}`
+  const deleteCoupon = (req, res) => {
+    try {
+      
+      const id = req.params.id;
+      const sql =  `DELETE FROM coupon WHERE id= ${id}`
 
-    connection.query(sql, (error) => {
-      if (error) {
-        console.log("Error Adding coupon Data in server.js: ", error);
-        return res.status(500).send("Error adding coupon data");
+      connection.query(sql, (error) => {
+        if (error) {
+          console.log("Error Adding coupon Data in server.js: ", error);
+          return res.status(500).send("Error adding coupon data");
 
-      } else {
-        return res.sendStatus(200);
-      }
-    });
-  } catch (error) {
-    console.log("Error in server.js: ", error);
-    return res.status(500).send("Internal server error");
+        } else {
+          return res.sendStatus(200);
+        }
+      });
+    } catch (error) {
+      console.log("Error in server.js: ", error);
+      return res.status(500).send("Internal server error");
+    }
   }
-}
 
 
 const editCouponData = (req, res) => {

@@ -18,7 +18,6 @@ const ProductListing = () => {
   const itemsPerPage = 16;
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(100000);
-  
 
   useEffect(() => {
     const getCategoryData = async () => {
@@ -64,10 +63,10 @@ const ProductListing = () => {
     const price = parseFloat(product.price);
     return (
       (!activeTab || product.cate_id === activeTab) &&
-      price >= minPrice && price <= maxPrice
+      price >= minPrice &&
+      price <= maxPrice
     );
   });
-
 
   // Pagination logic
   const totalItems = productData.length;
@@ -92,8 +91,16 @@ const ProductListing = () => {
         <aside className="sidebar">
           <h6>Category</h6>
           <div className="radio-group">
-          <label className={activeTab === null ? "active" : ""} onClick={() => handleTabClick(null)}>
-              <input type="radio" name="category" value="all" />
+            <label
+              className={activeTab === null ? "active" : ""}
+              onClick={() => handleTabClick(null)}
+            >
+              <input
+                type="radio"
+                name="category"
+                value="all"
+                checked={activeTab === null}
+              />
               <span className="custom-radio"></span> All
             </label>
             {categoryData.length > 0 ? (
@@ -103,7 +110,12 @@ const ProductListing = () => {
                   className={activeTab === category.id ? "active" : ""}
                   onClick={() => handleTabClick(category.id)}
                 >
-                  <input type="radio" name="category" value={category.id} />
+                  <input
+                    type="radio"
+                    name="category"
+                    value={category.id}
+                    checked={activeTab === category.id}
+                  />
                   <span className="custom-radio"></span> {category.name}
                 </label>
               ))
@@ -115,12 +127,22 @@ const ProductListing = () => {
           <div className="price-range">
             <p>Price Range</p>
             <div className="input">
-              <input type="number" name="min-price" placeholder="Min Price" value={minPrice} onChange={handlePriceChange} />
-              <input type="number" name="max-price" placeholder="Max Price" value={maxPrice} onChange={handlePriceChange} />
+              <input
+                type="number"
+                name="min-price"
+                placeholder="Min Price"
+                value={minPrice}
+                onChange={handlePriceChange}
+              />
+              <input
+                type="number"
+                name="max-price"
+                placeholder="Max Price"
+                value={maxPrice}
+                onChange={handlePriceChange}
+              />
             </div>
           </div>
-
-          
 
           <div className="radio-group">
             <label>
@@ -147,14 +169,18 @@ const ProductListing = () => {
               <input type="radio" name="price" />
               <span className="custom-radio"></span> Above 50000₹
             </label>
-          </div>
-
+                      
+          </div>
         </aside>
 
         <div className="products-with-searchbar">
           <nav className="product-navbar">
             <div className="search-select">
-              <input type="text" placeholder="Search..." className="search-input" />
+              <input
+                type="text"
+                placeholder="Search..."
+                className="search-input"
+              />
               <div className="select">
                 <h6>Sort By:</h6>
                 <div className="custom-dropdown">
@@ -170,7 +196,10 @@ const ProductListing = () => {
 
             <div>
               <p className="result">
-                <strong>{filteredProducts.length}/{totalItems}</strong> Results Loaded
+                <strong>
+                  {filteredProducts.length}/{totalItems}
+                </strong>{" "}
+                Results Loaded
               </p>
             </div>
           </nav>

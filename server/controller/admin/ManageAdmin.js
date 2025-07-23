@@ -11,7 +11,6 @@ const getAdminData = (req, res) => {
   });
 };
 
-
 const getAdminDataWithId = (req, res) => {
   const id = req.params.id
   const sql = `SELECT * FROM admin WHERE id=${id}`;

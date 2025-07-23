@@ -6,7 +6,7 @@ import { MdSave } from "react-icons/md";
 import { HiXMark } from "react-icons/hi2";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { notifyWarning, notifySuccess } from "../layout/ToastMessage";
+import { notifyWarning } from "../layout/ToastMessage";
 
 const port = import.meta.env.VITE_SERVER_URL;
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../layout/Navbar";
 import Sidebar from "../layout/Sidebar";
-import { MdDeleteForever } from "react-icons/md";
+import { MdDeleteForever, MdDelete } from "react-icons/md";
 import DashboardProImage from "../../../assets/image/dashboard_product_img.png";
 import DeleteModal from "../layout/DeleteModal";
 import { IoPencil } from "react-icons/io5";
@@ -17,6 +17,7 @@ const port = import.meta.env.VITE_SERVER_URL;
 const Category = () => {
   const [categoryData, setCategoryData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState([]);
   const navigate = useNavigate();
   const itemsPerPage = 10;
   const [activeTab, setActiveTab] = useState("All");
@@ -55,19 +56,42 @@ const Category = () => {
 
   const handleCategoryDelete = async () => {
     try {
-      await axios.delete(`${port}deletecategorydata/${deleteId}`);
+      await Promise.all(
+        selectedCategory.map((id) =>
+          axios.delete(`${port}deletecategorydata/${id}`)
+        )
+      );
+      notifySuccess("Selected Categories Deleted Successfully");
       getCategoryData();
-      notifySuccess("Category Deleted Successfully");
+      setSelectedCategory([]);
+      closeDeleteModal();
     } catch (error) {
-      console.error("Error deleting category:", error);
+      console.error("Error deleting selected category:", error);
     }
-    closeDeleteModal();
   };
 
   useEffect(() => {
     getCategoryData();
     getBrandData();
-  }, []);
+    setSelectedCategory([]);
+  }, [activeTab, currentPage]);
+
+  const handleSelectAll = (e) => {
+    if (e.target.checked) {
+      const allIds = category.map((p) => p.id);
+      setSelectedCategory(allIds);
+    } else {
+      setSelectedCategory([]);
+    }
+  };
+
+  const handleCheckboxChange = (id) => {
+    setSelectedCategory((prevSelected) =>
+      prevSelected.includes(id)
+        ? prevSelected.filter((pid) => pid !== id)
+        : [...prevSelected, id]
+    );
+  };
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -98,6 +122,9 @@ const Category = () => {
     navigate(`/admin/view-category/${id}`);
   };
 
+  const isAllSelected =
+    category.length > 0 && selectedCategory.length === category.length;
+
   return (
     <>
       <Navbar />
@@ -109,40 +136,59 @@ const Category = () => {
           button={{ link: "/admin/add-category", text: "Add Category" }}
         />
 
-        <div className="admin-panel-header-tabs">
-          <button
-            type="button"
-            className={`admin-panel-header-tab 
+        <div className="admin-panel-header-tabs-and-deleteall-btn">
+          <div className="admin-panel-header-tabs">
+            <button
+              type="button"
+              className={`admin-panel-header-tab 
                 ${activeTab === "All" ? "active" : ""}`}
-            onClick={() => setActiveTab("All")}
-          >
-            All
-          </button>
-          <button
-            type="button"
-            className={`admin-panel-header-tab ${
-              activeTab === "Active" ? "active" : ""
-            }`}
-            onClick={() => setActiveTab("Active")}
-          >
-            Active
-          </button>
+              onClick={() => setActiveTab("All")}
+            >
+              All
+            </button>
+            <button
+              type="button"
+              className={`admin-panel-header-tab ${
+                activeTab === "Active" ? "active" : ""
+              }`}
+              onClick={() => setActiveTab("Active")}
+            >
+              Active
+            </button>
 
-          <button
-            type="button"
-            className={`admin-panel-header-tab ${
-              activeTab === "Disable" ? "active" : ""
-            }`}
-            onClick={() => setActiveTab("Disable")}
-          >
-            Disable
-          </button>
+            <button
+              type="button"
+              className={`admin-panel-header-tab ${
+                activeTab === "Disable" ? "active" : ""
+              }`}
+              onClick={() => setActiveTab("Disable")}
+            >
+              Disable
+            </button>
+          </div>
+          {selectedCategory.length > 0 && (
+            <button
+              className="admin-header-delete-btn delete-btn"
+              onClick={() => setIsDeleteModalOpen(true)}
+            >
+              <MdDelete />
+              Delete
+            </button>
+          )}
         </div>
 
         <div className="dashboard-table-container full-height">
           <table>
             <thead>
               <tr>
+                <th>
+                  <input
+                    type="checkbox"
+                    style={{ width: "16px", height: "16px" }}
+                    onChange={handleSelectAll}
+                    checked={isAllSelected}
+                  />
+                </th>
                 <th>Category Name</th>
                 <th>Description</th>
                 <th>Brand</th>
@@ -154,8 +200,16 @@ const Category = () => {
             <tbody>
               {category.map((category, index) => (
                 <tr key={index}>
+                  <td>
+                    <input
+                      type="checkbox"
+                      style={{ width: "16px", height: "16px" }}
+                      checked={selectedCategory.includes(category.id)}
+                      onChange={() => handleCheckboxChange(category.id)}
+                    />
+                  </td>
                   <td className="product-info">
-                    <img src={`/upload/${category.image}`} alt="brand_image" />
+                    <img src={`/upload/${category.image}`} alt="category_image" />
                     <span>{category.name}</span>
                   </td>
                   <td>{category.description.slice(0, 40)}</td>

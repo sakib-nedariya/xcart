@@ -39,7 +39,7 @@ const Checkout = () => {
                 </div>
                 <div style={{ width: "50%" }}>
                   <label className="checkout-label-title">
-                    Company Name{" "}
+                    Company Name
                     <span style={{ color: "#929FA5" }}>(Optional)</span>
                   </label>
                   <input
@@ -169,7 +169,7 @@ const Checkout = () => {
               <div className="checkout-form-container-group">
                 <div style={{ width: "100%" }}>
                   <label className="checkout-label-title">
-                    Order Notes{" "}
+                    Order Notes
                     <span style={{ color: "#929FA5" }}>(Optional)</span>
                   </label>
                   <textarea

@@ -70,16 +70,15 @@ const Signup = () => {
               </div>
 
               <div className="form-group">
-                <label>Phone Number(Optional)</label>
+                <label>Phone Number (Optional)</label>
                 <input
                   type="text"
                   name="number"
                   placeholder="Enter your phone number"
                 />
               </div>
-
               <div>
-                <p>Forget password?</p>
+                <p>Forgot password?</p>
                 <div className="login-btn">
                   <button
                     className="btn primary-btn"
@@ -91,11 +90,15 @@ const Signup = () => {
                 </div>
 
                 <p className="sign-up">
-                  Already have an account? 
+                  Already have an account?
                   <Link to="/login">
                     <span> Login Now</span>
                   </Link>
                 </p>
+
+                <div class="or-divider">
+                  <span>OR</span>
+                </div>
 
                 <div className="google-btn">
                   <button className="btn primary-btn" type="button">

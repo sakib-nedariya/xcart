@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../layout/Navbar";
 import Sidebar from "../layout/Sidebar";
-import { MdDeleteForever } from "react-icons/md";
+import { MdDeleteForever, MdDelete } from "react-icons/md";
 import DeleteModal from "../layout/DeleteModal";
 import { IoPencil } from "react-icons/io5";
 import { IoIosEye } from "react-icons/io";
@@ -15,9 +15,10 @@ const port = import.meta.env.VITE_SERVER_URL;
 const Brand = () => {
   const [activeTab, setActiveTab] = useState("All");
   const [brandData, setBrandData] = useState([]);
-  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedBrands, setSelectedBrands] = useState([]);
   const itemsPerPage = 10;
+  const navigate = useNavigate();
 
   // Fetch customer data
   const getBrandData = async () => {
@@ -45,18 +46,39 @@ const Brand = () => {
 
   const handleBrandDelete = async () => {
     try {
-      await axios.delete(`${port}deletebranddata/${deleteId}`);
+      await Promise.all(
+        selectedBrands.map((id) => axios.delete(`${port}deletebranddata/${id}`))
+      );
+      notifySuccess("Selected brands deleted successfully");
       getBrandData();
-      notifySuccess("Brand Deleted Successfully");
+      setSelectedBrands([]);
+      closeDeleteModal();
     } catch (error) {
-      console.error("Error deleting brand:", error);
+      console.error("Error deleting selected brands:", error);
     }
-    closeDeleteModal();
   };
 
   useEffect(() => {
     getBrandData();
-  }, []);
+    setSelectedBrands([]);
+  }, [activeTab, currentPage]);
+
+ const handleSelectAll = (e) => {
+  if (e.target.checked) {
+    const allIds = brands.map((p) => p.id);
+    setSelectedBrands(allIds);
+  } else {
+    setSelectedBrands([]);
+  }
+};
+
+  const handleCheckboxChange = (id) => {
+    setSelectedBrands((prevSelected) =>
+      prevSelected.includes(id)
+        ? prevSelected.filter((pid) => pid !== id)
+        : [...prevSelected, id]
+    );
+  };
 
   const handleNavigateEdit = (id) => {
     navigate(`/admin/edit-brand/${id}`);
@@ -85,6 +107,10 @@ const Brand = () => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const brands = filteredData.slice(startIndex, endIndex);
+
+  const isAllSelected =
+    brands.length > 0 && selectedBrands.length === brands.length;
+
   return (
     <>
       <Navbar />
@@ -95,41 +121,59 @@ const Brand = () => {
           breadcrumbText="Brand List"
           button={{ link: "/admin/add-brand", text: "Add Brand" }}
         />
+        <div className="admin-panel-header-tabs-and-deleteall-btn">
+          <div className="admin-panel-header-tabs">
+            <button
+              type="button"
+              className={`admin-panel-header-tab ${
+                activeTab === "All" ? "active" : ""
+              }`}
+              onClick={() => setActiveTab("All")}
+            >
+              All
+            </button>
+            <button
+              type="button"
+              className={`admin-panel-header-tab ${
+                activeTab === "Active" ? "active" : ""
+              }`}
+              onClick={() => setActiveTab("Active")}
+            >
+              Active
+            </button>
+            <button
+              type="button"
+              className={`admin-panel-header-tab ${
+                activeTab === "Disable" ? "active" : ""
+              }`}
+              onClick={() => setActiveTab("Disable")}
+            >
+              Disable
+            </button>
+          </div>
 
-        <div className="admin-panel-header-tabs">
-          <button
-            type="button"
-            className={`admin-panel-header-tab ${
-              activeTab === "All" ? "active" : ""
-            }`}
-            onClick={() => setActiveTab("All")}
-          >
-            All
-          </button>
-          <button
-            type="button"
-            className={`admin-panel-header-tab ${
-              activeTab === "Active" ? "active" : ""
-            }`}
-            onClick={() => setActiveTab("Active")}
-          >
-            Active
-          </button>
-          <button
-            type="button"
-            className={`admin-panel-header-tab ${
-              activeTab === "Disable" ? "active" : ""
-            }`}
-            onClick={() => setActiveTab("Disable")}
-          >
-            Disable
-          </button>
+          {selectedBrands.length > 0 && (
+            <button
+              className="admin-header-delete-btn delete-btn"
+              onClick={() => setIsDeleteModalOpen(true)}
+            >
+              <MdDelete />
+              Delete
+            </button>
+          )}
         </div>
-
         <div className="dashboard-table-container full-height">
           <table>
             <thead>
               <tr>
+                <th>
+                  <input
+                    type="checkbox"
+                    style={{ width: "16px", height: "16px" }}
+                    onChange={handleSelectAll}
+                    checked={isAllSelected}
+                  />
+                </th>
                 <th style={{ width: "20%" }}>Brand Name</th>
                 <th style={{ width: "40%" }}>Description</th>
                 <th style={{ width: "15%" }}>Created Date</th>
@@ -140,6 +184,14 @@ const Brand = () => {
             <tbody>
               {brands.map((brand, index) => (
                 <tr key={index}>
+                  <td>
+                    <input
+                      type="checkbox"
+                      style={{ width: "16px", height: "16px" }}
+                      checked={selectedBrands.includes(brand.id)}
+                      onChange={() => handleCheckboxChange(brand.id)}
+                    />
+                  </td>
                   <td className="product-info admin-profile">
                     <img src={`/upload/${brand.image}`} alt="brand_image" />
                     <span>{brand.name}</span>
