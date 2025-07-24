@@ -1,10 +1,10 @@
 const connection = require("../../config/connection");
 
 const getCustomerData = (req, res) => {
-  const sql = "SELECT * FROM user ORDER BY id DESC";
+  const sql = "SELECT * FROM customer ORDER BY id DESC";
   connection.query(sql, (error, result) => {
     if (error) {
-      console.log("Error Getting Data user Table in server.js" + error);
+      console.log("Error Getting Data customer Table in server.js" + error);
     }
     return res.json(result);
   });
@@ -12,10 +12,10 @@ const getCustomerData = (req, res) => {
 
 const getCustomerDataWithId = (req, res) => {
   const id = req.params.id
-  const sql = `SELECT * FROM user WHERE id=${id}`;
+  const sql = `SELECT * FROM customer WHERE id=${id}`;
   connection.query(sql, (error, result) => {
     if (error) {
-      console.log("Error Getting Data user Table in server.js" + error);
+      console.log("Error Getting Data customer Table in server.js" + error);
     }
     return res.json(result);
   });
@@ -25,13 +25,13 @@ const addCustomerData = (req, res) => {
   try {
     const { first_name, middle_name, last_name, user_name, email, mobile_number, dob, address, password, status } = req.body;
     const imagePath = req.file ? req.file.filename : null;
-    const sql = "INSERT INTO user (first_name, middle_name, last_name, user_name, profile, email, mobile_number, dob, address, password, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    const sql = "INSERT INTO customer (first_name, middle_name, last_name, user_name, profile, email, mobile_number, dob, address, password, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     const data = [first_name, middle_name, last_name, user_name, imagePath, email, mobile_number, dob, address, password, status];
 
     connection.query(sql, data, (error) => {
       if (error) {
-        console.log("Error Adding user Data in server.js: ", error);
-        return res.status(500).send("Error adding user data");
+        console.log("Error Adding customer Data in server.js: ", error);
+        return res.status(500).send("Error adding customer data");
 
       } else {
         return res.sendStatus(200);
@@ -47,12 +47,12 @@ const deleteCustomer = (req, res) => {
   try {
      
     const id = req.params.id;
-    const sql =  `DELETE FROM user WHERE id= ${id}`
+    const sql =  `DELETE FROM customer WHERE id= ${id}`
 
     connection.query(sql, (error) => {
       if (error) {
-        console.log("Error Adding user Data in server.js: ", error);
-        return res.status(500).send("Error adding user data");
+        console.log("Error Adding customer Data in server.js: ", error);
+        return res.status(500).send("Error adding customer data");
 
       } else {
         return res.sendStatus(200);
@@ -75,17 +75,17 @@ const editCustomerData = (req, res) => {
     let data = [];
 
     if (imagePath) {
-      sql = "UPDATE user SET first_name=?, middle_name=?, last_name=?, user_name=?, profile=?, email=?, mobile_number=?, dob=?, address=?, password=?, status=? WHERE id=?";
+      sql = "UPDATE customer SET first_name=?, middle_name=?, last_name=?, user_name=?, profile=?, email=?, mobile_number=?, dob=?, address=?, password=?, status=? WHERE id=?";
       data = [first_name, middle_name, last_name, user_name, imagePath, email, mobile_number, dob, address, password, status, id];
     } else {
-      sql = "UPDATE user SET first_name=?, middle_name=?, last_name=?, user_name=?, email=?, mobile_number=?, dob=?, address=?, password=?, status=? WHERE id=?";
+      sql = "UPDATE customer SET first_name=?, middle_name=?, last_name=?, user_name=?, email=?, mobile_number=?, dob=?, address=?, password=?, status=? WHERE id=?";
       data = [first_name, middle_name, last_name, user_name, email, mobile_number, dob, address, password, status, id];
     }
 
     connection.query(sql, data, (error) => {
       if (error) {
-        console.log("Error Updating user Data in server.js: ", error);
-        return res.status(500).send("Error updating user data");
+        console.log("Error Updating customer Data in server.js: ", error);
+        return res.status(500).send("Error updating customer data");
       } else {
         return res.sendStatus(200);
       }

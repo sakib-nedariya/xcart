@@ -12,7 +12,7 @@ const Pagination = ({
   return (
     <div className="table-footer-pagination">
       <span>
-        Showing {startIndex + 1}-{Math.min(endIndex, totalItems)} of
+        Showing {startIndex + 1}-{Math.min(endIndex, totalItems)}&nbsp;of&nbsp;
         {totalItems}
       </span>
       <ul className="pagination">

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Brand = require("../../controller/brand/Brand");
-const upload = require('../../config/middleware')
+const upload = require('../../middleware/multer')
 
 router.route("/getbranddata").get(Brand.getBrandData);
 router.route("/getbranddatawithid/:id").get(Brand.getBrandDataWithId);

@@ -20,6 +20,9 @@ const Coupon = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  // Delete coupon
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
 
   const getCouponData = async () => {
     try {
@@ -29,10 +32,6 @@ const Coupon = () => {
       console.error("Error fetching data:", error);
     }
   };
-
-  // Delete coupon
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [deleteId, setDeleteId] = useState(null);
 
   const openDeleteModal = (id) => {
     setIsDeleteModalOpen(true);
@@ -46,17 +45,25 @@ const Coupon = () => {
 
   const handleCouponDelete = async () => {
     try {
-      await Promise.all(
-        selectedCoupon.map((id) =>
-          axios.delete(`${port}deletecoupondata/${id}`)
-        )
-      );
-      notifySuccess("Selected Coupons Deleted Successfully");
+      if (selectedCoupon.length > 0) {
+        // Multiple delete
+        await Promise.all(
+          selectedCoupon.map((id) =>
+            axios.delete(`${port}deletecoupondata/${id}`)
+          )
+        );
+        notifySuccess("Selected Coupons Deleted Successfully");
+      } else if (deleteId) {
+        // Single delete
+        await axios.delete(`${port}deletecoupondata/${deleteId}`);
+        notifySuccess("Coupon Deleted Successfully");
+      }
+
       getCouponData();
       setSelectedCoupon([]);
       closeDeleteModal();
     } catch (error) {
-      console.error("Error deleting selected coupon:", error);
+      console.error("Error deleting coupon(s):", error);
     }
   };
 

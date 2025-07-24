@@ -2,71 +2,44 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../layout/Navbar";
 import Sidebar from "../layout/Sidebar";
 import { MdDeleteForever, MdDelete } from "react-icons/md";
-import DashboardProImage from "../../../assets/image/dashboard_product_img.png";
 import DeleteModal from "../layout/DeleteModal";
 import { IoPencil } from "react-icons/io5";
-import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import { IoIosEye } from "react-icons/io";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { notifySuccess } from "../layout/ToastMessage";
 import Pagination from "../../../pages/admin/layout/Pagination";
 import Breadcrumb from "../layout/Breadcrumb";
+
 const port = import.meta.env.VITE_SERVER_URL;
 
 const Category = () => {
   const [categoryData, setCategoryData] = useState([]);
+  const [brandData, setBrandData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState([]);
-  const navigate = useNavigate();
-  const itemsPerPage = 10;
+  const [deleteId, setDeleteId] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("All");
-  const [brandData, setBrandData] = useState([]);
-  const getBrandData = async () => {
-    try {
-      const res = await axios.get(`${port}getbranddata`);
-      setBrandData(res.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+  const itemsPerPage = 10;
+  const navigate = useNavigate();
 
+  // Fetch data
   const getCategoryData = async () => {
     try {
       const res = await axios.get(`${port}getcategorydata`);
       setCategoryData(res.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching category data:", error);
     }
   };
 
-  // Delete customer
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [deleteId, setDeleteId] = useState(null);
-
-  const openDeleteModal = (id) => {
-    setIsDeleteModalOpen(true);
-    setDeleteId(id);
-  };
-
-  const closeDeleteModal = () => {
-    setIsDeleteModalOpen(false);
-    setDeleteId(null);
-  };
-
-  const handleCategoryDelete = async () => {
+  const getBrandData = async () => {
     try {
-      await Promise.all(
-        selectedCategory.map((id) =>
-          axios.delete(`${port}deletecategorydata/${id}`)
-        )
-      );
-      notifySuccess("Selected Categories Deleted Successfully");
-      getCategoryData();
-      setSelectedCategory([]);
-      closeDeleteModal();
+      const res = await axios.get(`${port}getbranddata`);
+      setBrandData(res.data);
     } catch (error) {
-      console.error("Error deleting selected category:", error);
+      console.error("Error fetching brand data:", error);
     }
   };
 
@@ -76,9 +49,63 @@ const Category = () => {
     setSelectedCategory([]);
   }, [activeTab, currentPage]);
 
+  // Modal logic
+  const openDeleteModal = (id) => {
+    setDeleteId(id);
+    setIsDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteId(null);
+    setIsDeleteModalOpen(false);
+  };
+
+  // Deletion logic
+  const handleCategoryDelete = async () => {
+    try {
+      if (selectedCategory.length > 0) {
+        await Promise.all(
+          selectedCategory.map((id) =>
+            axios.delete(`${port}deletecategorydata/${id}`)
+          )
+        );
+        notifySuccess("Selected categories deleted successfully");
+      } else if (deleteId) {
+        await axios.delete(`${port}deletecategorydata/${deleteId}`);
+        notifySuccess("Category deleted successfully");
+      }
+
+      getCategoryData();
+      setSelectedCategory([]);
+      setDeleteId(null);
+      closeDeleteModal();
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
+  };
+
+  // Filtering
+  const filteredData = categoryData.filter((category) => {
+    if (activeTab === "All") return true;
+    if (activeTab === "Active") return parseInt(category.status, 10) === 1;
+    if (activeTab === "Disable") return parseInt(category.status, 10) === 0;
+    return true;
+  });
+
+  // Pagination
+  const totalItems = filteredData.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedCategories = filteredData.slice(startIndex, endIndex);
+
+  const isAllSelected =
+    paginatedCategories.length > 0 &&
+    selectedCategory.length === paginatedCategories.length;
+
   const handleSelectAll = (e) => {
     if (e.target.checked) {
-      const allIds = category.map((p) => p.id);
+      const allIds = paginatedCategories.map((cat) => cat.id);
       setSelectedCategory(allIds);
     } else {
       setSelectedCategory([]);
@@ -99,31 +126,8 @@ const Category = () => {
     }
   };
 
-  // Filter data based on active tab
-  const filteredData = categoryData.filter((category) => {
-    if (activeTab === "All") return true;
-    if (activeTab === "Active") return parseInt(category.status, 10) === 1;
-    if (activeTab === "Disable") return parseInt(category.status, 10) === 0;
-    return true;
-  });
-
-  // Pagination logic on filtered data
-  const totalItems = filteredData.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const category = filteredData.slice(startIndex, endIndex);
-
-  const handleNavigateEdit = (id) => {
-    navigate(`/admin/edit-category/${id}`);
-  };
-
-  const handleNavigateView = (id) => {
-    navigate(`/admin/view-category/${id}`);
-  };
-
-  const isAllSelected =
-    category.length > 0 && selectedCategory.length === category.length;
+  const handleNavigateEdit = (id) => navigate(`/admin/edit-category/${id}`);
+  const handleNavigateView = (id) => navigate(`/admin/view-category/${id}`);
 
   return (
     <>
@@ -135,37 +139,22 @@ const Category = () => {
           breadcrumbText="Category List"
           button={{ link: "/admin/add-category", text: "Add Category" }}
         />
-
         <div className="admin-panel-header-tabs-and-deleteall-btn">
           <div className="admin-panel-header-tabs">
-            <button
-              type="button"
-              className={`admin-panel-header-tab 
-                ${activeTab === "All" ? "active" : ""}`}
-              onClick={() => setActiveTab("All")}
-            >
-              All
-            </button>
-            <button
-              type="button"
-              className={`admin-panel-header-tab ${
-                activeTab === "Active" ? "active" : ""
-              }`}
-              onClick={() => setActiveTab("Active")}
-            >
-              Active
-            </button>
-
-            <button
-              type="button"
-              className={`admin-panel-header-tab ${
-                activeTab === "Disable" ? "active" : ""
-              }`}
-              onClick={() => setActiveTab("Disable")}
-            >
-              Disable
-            </button>
+            {["All", "Active", "Disable"].map((tab) => (
+              <button
+                key={tab}
+                type="button"
+                className={`admin-panel-header-tab ${
+                  activeTab === tab ? "active" : ""
+                }`}
+                onClick={() => setActiveTab(tab)}
+              >
+                {tab}
+              </button>
+            ))}
           </div>
+
           {selectedCategory.length > 0 && (
             <button
               className="admin-header-delete-btn delete-btn"
@@ -185,8 +174,8 @@ const Category = () => {
                   <input
                     type="checkbox"
                     style={{ width: "16px", height: "16px" }}
-                    onChange={handleSelectAll}
                     checked={isAllSelected}
+                    onChange={handleSelectAll}
                   />
                 </th>
                 <th>Category Name</th>
@@ -198,7 +187,7 @@ const Category = () => {
               </tr>
             </thead>
             <tbody>
-              {category.map((category, index) => (
+              {paginatedCategories.map((category, index) => (
                 <tr key={index}>
                   <td>
                     <input
@@ -209,19 +198,21 @@ const Category = () => {
                     />
                   </td>
                   <td className="product-info">
-                    <img src={`/upload/${category.image}`} alt="category_image" />
+                    <img
+                      src={`/upload/${category.image}`}
+                      alt="category_image"
+                    />
                     <span>{category.name}</span>
                   </td>
                   <td>{category.description.slice(0, 40)}</td>
-                  {brandData.map((brand) => {
-                    if (brand.id === category.brand_id) {
-                      return <td>{brand.name}</td>;
-                    }
-                  })}
                   <td>
-                    {new Date(category.created_date).toLocaleDateString(
-                      "en-GB"
-                    )}
+                    {
+                      brandData.find((brand) => brand.id === category.brand_id)
+                        ?.name
+                    }
+                  </td>
+                  <td>
+                    {new Date(category.created_date).toLocaleDateString("en-GB")}
                   </td>
                   <td>
                     <span
@@ -251,7 +242,6 @@ const Category = () => {
             </tbody>
           </table>
 
-          {/* Pagination */}
           {totalItems > itemsPerPage && (
             <Pagination
               currentPage={currentPage}
@@ -264,9 +254,10 @@ const Category = () => {
           )}
         </div>
       </main>
+
       {isDeleteModalOpen && (
         <DeleteModal
-          title="Brand"
+          title="Category"
           onCancel={closeDeleteModal}
           onDelete={handleCategoryDelete}
         />

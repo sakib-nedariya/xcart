@@ -71,7 +71,6 @@ const addProductData = (req, res) => {
   }
 };
 
-
 const deleteProduct = (req, res) => {
   try {
     const id = req.params.id;

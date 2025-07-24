@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Category = require("../../controller/category/Category");
-const upload = require('../../config/middleware')
+const upload = require('../../middleware/multer')
 
 router.route("/getcategorydata").get(Category.getCategoryData);
 router.route("/getcategorydatawithid/:id").get(Category.getCategoryDataWithId);

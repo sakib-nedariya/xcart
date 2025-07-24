@@ -5,6 +5,10 @@
     rgba(56, 54, 56, 1) 2%,
     rgba(11, 11, 11, 1) 37%
   );
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* makes sure it's on top of other content */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .navbar .container {
@@ -26,7 +30,9 @@
 .nav-links a:hover,
 .login-signup-btn a:hover,
 .nav-links a.active,
-.login-signup-btn a.active {
+.login-signup-btn a.active,
+.navbar_shopping_cart_and_profile svg:hover,
+.navbar_shopping_cart_and_profile a.active svg {
   color: var(--white-color);
 }
 .navbar-logo {
@@ -44,6 +50,34 @@
   border-right: 2px solid var(--primary-font-color);
   padding-right: 12px;
   margin-right: 12px;
+}
+.navbar_shopping_cart_and_profile {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar_shopping_cart_and_profile svg {
+  font-size: 22px;
+  color: var(--primary-font-color);
+}
+.cart-icon-wrapper {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  font-family: var(--info-font);
+  top: -5px;
+  right: -6px;
+  background-color: var(--primary-btn-bg);
+  color: var(--white-color);
+  font-size: 10px;
+  height: 16px;
+  width: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
 }
 
 /* Hamburger Menu Icon */

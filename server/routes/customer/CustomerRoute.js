@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Customer = require("../../controller/customer/Customer");
-const upload = require('../../config/middleware')
+const upload = require('../../middleware/multer')
 
 router.route("/getcustomerdata").get(Customer.getCustomerData);
 router.route("/getcustomerdatawithid/:id").get(Customer.getCustomerDataWithId);

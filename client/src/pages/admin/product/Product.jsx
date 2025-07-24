@@ -10,6 +10,7 @@ import Pagination from "../../../pages/admin/layout/Pagination";
 import { useNavigate } from "react-router-dom";
 import DeleteModal from "../layout/DeleteModal";
 import "../../../assets/css/admin/product.css";
+import { notifySuccess } from "../layout/ToastMessage";
 
 const port = import.meta.env.VITE_SERVER_URL;
 
@@ -19,6 +20,7 @@ const Product = () => {
   const [categoryData, setCategoryData] = useState([]);
   const [productData, setProductData] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const [deleteId, setDeleteId] = useState(null); // NEW
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -77,17 +79,26 @@ const Product = () => {
 
   const handleProductDelete = async () => {
     try {
-      await Promise.all(
-        selectedProducts.map((id) =>
-          axios.delete(`${port}deleteproductdata/${id}`)
-        )
-      );
+      if (selectedProducts.length > 0) {
+        // Bulk delete
+        await Promise.all(
+          selectedProducts.map((id) =>
+            axios.delete(`${port}deleteproductdata/${id}`)
+          )
+        );
+        notifySuccess("Selected Products Deleted Successfully");
+      } else if (deleteId) {
+        // Single delete
+        await axios.delete(`${port}deleteproductdata/${deleteId}`);
+        notifySuccess("Produc Deleted Successfully");
+      }
+
       getProductData();
       setSelectedProducts([]);
+      setDeleteId(null);
       setIsDeleteModalOpen(false);
-      // optionally add: toast or success alert
     } catch (error) {
-      console.error("Error deleting selected products:", error);
+      console.error("Error deleting product(s):", error);
     }
   };
 
@@ -156,7 +167,7 @@ const Product = () => {
             ))}
           </div>
 
-          {selectedProducts.length > 0 && (
+          {(selectedProducts.length > 0 || deleteId) && (
             <button
               className="admin-header-delete-btn delete-btn"
               onClick={() => setIsDeleteModalOpen(true)}
@@ -250,7 +261,7 @@ const Product = () => {
                     <MdDeleteForever
                       title="Delete"
                       onClick={() => {
-                        setSelectedProducts([product.id]);
+                        setDeleteId(product.id); // ✅ Single delete
                         setIsDeleteModalOpen(true);
                       }}
                     />
@@ -276,7 +287,10 @@ const Product = () => {
       {isDeleteModalOpen && (
         <DeleteModal
           title="products"
-          onCancel={() => setIsDeleteModalOpen(false)}
+          onCancel={() => {
+            setIsDeleteModalOpen(false);
+            setDeleteId(null); // ✅ Clear deleteId on cancel
+          }}
           onDelete={handleProductDelete}
         />
       )}

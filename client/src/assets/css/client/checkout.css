@@ -43,6 +43,9 @@
 .checkout-section-additional-information textarea::placeholder {
   color: var(--placeholder-color);
 }
+.checkout-form-container-group select{
+  padding: 14px 5px !important;
+}
 .checkout-section-shipping-option {
   font-size: 15px;
   user-select: none;
