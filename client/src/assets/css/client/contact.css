@@ -13,7 +13,7 @@
 .contact-container select::placeholder {
   font-family: var(--secondary-font);
   font-size: 14px;
-  color: var(--primary-font-color);
+  color: var(--placeholder-color);
 }
 .contact-container input:focus,
 .contact-container textarea:focus {

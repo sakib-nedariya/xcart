@@ -8,6 +8,8 @@ import ShoppingCart from "../../pages/client/cart/ShoppingCart";
 import Checkout from "../../pages/client/cart/Checkout";
 import Login from "../../pages/client/login/Login";
 import Signup from "../../pages/client/login/Signup";
+import WishList from "../../pages/client/userDashboard/WishList";
+import Dashboard from "../../pages/client/userDashboard/Dashboard";
 
 const HomeRoute = () => {
   return (
@@ -21,6 +23,8 @@ const HomeRoute = () => {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/wishlist" element={<WishList />} />
+        <Route path="/user-dashboard" element={<Dashboard />} />
       </Routes>
     </>
   );

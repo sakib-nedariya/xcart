@@ -15,8 +15,13 @@ const ProductListing = () => {
   const [productData, setProductData] = useState([]);
   const [activeTab, setActiveTab] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(100000);
+
+  const [inputMinPrice, setInputMinPrice] = useState("");
+  const [inputMaxPrice, setInputMaxPrice] = useState("");
+
   const [selectedPriceRange, setSelectedPriceRange] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState("popular");
@@ -24,7 +29,6 @@ const ProductListing = () => {
   const navigate = useNavigate();
   const itemsPerPage = 16;
 
-  // Fetch categories and products
   useEffect(() => {
     const getCategoryData = async () => {
       try {
@@ -56,9 +60,25 @@ const ProductListing = () => {
   const handlePriceChange = (e) => {
     const { name, value } = e.target;
     if (/^\d*$/.test(value)) {
-      if (name === "min-price") setMinPrice(value);
-      if (name === "max-price") setMaxPrice(value);
+      if (name === "min-price") {
+        setInputMinPrice(value);
+      } else if (name === "max-price") {
+        setInputMaxPrice(value);
+      }
       setSelectedPriceRange("");
+    }
+  };
+
+  const handlePriceBlur = () => {
+    // Optional: keep blur behavior or remove it if only using Enter
+  };
+
+  const handlePriceKeyDown = (e) => {
+    if (e.key === "Enter") {
+      const min = parseInt(inputMinPrice) || 0;
+      const max = parseInt(inputMaxPrice) || 100000;
+      setMinPrice(min);
+      setMaxPrice(max);
       setCurrentPage(1);
     }
   };
@@ -66,6 +86,9 @@ const ProductListing = () => {
   const handlePriceRangeChange = (e) => {
     const value = e.target.value;
     setSelectedPriceRange(value);
+    setInputMinPrice("");
+    setInputMaxPrice("");
+
     switch (value) {
       case "all":
         setMinPrice(0);
@@ -145,9 +168,8 @@ const ProductListing = () => {
     <>
       <Navbar />
       <div className="container-fluid productlisting-page-main">
-        <div className="container product-container">
+        <div className="container product-container padding-main">
           <aside className="sidebar">
-            {/* Category Filter */}
             <h6>Category</h6>
             <div className="radio-group">
               <label
@@ -181,7 +203,6 @@ const ProductListing = () => {
               ))}
             </div>
 
-            {/* Price Inputs */}
             <div className="price-range">
               <p>Price Range</p>
               <div className="input">
@@ -190,21 +211,24 @@ const ProductListing = () => {
                   type="text"
                   name="min-price"
                   placeholder="Min Price"
-                  value={minPrice}
+                  value={inputMinPrice}
                   onChange={handlePriceChange}
+                  onBlur={handlePriceBlur}
+                  onKeyDown={handlePriceKeyDown}
                 />
                 <input
                   style={{ padding: "8px 10px" }}
                   type="text"
                   name="max-price"
                   placeholder="Max Price"
-                  value={maxPrice}
+                  value={inputMaxPrice}
                   onChange={handlePriceChange}
+                  onBlur={handlePriceBlur}
+                  onKeyDown={handlePriceKeyDown}
                 />
               </div>
             </div>
 
-            {/* Price Range Radio */}
             <div className="radio-group">
               {[
                 { label: "All Price", value: "all" },
@@ -231,7 +255,6 @@ const ProductListing = () => {
             </div>
           </aside>
 
-          {/* Product Grid + Controls */}
           <div className="products-with-searchbar">
             <nav className="product-navbar">
               <div className="search-select">
@@ -269,7 +292,6 @@ const ProductListing = () => {
               </div>
             </nav>
 
-            {/* Product Cards */}
             <div
               className={`product-items ${
                 paginatedProducts.length === 0 ? "no-grid" : ""
@@ -308,7 +330,6 @@ const ProductListing = () => {
               )}
             </div>
 
-            {/* Pagination */}
             {totalItems > itemsPerPage && (
               <Pagination
                 currentPage={currentPage}

@@ -52,11 +52,11 @@ const Contact = () => {
               <div className="flex">
                 <div className="form-group">
                   <label>First Name</label>
-                  <input type="text" name="firstname" placeholder="Feyz" />
+                  <input type="text" name="firstname" placeholder="Enter your firstname" />
                 </div>
                 <div className="form-group">
                   <label>Second Name</label>
-                  <input type="text" name="secondname" placeholder="Ibrahim" />
+                  <input type="text" name="lastname" placeholder="Enter your lastname" />
                 </div>
               </div>
 
@@ -66,15 +66,15 @@ const Contact = () => {
                   <input
                     type="email"
                     name="email"
-                    placeholder="example@gmail.com"
+                    placeholder="Enter your email"
                   />
                 </div>
                 <div className="form-group">
-                  <label>Phone Number</label>
+                  <label>Mobile Number</label>
                   <input
                     type="text"
-                    name="phonenumber"
-                    placeholder="+91 73569 88456"
+                    name="mobilenumber"
+                    placeholder="Enter your mobile number"
                   />
                 </div>
               </div>
