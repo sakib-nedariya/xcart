@@ -35,7 +35,6 @@
 }
 .product-container {
   background: var(--light-white-color);
-  padding: 40px;
   display: flex;
   gap: 20px;
 }
