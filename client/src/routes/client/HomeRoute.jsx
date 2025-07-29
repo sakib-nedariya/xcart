@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "../../pages/client/home";
 import Contact from "../../pages/client/contact/Contact";
@@ -10,6 +9,9 @@ import Login from "../../pages/client/login/Login";
 import Signup from "../../pages/client/login/Signup";
 import WishList from "../../pages/client/userDashboard/WishList";
 import Dashboard from "../../pages/client/userDashboard/Dashboard";
+import OrderHistory from "../../pages/client/userDashboard/OrderHistory";
+import Address from "../../pages/client/userDashboard/Address";
+import AccountDetails from "../../pages/client/userDashboard/AccountDetails";
 
 const HomeRoute = () => {
   return (
@@ -25,6 +27,9 @@ const HomeRoute = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/user-dashboard" element={<Dashboard />} />
+        <Route path="/order-history" element={<OrderHistory />} />
+        <Route path="/user-address" element={<Address />} />
+        <Route path="/user-account-details" element={<AccountDetails />} />
       </Routes>
     </>
   );

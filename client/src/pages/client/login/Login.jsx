@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../../assets/css/client/login.css";
-import login from "../../../assets/image/login-bg.png";
+import loginIMG from "../../../assets/image/login-bg.png";
 import { Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -9,14 +9,13 @@ import Navbar from "../layout/Navbar";
 import Footer from "../layout/Footer";
 import axios from "axios";
 import { notifyError, notifySuccess } from "../../admin/layout/ToastMessage";
+import { useAuth } from "../../../context/AuthContext";
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [passwordViewOrHide, setPasswordViewOrHide] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,17 +23,17 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await axios.post("http://localhost:1020/login", formData);
-
-      // Save token
-      localStorage.setItem("token", response.data.token);
-      notifySuccess("Login successful");
-
+      const response = await axios.post(
+        "http://localhost:1020/login",
+        formData
+      );
+      login(response.data.token);
+      notifySuccess(response.data.message);
       navigate("/");
     } catch (error) {
-      notifyError(error.response?.data?.message || "Login failed");
+      const message = error.response?.data?.message || "Login failed";
+      notifyError(message); 
     }
   };
 
@@ -44,7 +43,7 @@ const Login = () => {
       <div className="container-fluid bg-color">
         <div className="container padding-main login-container">
           <div className="login">
-            <img src={login} alt="Login" />
+            <img src={loginIMG} alt="Login" />
           </div>
           <div className="login-form">
             <h3>Login</h3>
@@ -61,7 +60,6 @@ const Login = () => {
                   required
                 />
               </div>
-
               <div className="form-group password-input">
                 <label>Password</label>
                 <span className="required_field">*</span>
@@ -74,25 +72,20 @@ const Login = () => {
                   required
                 />
                 <span
-                  onClick={() => {
-                    setPasswordViewOrHide(!passwordViewOrHide);
-                  }}
+                  onClick={() => setPasswordViewOrHide(!passwordViewOrHide)}
                 >
                   {passwordViewOrHide ? <FaEyeSlash /> : <FaEye />}
                 </span>
               </div>
-
               <p>Forgot password?</p>
               <div className="login-btn">
                 <button className="btn primary-btn" type="submit">
                   Login
                 </button>
               </div>
-
               <div className="or-divider">
                 <span>OR</span>
               </div>
-
               <div className="google-btn">
                 <button className="btn primary-btn" type="button">
                   <FcGoogle
@@ -105,7 +98,6 @@ const Login = () => {
                   Continue With Google
                 </button>
               </div>
-
               <p className="sign-up">
                 Don't have an account?
                 <Link to="/signup">

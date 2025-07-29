@@ -123,10 +123,8 @@
   background-color: var(--primary-btn-bg);
   border: 2px solid var(--primary-btn-bg);
 }
-.user_billing_name h5 {
-  line-height: 1.8em;
-}
 .user-billing-address {
-  font-family: var(--info-font);
   color: var(--gray-light-text-color);
+  line-height:1.4em !important;
+  padding-bottom: 4px;
 }

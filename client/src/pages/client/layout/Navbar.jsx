@@ -1,35 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { AiOutlineShoppingCart, AiOutlineHeart, AiOutlineUser } from "react-icons/ai";
+import { useAuth } from "../../../context/AuthContext";
 import "../../../assets/css/client/navbar.css";
-import {
-  AiOutlineShoppingCart,
-  AiOutlineHeart,
-  AiOutlineUser,
-} from "react-icons/ai";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Check token
+  const { isLoggedIn } = useAuth();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token); // true if token exists
-  }, []);
-
   return (
     <>
       <nav className="container-fluid navbar">
         <div className="container padding-side">
-          <NavLink to="/" className={"navbar-logo"}>
+          <NavLink to="/" className="navbar-logo">
             <h4>XCART</h4>
           </NavLink>
 
-          {/* Menu List */}
           <ul className={isOpen ? "nav-links active" : "nav-links"}>
             <li>
               <NavLink to="/" onClick={() => setIsOpen(false)}>
@@ -48,7 +39,6 @@ const Navbar = () => {
             </li>
           </ul>
 
-          {/* Conditionally render login/signup or icons */}
           {!isLoggedIn ? (
             <div className="login-signup-btn">
               <NavLink to="/login" onClick={() => setIsOpen(false)}>
@@ -67,19 +57,14 @@ const Navbar = () => {
               <NavLink to="/wishlist">
                 <AiOutlineHeart />
               </NavLink>
-              <NavLink to="/profile">
+              <NavLink to="/user-account-details">
                 <AiOutlineUser />
               </NavLink>
             </div>
           )}
 
-          {/* Hamburger Icon */}
           <span className="menu-icon">
-            {isOpen ? (
-              <FaTimes onClick={toggleMenu} />
-            ) : (
-              <FaBars onClick={toggleMenu} />
-            )}
+            {isOpen ? <FaTimes onClick={toggleMenu} /> : <FaBars onClick={toggleMenu} />}
           </span>
         </div>
       </nav>

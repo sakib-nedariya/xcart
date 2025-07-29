@@ -40,7 +40,6 @@ const signup = async (req, res) => {
 const login = (req, res) => {
   const { email, password } = req.body;
 
-  // Check user
   connection.query(
     "SELECT * FROM users WHERE email = ?",
     [email],
@@ -48,18 +47,16 @@ const login = (req, res) => {
       if (err) return res.status(500).json({ message: "Database error", err });
 
       if (results.length === 0) {
-        return res.status(401).json({ message: "Invalid credentials" });
+        return res.status(401).json({ message: "Email not registered" });
       }
 
       const user = results[0];
 
-      // Compare password
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
-        return res.status(401).json({ message: "Invalid credentials" });
+        return res.status(401).json({ message: "Password does not match" });
       }
 
-      // Create JWT token
       const token = jwt.sign(
         { id: user.id, email: user.email },
         process.env.JWT_SECRET,
@@ -79,5 +76,6 @@ const login = (req, res) => {
     }
   );
 };
+
 
 module.exports = {signup, login}
