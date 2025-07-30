@@ -25,50 +25,56 @@ const getProductDataWithId = (req, res) => {
 };
 
 const addProductData = (req, res) => {
-  try {
-    const { brand_id, cate_id, slogan, name, description, price, discount, memory, storage, status } = req.body;
-    const imagePath = req.file ? req.file.filename : null;
+  const {
+    brand_id,
+    cate_id,
+    slogan,
+    name,
+    description,
+    price,
+    discount,
+    memory,
+    storage,
+    status,
+  } = req.body;
 
-    // Check if brand_id exists
-    const brandCheckSql = "SELECT id FROM brand WHERE id = ?";
-    connection.query(brandCheckSql, [brand_id], (brandError, brandResult) => {
-      if (brandError) {
-        console.log("Error Checking brand_id: ", brandError);
-        return res.status(500).send("Error checking brand_id");
-      }
-      if (brandResult.length === 0) {
-        return res.status(400).send("Invalid brand_id. Brand does not exist.");
-      }
+  const images = req.files?.map((file) => file.filename) || [];
 
-      // Check if cate_id exists
-      const cateCheckSql = "SELECT id FROM category WHERE id = ?";
-      connection.query(cateCheckSql, [cate_id], (cateError, cateResult) => {
-        if (cateError) {
-          console.log("Error Checking cate_id: ", cateError);
-          return res.status(500).send("Error checking cate_id");
+  const brandCheck = "SELECT id FROM brand WHERE id=?";
+  connection.query(brandCheck, [brand_id], (err, brandRes) => {
+    if (err || brandRes.length === 0) return res.status(400).send("Invalid brand_id");
+
+    const cateCheck = "SELECT id FROM category WHERE id=?";
+    connection.query(cateCheck, [cate_id], (err, cateRes) => {
+      if (err || cateRes.length === 0) return res.status(400).send("Invalid cate_id");
+
+      const sql = `INSERT INTO product 
+        (brand_id, cate_id, slogan, name, description, price, discount, memory, storage, image, status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
+      const data = [
+        brand_id,
+        cate_id,
+        slogan,
+        name,
+        description,
+        price,
+        discount,
+        memory,
+        storage,
+        JSON.stringify(images),
+        status,
+      ];
+
+      connection.query(sql, data, (err) => {
+        if (err) {
+          console.error("Insert error:", err);
+          return res.status(500).send("Insert failed");
         }
-        if (cateResult.length === 0) {
-          return res.status(400).send("Invalid cate_id. Category does not exist.");
-        }
-
-        
-        const sql =
-          "INSERT INTO product (brand_id, cate_id, slogan, name, description, price, discount, memory, storage, image, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        const data = [brand_id, cate_id, slogan, name, description, price, discount, memory, storage, imagePath, status];
-
-        connection.query(sql, data, (error) => {
-          if (error) {
-            console.log("Error Adding product Data: ", error);
-            return res.status(500).send("Error adding product data");
-          }
-          return res.sendStatus(200);
-        });
+        return res.sendStatus(200);
       });
     });
-  } catch (error) {
-    console.log("Error in server.js: ", error);
-    return res.status(500).send("Internal server error");
-  }
+  });
 };
 
 const deleteProduct = (req, res) => {
@@ -91,36 +97,59 @@ const deleteProduct = (req, res) => {
 };
 
 const editProductData = (req, res) => {
-  try {
-    const id = req.params.id;
-    const { brand_id, cate_id, slogan, name, description, price, discount, memory, storage, status } = req.body;
-    const imagePath = req?.file?.filename;
+  const id = req.params.id;
+  const {
+    brand_id,
+    cate_id,
+    slogan,
+    name,
+    description,
+    price,
+    discount,
+    memory,
+    storage,
+    status,
+  } = req.body;
 
-    let sql = "";
-    let data = [];
+  let newImages = req.files?.map((file) => file.filename) || [];
+  let existingImages = [];
 
-    if (imagePath) {
-      sql =
-        "UPDATE product SET brand_id=?, cate_id=?, slogan=?, name=?, description=?, price=?, discount=?, memory=?, storage=?, image=?, status=? WHERE id=?";
-      data = [brand_id, cate_id, slogan, name, description, price, discount, memory, storage, imagePath, status, id];
-    } else {
-      sql =
-        "UPDATE product SET brand_id=?, cate_id=?, slogan=?, name=?, description=?, price=?, discount=?, memory=?, storage=?, status=? WHERE id=?";
-      data = [brand_id, cate_id, slogan, name, description, price, discount, memory, storage, status, id];
+  if (req.body.existingImages) {
+    try {
+      existingImages = JSON.parse(req.body.existingImages);
+    } catch (err) {
+      console.error("Error parsing existing images:", err);
     }
-
-    connection.query(sql, data, (error) => {
-      if (error) {
-        console.log("Error Updating product Data: ", error);
-        return res.status(500).send("Error updating product data");
-      }
-      return res.sendStatus(200);
-    });
-  } catch (error) {
-    console.log("Error in server.js: ", error);
-    return res.status(500).send("Internal server error");
   }
+
+  const finalImages = JSON.stringify([...existingImages, ...newImages]);
+
+  const sql = `UPDATE product SET brand_id=?, cate_id=?, slogan=?, name=?, description=?, price=?, discount=?, memory=?, storage=?, image=?, status=? WHERE id=?`;
+
+  const data = [
+    brand_id,
+    cate_id,
+    slogan,
+    name,
+    description,
+    price,
+    discount,
+    memory,
+    storage,
+    finalImages,
+    status,
+    id,
+  ];
+
+  connection.query(sql, data, (error) => {
+    if (error) {
+      console.error("Error Updating product Data: ", error);
+      return res.status(500).send("Error updating product data");
+    }
+    return res.sendStatus(200);
+  });
 };
+
 
 
 module.exports = { getProductData, addProductData, getProductDataWithId, editProductData, deleteProduct };

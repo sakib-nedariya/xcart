@@ -108,6 +108,16 @@ const Product = () => {
     }
   };
 
+  const getFirstImage = (image) => {
+    if (Array.isArray(image)) return image[0];
+    try {
+      const parsed = JSON.parse(image);
+      return Array.isArray(parsed) ? parsed[0] : image;
+    } catch {
+      return image;
+    }
+  };
+
   const filteredData = productData.filter((product) => {
     if (activeTab === "All Products") return true;
     if (activeTab === "Published") return parseInt(product.status, 10) === 1;
@@ -212,7 +222,10 @@ const Product = () => {
                     />
                   </td>
                   <td className="product-info">
-                    <img src={`/upload/${product.image}`} alt="product_image" />
+                    <img
+                      src={`/upload/${getFirstImage(product.image)}`}
+                      alt="product_image"
+                    />
                     <span>{product.slogan}</span>
                   </td>
                   <td>

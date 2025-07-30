@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { AiOutlineShoppingCart, AiOutlineHeart, AiOutlineUser } from "react-icons/ai";
+import {
+  AiOutlineShoppingCart,
+  AiOutlineHeart,
+  AiOutlineUser,
+} from "react-icons/ai";
 import { useAuth } from "../../../context/AuthContext";
+import { useCart } from "../../../context/CartContext";
 import "../../../assets/css/client/navbar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isLoggedIn } = useAuth();
+  const { cartCount } = useCart();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -52,7 +58,9 @@ const Navbar = () => {
             <div className="navbar_shopping_cart_and_profile">
               <NavLink to="/shopping-cart" className="cart-icon-wrapper">
                 <AiOutlineShoppingCart />
-                <span className="cart-badge">2</span>
+                {cartCount > 0 && (
+                  <span className="cart-badge">{cartCount}</span>
+                )}
               </NavLink>
               <NavLink to="/wishlist">
                 <AiOutlineHeart />
@@ -64,7 +72,11 @@ const Navbar = () => {
           )}
 
           <span className="menu-icon">
-            {isOpen ? <FaTimes onClick={toggleMenu} /> : <FaBars onClick={toggleMenu} />}
+            {isOpen ? (
+              <FaTimes onClick={toggleMenu} />
+            ) : (
+              <FaBars onClick={toggleMenu} />
+            )}
           </span>
         </div>
       </nav>

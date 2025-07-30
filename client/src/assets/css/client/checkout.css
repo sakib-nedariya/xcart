@@ -43,7 +43,7 @@
 .checkout-section-additional-information textarea::placeholder {
   color: var(--placeholder-color);
 }
-.checkout-form-container-group select{
+.checkout-form-container-group select {
   padding: 14px 5px !important;
 }
 .checkout-section-shipping-option {
@@ -100,9 +100,6 @@
 .checkout-container-order-price-summery .shopping-cartcheckout-btn {
   margin: 15px 0 0 0;
 }
-.order-summery-product-list {
-  padding-bottom: 15px;
-}
 .order-summery-product {
   display: flex;
   align-items: center;
@@ -111,7 +108,7 @@
 .order-summery-product img {
   width: 60px;
   height: 60px;
-  object-fit: cover;
+  object-fit: contain;
   margin-right: 15px;
 }
 .order-summery-product-details p {
@@ -123,4 +120,9 @@
 .order-summery-product-price span {
   color: var(--primary-btn-bg);
   font-weight: 600;
+}
+.order-summery-product-list {
+  max-height: 200px;
+  overflow-y: hidden;
+  margin-bottom: 24px;
 }

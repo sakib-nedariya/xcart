@@ -5,6 +5,7 @@ import "../../../assets/css/main.css";
 import Navbar from "../layout/Navbar";
 import Footer from "../layout/Footer";
 import { BsBookmark } from "react-icons/bs";
+import { useCart } from "../../../context/CartContext";
 import axios from "axios";
 
 const port = import.meta.env.VITE_SERVER_URL;
@@ -12,6 +13,11 @@ const port = import.meta.env.VITE_SERVER_URL;
 const ProductView = () => {
   const { id } = useParams();
   const [productData, setProductData] = useState([]); // Store data as an array
+  const { addToCart } = useCart(); //  get from context
+
+  const handleAddToCart = (product) => {
+    addToCart(product);
+  };
 
   const getProductData = async () => {
     try {
@@ -41,7 +47,11 @@ const ProductView = () => {
                 <div className="view-page-image-main-div">
                   <div className="view-image">
                     <img
-                      src={product.image ? `/upload/${product.image}` : "/path-to-default-image/default.png"}
+                      src={
+                        product.image
+                          ? `/upload/${product.image}`
+                          : "/path-to-default-image/default.png"
+                      }
                       alt={product.name || "Product Image"}
                     />
                   </div>
@@ -49,10 +59,19 @@ const ProductView = () => {
                 <div className="view-product-content">
                   <h5>{product.name}</h5>
                   <div className="view-product-info">
-                    <p>ID: <b>{product.name}</b></p>
-                    <p>Availability: <b>{product.status ? "In Stock" : "Out of Stock"}</b></p>
-                    <p>Brand: <b>{product.id}</b></p>
-                    <p>Category: <b>{product.cate_id}</b></p>
+                    <p>
+                      ID: <b>{product.name}</b>
+                    </p>
+                    <p>
+                      Availability:{" "}
+                      <b>{product.status ? "In Stock" : "Out of Stock"}</b>
+                    </p>
+                    <p>
+                      Brand: <b>{product.id}</b>
+                    </p>
+                    <p>
+                      Category: <b>{product.cate_id}</b>
+                    </p>
                   </div>
                   <div className="price-discount">
                     <div className="price">
@@ -65,46 +84,50 @@ const ProductView = () => {
                   </div>
 
                   <div className="form-group">
-                <label htmlFor="memory">Memory</label>
-                <select name="memory" id="memory">
-                  <option value="">{product.memory}</option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="storage">Storage</label>
-                <select name="size" id="size">
-                  <option value="">{product.storage}</option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="size">Size</label>
-                <select name="storage" id="storage">
-                  <option value="">1TB SSD Storage</option>
-                  <option value="">3TB SSD Storage</option>
-                  <option value="">5TB SSD Storage</option>
-                </select>
-              </div>
-
-              <div className="cart-actions">
-                <div className="product-actions">
-                  <div className="quantity-selector">
-                    <span>-</span>
-                    <span>01</span>
-                    <span>+</span>
+                    <label htmlFor="memory">Memory</label>
+                    <select name="memory" id="memory">
+                      <option value="">{product.memory}</option>
+                    </select>
                   </div>
 
-                  <button className="primary-btn">Add To Cart</button>
-                </div>
+                  <div className="form-group">
+                    <label htmlFor="storage">Storage</label>
+                    <select name="size" id="size">
+                      <option value="">{product.storage}</option>
+                    </select>
+                  </div>
 
-                <div className="buy-now-icon">
-                  <button className="primary-btn buy-now">Buy Now</button>
-                  <button className="bookmark-btn">
-                    <BsBookmark size={18} />
-                  </button>
-                </div>
-              </div>
+                  <div className="form-group">
+                    <label htmlFor="size">Size</label>
+                    <select name="storage" id="storage">
+                      <option value="">1TB SSD Storage</option>
+                      <option value="">3TB SSD Storage</option>
+                      <option value="">5TB SSD Storage</option>
+                    </select>
+                  </div>
+
+                  <div className="cart-actions">
+                    <div className="product-actions">
+                      <div className="quantity-selector">
+                        <span>-</span>
+                        <span>01</span>
+                        <span>+</span>
+                      </div>
+                      <button
+                        className="primary-btn"
+                        onClick={() => handleAddToCart(product)}
+                      >
+                        Add To Cart
+                      </button>
+                    </div>
+
+                    <div className="buy-now-icon">
+                      <button className="primary-btn buy-now">Buy Now</button>
+                      <button className="bookmark-btn">
+                        <BsBookmark size={18} />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
 

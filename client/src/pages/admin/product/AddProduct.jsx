@@ -5,26 +5,28 @@ import { IoMdArrowDropright } from "react-icons/io";
 import { MdSave } from "react-icons/md";
 import { HiXMark } from "react-icons/hi2";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { use } from "react";
 import axios from "axios";
+import { RxCross2 } from "react-icons/rx";
 import {
   notifyWarning,
   notifySuccess,
   notifyError,
 } from "../layout/ToastMessage";
 import default_profile from "../../../assets/image/default_profile.png";
+
 const port = import.meta.env.VITE_SERVER_URL;
 
 const AddProduct = () => {
   const [brandData, setBrandData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const navigate = useNavigate();
+
   const getBrandData = async () => {
     try {
       const res = await axios.get(`${port}getbranddata`);
       setBrandData(res.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching brand data:", error);
     }
   };
 
@@ -33,16 +35,18 @@ const AddProduct = () => {
       const res = await axios.get(`${port}getcategorydata`);
       setCategoryData(res.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching category data:", error);
     }
   };
+
   const [addProductData, setAddProductData] = useState({
     brand_id: "",
     cate_id: "",
     slogan: "",
     name: "",
     description: "",
-    image: "",
+    image: [],
+    profilePreview: [],
     price: "",
     discount: "",
     memory: "",
@@ -59,14 +63,32 @@ const AddProduct = () => {
   };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setAddProductData({
-        ...addProductData,
-        image: file,
-        profilePreview: URL.createObjectURL(file),
-      });
+    const files = Array.from(e.target.files);
+
+    if (files.length > 8) {
+      notifyWarning("You can only upload up to 8 images.");
+      return;
     }
+
+    setAddProductData((prevData) => ({
+      ...prevData,
+      image: files,
+      profilePreview: files.map((file) => URL.createObjectURL(file)),
+    }));
+  };
+
+  const removeImage = (index) => {
+    setAddProductData((prevData) => {
+      const updatedImages = [...prevData.image];
+      const updatedPreviews = [...prevData.profilePreview];
+      updatedImages.splice(index, 1);
+      updatedPreviews.splice(index, 1);
+      return {
+        ...prevData,
+        image: updatedImages,
+        profilePreview: updatedPreviews,
+      };
+    });
   };
 
   const saveProductData = async (e) => {
@@ -81,21 +103,24 @@ const AddProduct = () => {
     formData.append("discount", addProductData.discount);
     formData.append("memory", addProductData.memory);
     formData.append("storage", addProductData.storage);
-    if (addProductData.image) {
-      formData.append("image", addProductData.image);
-    }
     formData.append("status", addProductData.status);
-    await axios
-      .post(`${port}addproductdata`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-      .then(() => {
-        navigate("/admin/product");
-        notifySuccess("Data Added Successfully");
-      })
-      .catch((error) => {
-        console.log("Error adding product data:", error);
+
+    if (addProductData.image && addProductData.image.length > 0) {
+      addProductData.image.forEach((file) => {
+        formData.append("images", file);
       });
+    }
+
+    try {
+      await axios.post(`${port}addproductdata`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      navigate("/admin/product");
+      notifySuccess("Data Added Successfully");
+    } catch (error) {
+      console.error("Error adding product data:", error);
+      notifyError("Failed to add product");
+    }
   };
 
   useEffect(() => {
@@ -106,6 +131,7 @@ const AddProduct = () => {
   const handleButtonClick = () => {
     document.getElementById("imageInputFile").click();
   };
+
   return (
     <>
       <Sidebar />
@@ -185,14 +211,32 @@ const AddProduct = () => {
               <div className="add-product-form-container">
                 <label htmlFor="imageInputFile">Photo</label>
                 <div className="add-product-upload-container">
-                  <div className="add-product-upload-icon">
-                    <img
-                      style={{ margin: "0 6px" }}
-                      src={addProductData.profilePreview || default_profile}
-                      alt="Selected Profile"
-                      width="100"
-                    />
+                  <div className="add-product-upload-icon preview-grid">
+                    {addProductData.profilePreview.length > 0 ? (
+                      addProductData.profilePreview.map((src, index) => (
+                        <div key={index} className="image-preview-wrapper">
+                          <img
+                            src={src}
+                            alt={`Preview ${index}`}
+                            className="image-preview"
+                          />
+
+                          <RxCross2
+                            className="remove-preview-button" title="Remove"
+                            onClick={() => removeImage(index)}
+                          />
+                        </div>
+                      ))
+                    ) : (
+                      <img
+                        src={default_profile}
+                        alt="Default Preview"
+                        className="image-preview"
+                        style={{ margin: "0 6px" }}
+                      />
+                    )}
                   </div>
+
                   <p className="add-product-upload-text">
                     Drag and drop image here, or click add image
                   </p>
@@ -206,8 +250,9 @@ const AddProduct = () => {
                   <input
                     type="file"
                     id="imageInputFile"
-                    name="profile"
+                    name="images"
                     onChange={handleFileChange}
+                    multiple
                     style={{ display: "none" }}
                   />
                 </div>
@@ -261,9 +306,7 @@ const AddProduct = () => {
                 </select>
               </div>
               <div className="add-product-form-container">
-                <label htmlFor="category">
-                  Select Category
-                </label>
+                <label htmlFor="category">Select Category</label>
                 <select
                   id="category"
                   name="cate_id"
@@ -316,7 +359,7 @@ const AddProduct = () => {
                 >
                   <option value="1">Published</option>
                   <option value="2">Low Stock</option>
-                  <option value="3">Draft</option> 
+                  <option value="3">Draft</option>
                   <option value="0">Out of Stock</option>
                 </select>
               </div>

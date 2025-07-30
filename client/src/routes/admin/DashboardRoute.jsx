@@ -19,7 +19,6 @@ import AddCategory from "../../pages/admin/category/AddCategory";
 import EditCategory from "../../pages/admin/category/EditCategory";
 import ViewCategory from "../../pages/admin/category/ViewCategory";
 
-
 import Order from "../../pages/admin/orders/Order";
 
 import Coupon from "../../pages/admin/coupon/Coupon";
@@ -36,11 +35,12 @@ import Customer from "../../pages/admin/customers/Customer";
 import AddNewCustomer from "../../pages/admin/customers/AddNewCustomer";
 import EditCustomer from "../../pages/admin/customers/EditCustomer";
 import ViewCustomer from "../../pages/admin/customers/ViewCustomer";
-
+import ScrollToTop from "../../Components/ScrollToTop";
 
 const DashboardRoute = () => {
   return (
     <>
+      <ScrollToTop />
       <Routes>
         <Route path="/admin" element={<Login />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
@@ -54,7 +54,7 @@ const DashboardRoute = () => {
         <Route path="/admin/add-brand" element={<AddBrand />} />
         <Route path="/admin/edit-brand/:id" element={<EditBrand />} />
         <Route path="/admin/view-brand/:id" element={<ViewBrand />} />
-        
+
         <Route path="/admin/category" element={<Category />} />
         <Route path="/admin/add-category" element={<AddCategory />} />
         <Route path="/admin/edit-category/:id" element={<EditCategory />} />

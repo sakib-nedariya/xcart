@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../../../context/CartContext";
 
 const port = import.meta.env.VITE_SERVER_URL;
 
@@ -9,10 +10,11 @@ const ProductCategory = () => {
   const [categoryData, setCategoryData] = useState([]);
   const [productData, setProductData] = useState([]);
   const navigate = useNavigate();
+  const { addToCart } = useCart(); //  get from context
 
-  const handleNavigateCart = () =>{
-    navigate("/shopping-cart")
-  }
+  const handleAddToCart = (product) => {
+    addToCart(product);
+  };
 
   const getCategoryData = async () => {
     try {
@@ -85,7 +87,10 @@ const ProductCategory = () => {
                     <h5 className="product-name">{product.slogan}</h5>
                     <span className="product-price">₹{product.price}</span>
                   </div>
-                  <button className="primary-btn homepage-add-to-cart-btn" onClick={()=> handleNavigateCart()}>
+                  <button
+                    className="primary-btn homepage-add-to-cart-btn"
+                    onClick={() => handleAddToCart(product)}
+                  >
                     Add to cart
                   </button>
                 </div>
@@ -93,7 +98,6 @@ const ProductCategory = () => {
             ) : (
               <div>Loading products...</div>
             )}
-          
           </div>
           <button
             type="button"

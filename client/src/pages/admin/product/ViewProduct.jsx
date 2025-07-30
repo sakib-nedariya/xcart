@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { IoMdArrowDropright } from "react-icons/io";
 import { IoArrowBackSharp } from "react-icons/io5";
 import default_profile from "../../../assets/image/default_profile.png";
 import Sidebar from "../layout/Sidebar";
 import Navbar from "../layout/Navbar";
 import axios from "axios";
+
 const port = import.meta.env.VITE_SERVER_URL;
 
 const ViewProduct = () => {
@@ -19,7 +19,7 @@ const ViewProduct = () => {
     slogan: "",
     name: "",
     description: "",
-    image: "",
+    image: [],
     price: "",
     discount: "",
     memory: "",
@@ -32,7 +32,7 @@ const ViewProduct = () => {
       const res = await axios.get(`${port}getbranddata`);
       setBrandData(res.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching brand data:", error);
     }
   };
 
@@ -41,32 +41,38 @@ const ViewProduct = () => {
       const res = await axios.get(`${port}getcategorydata`);
       setCategoryData(res.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching category data:", error);
     }
   };
-  const handleChangeInput = (e) => {
-    const { name, value } = e.target;
-    setProductData({
-      ...productData,
-      [name]: value,
-    });
-  };
+
   const getProductData = async () => {
     try {
       const res = await axios.get(`${port}getproductdatawithid/${id}`);
       const fetchedData = res.data[0];
+
+      let images = [];
+      if (Array.isArray(fetchedData.image)) {
+        images = fetchedData.image;
+      } else {
+        try {
+          images = JSON.parse(fetchedData.image);
+        } catch {
+          images = [];
+        }
+      }
+
       setProductData({
         ...fetchedData,
+        image: images,
       });
-      console.log(productData);
     } catch (error) {
-      console.log("Error fetching data:", error);
+      console.error("Error fetching product data:", error);
     }
   };
 
   useEffect(() => {
-    getCategoryData();
     getBrandData();
+    getCategoryData();
     getProductData();
   }, [id]);
 
@@ -102,57 +108,56 @@ const ViewProduct = () => {
             </NavLink>
           </div>
         </div>
+
         <div className="dashboard-add-content-card-div">
           <div className="dashboard-add-content-left-side">
             <div className="dashboard-add-content-card">
               <h6>General Information</h6>
               <div className="add-product-form-container">
                 <label htmlFor="product-name">Product Name</label>
-                <input
-                  type="text"
-                  id="product-name"
-                  name="name"
-                  value={productData.name}
-                  onChange={handleChangeInput}
-                  placeholder="Type product name here..."
-                />
+                <input type="text" value={productData.name} readOnly />
+
                 <label htmlFor="product-slogan">Slogan</label>
-                <input
-                  type="text"
-                  id="product-slogan"
-                  name="slogan"
-                  value={productData.slogan}
-                  onChange={handleChangeInput}
-                  placeholder="Type product slogan here..."
-                />
+                <input type="text" value={productData.slogan} readOnly />
+
                 <label htmlFor="product-description">Description</label>
-                <textarea
-                  id="product-description"
-                  name="description"
-                  value={productData.description}
-                  onChange={handleChangeInput}
-                  placeholder="Type product description here..."
-                ></textarea>
+                <textarea value={productData.description} readOnly />
               </div>
             </div>
 
             <div className="dashboard-add-content-card">
               <h6>Media</h6>
               <div className="add-product-form-container">
-                <label htmlFor="product-image">Photo</label>
+                <label>Images</label>
                 <div className="add-product-upload-container">
-                  <div className="add-product-upload-icon">
-                    {productData.image ? (
-                      <img
-                        src={`/upload/${productData.image}`}
-                        alt="Image"
-                        width="100"
-                      />
+                  <div
+                    className="add-product-upload-icon preview-grid"
+                    style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}
+                  >
+                    {productData.image.length > 0 ? (
+                      productData.image.map((img, index) => (
+                        <img
+                          key={index}
+                          src={`/upload/${img}`}
+                          alt={`Product ${index}`}
+                          className="image-preview"
+                          style={{
+                            width: "80px",
+                            height: "80px",
+                            objectFit: "contain",
+                          }}
+                        />
+                      ))
                     ) : (
                       <img
                         src={default_profile}
-                        alt="Default Profile"
-                        width="100"
+                        alt="Default"
+                        className="image-preview"
+                        style={{
+                          width: "80px",
+                          height: "80px",
+                          objectFit: "contain",
+                        }}
                       />
                     )}
                   </div>
@@ -163,26 +168,10 @@ const ViewProduct = () => {
             <div className="dashboard-add-content-card">
               <h6>Pricing</h6>
               <div className="add-product-form-container">
-                <label htmlFor="product-price">Base Price</label>
-                <input
-                  type="text"
-                  id="product-price"
-                  name="price"
-                  value={productData.price}
-                  onChange={handleChangeInput}
-                  placeholder="Type base price here..."
-                />
-                <label htmlFor="product-discount">
-                  Discount Percentage (%)
-                </label>
-                <input
-                  type="text"
-                  id="product-discount"
-                  name="discount"
-                  value={productData.discount}
-                  onChange={handleChangeInput}
-                  placeholder="Type discount percentage..."
-                />
+                <label>Base Price</label>
+                <input type="text" value={productData.price} readOnly />
+                <label>Discount (%)</label>
+                <input type="text" value={productData.discount} readOnly />
               </div>
             </div>
           </div>
@@ -191,15 +180,8 @@ const ViewProduct = () => {
             <div className="dashboard-add-content-card">
               <h6>Brand & Category</h6>
               <div className="add-product-form-container">
-                <label htmlFor="brand">Selected Brand</label>
-                <select
-                  id="brand"
-                  name="brand_id"
-                  value={productData.brand_id}
-                  onChange={handleChangeInput}
-                  disabled
-                >
-                  <option value="">Select Brand</option>
+                <label>Brand</label>
+                <select value={productData.brand_id} disabled>
                   {brandData.map((brand) => (
                     <option key={brand.id} value={brand.id}>
                       {brand.name}
@@ -208,18 +190,11 @@ const ViewProduct = () => {
                 </select>
               </div>
               <div className="add-product-form-container">
-                <label htmlFor="category">Selected Category</label>
-                <select
-                  id="category"
-                  name="cate_id"
-                  value={productData.cate_id}
-                  onChange={handleChangeInput}
-                  disabled
-                >
-                  <option value="">Select Category</option>
-                  {categoryData.map((category) => (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
+                <label>Category</label>
+                <select value={productData.cate_id} disabled>
+                  {categoryData.map((cat) => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
                     </option>
                   ))}
                 </select>
@@ -229,40 +204,21 @@ const ViewProduct = () => {
             <div className="dashboard-add-content-card">
               <h6>Memory & Storage</h6>
               <div className="add-product-form-container">
-                <label htmlFor="memory">Memory (RAM)</label>
-                <input
-                  type="text"
-                  id="memory"
-                  name="memory"
-                  value={productData.memory}
-                  onChange={handleChangeInput}
-                  placeholder="Memory"
-                />
-                <label htmlFor="storage">Storage</label>
-                <input
-                  type="text"
-                  id="storage"
-                  name="storage"
-                  value={productData.storage}
-                  onChange={handleChangeInput}
-                  placeholder="Storage"
-                />
+                <label>Memory</label>
+                <input type="text" value={productData.memory} readOnly />
+                <label>Storage</label>
+                <input type="text" value={productData.storage} readOnly />
               </div>
             </div>
 
             <div className="dashboard-add-content-card">
               <h6>Status</h6>
               <div className="add-product-form-container">
-                <label htmlFor="status">Product Status</label>
-                <select
-                  id="status"
-                  name="status"
-                  onChange={handleChangeInput}
-                  value={productData.status}
-                >
+                <label>Status</label>
+                <select value={productData.status} disabled>
                   <option value="1">Published</option>
                   <option value="2">Low Stock</option>
-                  <option value="3">Draft</option> {/* Fixed from "Draf" */}
+                  <option value="3">Draft</option>
                   <option value="0">Out of Stock</option>
                 </select>
               </div>

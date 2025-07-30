@@ -120,6 +120,16 @@ const ProductListing = () => {
     setCurrentPage(1);
   };
 
+  const getFirstImage = (image) => {
+    if (Array.isArray(image)) return image[0];
+    try {
+      const parsed = JSON.parse(image);
+      return Array.isArray(parsed) ? parsed[0] : image;
+    } catch {
+      return image;
+    }
+  };
+
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value.toLowerCase());
     setCurrentPage(1);
@@ -306,7 +316,7 @@ const ProductListing = () => {
                   >
                     <div className="product-img">
                       <img
-                        src={`/upload/${product.image}`}
+                        src={`/upload/${getFirstImage(product.image)}`}
                         alt="product_image"
                       />
                     </div>

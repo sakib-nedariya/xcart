@@ -15,7 +15,7 @@
   --light-gray-color: #8b8e99;
   --black-color: #000;
   --red-color: #ed4f32;
-  --gray-light-text-color: #5F6C72;
+  --gray-light-text-color: #5f6c72;
   --sidebar-bg-color: #ebebee;
   --light-black-color: #747477;
   --placeholder-color: #929fa5;
@@ -262,8 +262,8 @@ button {
 
 .admin-panel-header-div .dashboard-table-container {
   display: flex;
+  width: 100%;
   flex-direction: column;
-  justify-content: space-between;
   background: var(--white-color);
   font-size: 14px;
   font-weight: 500;
@@ -556,4 +556,60 @@ button {
   border: 1px solid var(--primary-border-color);
   background-color: var(--white-color);
   border-radius: 4px;
+}
+
+/* active user container in dashboard */
+
+.admin-panel-header-div .active-user-container {
+  width: 35%;
+}
+
+.active-user-container p {
+  font-family: var(--info-font);
+}
+
+.active-user-container .user-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 10px;
+}
+
+.active-user-container .user-item {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.active-user-container .user-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.active-user-container .user-info {
+  margin-left: 12px;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.active-user-container .user-role {
+  font-size: 12px;
+  color: var(--light-gray-color);
+  margin: 2px 0 0;
+}
+
+.active-user-container .status-indicator {
+  position: absolute;
+  left: 32px;
+  bottom: 0;
+  width: 15px;
+  height: 15px;
+  border: 2px solid var(--white-color);
+  border-radius: 50%;
 }

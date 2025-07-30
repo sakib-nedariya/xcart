@@ -8,6 +8,7 @@ import selecteTV from "../../../assets/image/TV.png";
 import selecteHeadphone from "../../../assets/image/headphone.png";
 import Navbar from "../layout/Navbar";
 import Footer from "../layout/Footer";
+import { useCart } from "../../../context/CartContext";
 
 const Checkout = () => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -19,6 +20,7 @@ const Checkout = () => {
   const [cities, setCities] = useState([]);
 
   const handleSelection = (option) => setSelectedOption(option);
+  const { cartItems } = useCart();
 
   useEffect(() => {
     setCountries(Country.getAllCountries());
@@ -39,6 +41,17 @@ const Checkout = () => {
     }
   }, [selectedState, selectedCountry]);
 
+  const getSubtotal = () => {
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+  };
+
+  const discount = 999;
+  const tax = 2999;
+  const total = getSubtotal() + tax - discount;
+
   return (
     <>
       <Navbar />
@@ -50,7 +63,11 @@ const Checkout = () => {
               <div className="checkout-form-container-group">
                 <div style={{ width: "25%" }}>
                   <label className="checkout-label-title">First Name</label>
-                  <input type="text" name="firstname" placeholder="First Name" />
+                  <input
+                    type="text"
+                    name="firstname"
+                    placeholder="First Name"
+                  />
                 </div>
                 <div style={{ width: "25%" }}>
                   <label className="checkout-label-title">Last Name</label>
@@ -58,9 +75,14 @@ const Checkout = () => {
                 </div>
                 <div style={{ width: "50%" }}>
                   <label className="checkout-label-title">
-                    Company Name <span style={{ color: "#929FA5" }}>(Optional)</span>
+                    Company Name{" "}
+                    <span style={{ color: "#929FA5" }}>(Optional)</span>
                   </label>
-                  <input type="text" name="companyname" placeholder="Enter your company name" />
+                  <input
+                    type="text"
+                    name="companyname"
+                    placeholder="Enter your company name"
+                  />
                 </div>
               </div>
 
@@ -79,7 +101,9 @@ const Checkout = () => {
                     value={selectedCountry}
                     onChange={(e) => setSelectedCountry(e.target.value)}
                   >
-                    <option value="" disabled>Select Country...</option>
+                    <option value="" disabled>
+                      Select Country...
+                    </option>
                     {countries.map((country) => (
                       <option key={country.isoCode} value={country.isoCode}>
                         {country.name}
@@ -96,7 +120,9 @@ const Checkout = () => {
                     onChange={(e) => setSelectedState(e.target.value)}
                     disabled={!selectedCountry}
                   >
-                    <option value="" disabled>Select State...</option>
+                    <option value="" disabled>
+                      Select State...
+                    </option>
                     {states.map((state) => (
                       <option key={state.isoCode} value={state.isoCode}>
                         {state.name}
@@ -113,7 +139,9 @@ const Checkout = () => {
                     onChange={(e) => setSelectedCity(e.target.value)}
                     disabled={!selectedState}
                   >
-                    <option value="" disabled>Select City...</option>
+                    <option value="" disabled>
+                      Select City...
+                    </option>
                     {cities.map((city) => (
                       <option key={city.name} value={city.name}>
                         {city.name}
@@ -124,7 +152,11 @@ const Checkout = () => {
 
                 <div style={{ width: "25%" }}>
                   <label className="checkout-label-title">Zip Code</label>
-                  <input type="text" name="zipcode" placeholder="Enter Zip Code" />
+                  <input
+                    type="text"
+                    name="zipcode"
+                    placeholder="Enter Zip Code"
+                  />
                 </div>
               </div>
 
@@ -141,7 +173,9 @@ const Checkout = () => {
 
               <div className="checkout-section-shipping-option">
                 <input type="checkbox" id="ship-different" />
-                <label htmlFor="ship-different">Ship into different address</label>
+                <label htmlFor="ship-different">
+                  Ship into different address
+                </label>
               </div>
             </form>
 
@@ -151,16 +185,23 @@ const Checkout = () => {
                 {[
                   { value: "cod", img: CODImage, label: "Cash on Delivery" },
                   { value: "razorpay", img: Razorpay, label: "Razorpay" },
-                  { value: "wallet", img: MyWallet, label: "My Wallet" }
+                  { value: "wallet", img: MyWallet, label: "My Wallet" },
                 ].map((option) => (
                   <div
                     key={option.value}
-                    className={`option ${selectedOption === option.value ? "active" : ""}`}
+                    className={`option ${
+                      selectedOption === option.value ? "active" : ""
+                    }`}
                     onClick={() => handleSelection(option.value)}
                   >
                     <img src={option.img} alt={option.label} />
                     <p>{option.label}</p>
-                    <input type="radio" name="payment" checked={selectedOption === option.value} readOnly />
+                    <input
+                      type="radio"
+                      name="payment"
+                      checked={selectedOption === option.value}
+                      readOnly
+                    />
                   </div>
                 ))}
               </div>
@@ -171,7 +212,8 @@ const Checkout = () => {
               <div className="checkout-form-container-group">
                 <div style={{ width: "100%" }}>
                   <label className="checkout-label-title">
-                    Order Notes <span style={{ color: "#929FA5" }}>(Optional)</span>
+                    Order Notes{" "}
+                    <span style={{ color: "#929FA5" }}>(Optional)</span>
                   </label>
                   <textarea
                     name="ordernotes"
@@ -185,32 +227,57 @@ const Checkout = () => {
           <div className="checkout-container-order-price-summery">
             <div className="shopping-cart-price-card">
               <h6>Order Summary</h6>
-              <div className="order-summery-product-list">
-                <div className="order-summery-product">
-                  <img src={selecteTV} alt="Image" />
-                  <div className="order-summery-product-details">
-                    <p className="order-summery-product-title">Canon EOS 1500D DSLR Camera Body+ 18-...</p>
-                    <p className="order-summery-product-price">1 x <span>₹70</span></p>
+              <div
+                className="order-summery-product-list"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.overflowY = "auto";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.overflowY = "hidden";
+                }}
+              >
+                {cartItems.map((item) => (
+                  <div className="order-summery-product" key={item.id}>
+                    <img src={`/upload/${item.image}`} alt={item.slogan} />
+                    <div className="order-summery-product-details">
+                      <p className="order-summery-product-title">
+                        {item.slogan}
+                      </p>
+                      <p className="order-summery-product-price">
+                        {item.quantity} x <span>₹{item.price}</span>
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="order-summery-product">
-                  <img src={selecteHeadphone} alt="Image" />
-                  <div className="order-summery-product-details">
-                    <p className="order-summery-product-title">Wired Over-Ear Gaming Headphones with U...</p>
-                    <p className="order-summery-product-price">3 x <span>₹250</span></p>
-                  </div>
-                </div>
+                ))}
               </div>
 
-              <div className="shopping-cart-price-row"><span>Sub-total</span><span>₹121,999</span></div>
-              <div className="shopping-cart-price-row"><span>Shipping</span><span>Free</span></div>
-              <div className="shopping-cart-price-row"><span>Discount</span><span>₹999</span></div>
-              <div className="shopping-cart-price-row"><span>Tax</span><span>₹2,999</span></div>
+              <div className="shopping-cart-price-row">
+                <span>Sub-total</span>
+                <span>₹{getSubtotal()}</span>
+              </div>
+              <div className="shopping-cart-price-row">
+                <span>Shipping</span>
+                <span>Free</span>
+              </div>
+              <div className="shopping-cart-price-row">
+                <span>Discount</span>
+                <span>₹{discount}</span>
+              </div>
+              <div className="shopping-cart-price-row">
+                <span>Tax</span>
+                <span>₹{tax}</span>
+              </div>
               <div className="shopping-cart-price-row product-total-price">
-                <span>Total</span><span><b>₹123,999</b></span>
+                <span>Total</span>
+                <span>
+                  <b>₹{total}</b>
+                </span>
               </div>
 
-              <button type="button" className="shopping-cartcheckout-btn primary-btn">
+              <button
+                type="button"
+                className="shopping-cartcheckout-btn primary-btn"
+              >
                 Place Order
               </button>
             </div>

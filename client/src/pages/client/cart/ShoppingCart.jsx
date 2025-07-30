@@ -1,33 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiMinusSm, HiPlusSm } from "react-icons/hi";
 import { MdOutlineCancel } from "react-icons/md";
-import ShoppingCartProduct from "../../../assets/image/shopping-cart.png";
 import "../../../assets/css/client/shoppingcart.css";
 import Navbar from "../layout/Navbar";
+import noItemFound from "../../../assets/image/no-item-add.png"
 import Footer from "../layout/Footer";
+import { useCart } from "../../../context/CartContext"; 
 
 const ShoppingCart = () => {
   const navigate = useNavigate();
+  const { cartItems, addToCart, removeFromCart } = useCart(); 
 
-  // State to manage product quantities
-  const [quantities, setQuantities] = useState({
-    macbook: 1,
-    iphone: 1,
-  });
+  const [quantities, setQuantities] = useState({});
+
+  useEffect(() => {
+    const initialQuantities = {};
+    cartItems.forEach((item) => {
+      initialQuantities[item.id] = item.quantity || 1;
+    });
+    setQuantities(initialQuantities);
+  }, [cartItems]);
 
   const handleIncrement = (product) => {
     setQuantities((prev) => ({
       ...prev,
-      [product]: prev[product] + 1,
+      [product.id]: (prev[product.id] || 1) + 1,
     }));
+    addToCart(product); 
   };
 
   const handleDecrement = (product) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [product]: prev[product] > 1 ? prev[product] - 1 : 1, // Ensure quantity doesn't go below 1
-    }));
+    setQuantities((prev) => {
+      const currentQty = prev[product.id] || 1;
+      if (currentQty <= 1) return prev;
+      return { ...prev, [product.id]: currentQty - 1 };
+    });
+  };
+
+  const handleRemove = (id) => {
+    removeFromCart(id);
+  };
+
+  const getSubtotal = () => {
+    return cartItems.reduce((total, item) => {
+      const qty = quantities[item.id] || 1;
+      return total + qty * item.price;
+    }, 0);
   };
 
   const handlecheckoutpagenavigate = () => {
@@ -51,67 +70,51 @@ const ShoppingCart = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="shopping-cart-container-product">
-                    <span className="product-remove-btn">
-                      <MdOutlineCancel />
-                    </span>
-                    <img src={ShoppingCartProduct} alt="MacBook" />
-                    <span className="shopping-cart-product-name">
-                      2020 Apple MacBook Pro with...
-                    </span>
-                  </td>
-                  <td>
-                    <span className="product-old-price">₹120000</span>
-                    <span className="product-new-price">₹89000</span>
-                  </td>
-                  <td>
-                    <div className="product_quantity">
-                      <HiMinusSm onClick={() => handleDecrement("macbook")} />
-                      <span>{quantities.macbook}</span>
-                      <HiPlusSm onClick={() => handleIncrement("macbook")} />
-                    </div>
-                  </td>
-                  <td className="product-last-price">
-                    ₹{quantities.macbook * 89000}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="shopping-cart-container-product">
-                    <span className="product-remove-btn">
-                      <MdOutlineCancel />
-                    </span>
-                    <img src={ShoppingCartProduct} alt="iPhone" />
-                    <span className="shopping-cart-product-name">
-                      iPhone 11 Pro (256 GB) - Gray
-                    </span>
-                  </td>
-                  <td>
-                    <span className="product-old-price">₹120000</span>
-                    <span className="product-new-price">₹32999</span>
-                  </td>
-                  <td>
-                    <div className="product_quantity">
-                      <HiMinusSm onClick={() => handleDecrement("iphone")} />
-                      <span>{quantities.iphone}</span>
-                      <HiPlusSm onClick={() => handleIncrement("iphone")} />
-                    </div>
-                  </td>
-                  <td className="product-last-price">
-                    ₹{quantities.iphone * 32999}
-                  </td>
-                </tr>
+                {cartItems.length === 0 ? (
+                  <tr>
+                    <td colSpan={4} align="center"><img src={noItemFound}  /></td>
+                  </tr>
+                ) : (
+                  cartItems.map((item) => (
+                    <tr key={item.id}>
+                      <td className="shopping-cart-container-product">
+                        <span
+                          className="product-remove-btn" title="Remove"
+                          onClick={() => handleRemove(item.id)}
+                        >
+                          <MdOutlineCancel />
+                        </span>
+                        <img src={`/upload/${item.image}`} alt={item.slogan} />
+                        <span className="shopping-cart-product-name">
+                          {item.slogan}
+                        </span>
+                      </td>
+                      <td>
+                        <span className="product-new-price">₹{item.price}</span>
+                      </td>
+                      <td>
+                        <div className="product_quantity">
+                          <HiMinusSm onClick={() => handleDecrement(item)} />
+                          <span>{quantities[item.id] || 1}</span>
+                          <HiPlusSm onClick={() => handleIncrement(item)} />
+                        </div>
+                      </td>
+                      <td className="product-last-price">
+                        ₹{(quantities[item.id] || 1) * item.price}
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
+
           <div className="shopping-cart-total-price-details">
             <div className="shopping-cart-price-card">
               <h6>Cart Totals</h6>
               <div className="shopping-cart-price-row">
                 <span>Sub-total</span>
-                <span className="shopping-cart-price">
-                  ₹{quantities.macbook * 89000 + quantities.iphone * 32999}
-                </span>
+                <span className="shopping-cart-price">₹{getSubtotal()}</span>
               </div>
               <div className="shopping-cart-price-row">
                 <span>Shipping</span>
@@ -123,18 +126,12 @@ const ShoppingCart = () => {
               </div>
               <div className="shopping-cart-price-row">
                 <span>Tax</span>
-                <span className="shopping-cart-price">₹2,999</span>
+                <span className="shopping-cart-price">₹2999</span>
               </div>
               <div className="shopping-cart-price-row product-total-price">
                 <span>Total</span>
                 <span>
-                  <b>
-                    ₹
-                    {quantities.macbook * 89000 +
-                      quantities.iphone * 32999 +
-                      2999 -
-                      999}
-                  </b>
+                  <b>₹{getSubtotal() + 2999 - 999}</b>
                 </span>
               </div>
               <button
@@ -145,6 +142,7 @@ const ShoppingCart = () => {
                 PROCEED TO CHECKOUT
               </button>
             </div>
+
             <div className="shopping-cart-price-card coupon-code">
               <h6>Coupon Code</h6>
               <input

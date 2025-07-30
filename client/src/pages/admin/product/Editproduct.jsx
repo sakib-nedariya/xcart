@@ -7,21 +7,23 @@ import default_profile from "../../../assets/image/default_profile.png";
 import Sidebar from "../layout/Sidebar";
 import Navbar from "../layout/Navbar";
 import axios from "axios";
+import { RxCross2 } from "react-icons/rx";
 import { notifyWarning, notifySuccess } from "../layout/ToastMessage";
 const port = import.meta.env.VITE_SERVER_URL;
 
 const EditProduct = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [brandData, setBrandData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
-  const navigate = useNavigate();
+  const [selectedFiles, setSelectedFiles] = useState([]);
   const [productData, setProductData] = useState({
     brand_id: "",
     cate_id: "",
     slogan: "",
     name: "",
     description: "",
-    image: "",
+    existingImages: [],
     price: "",
     discount: "",
     memory: "",
@@ -29,94 +31,109 @@ const EditProduct = () => {
     status: "",
   });
 
+  useEffect(() => {
+    getBrandData();
+    getCategoryData();
+    getProductData();
+  }, [id]);
+
   const getBrandData = async () => {
     try {
-      const res = await axios.get(`${port}getbranddata`);
-      setBrandData(res.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
+      const { data } = await axios.get(`${port}getbranddata`);
+      setBrandData(data);
+    } catch {
+      /*...*/
     }
   };
-
   const getCategoryData = async () => {
     try {
-      const res = await axios.get(`${port}getcategorydata`);
-      setCategoryData(res.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
+      const { data } = await axios.get(`${port}getcategorydata`);
+      setCategoryData(data);
+    } catch {
+      /*...*/
+    }
+  };
+  const getProductData = async () => {
+    try {
+      const res = await axios.get(`${port}getproductdatawithid/${id}`);
+      const fetched = res.data[0];
+      let imgs = [];
+      try {
+        imgs = JSON.parse(fetched.image);
+        if (!Array.isArray(imgs)) imgs = [imgs];
+      } catch {
+        if (fetched.image) imgs = [fetched.image];
+      }
+      setProductData({ ...fetched, existingImages: imgs });
+    } catch (err) {
+      /*...*/
     }
   };
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
-    setProductData({
-      ...productData,
-      [name]: value,
-    });
+    setProductData((p) => ({ ...p, [name]: value }));
   };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setProductData({
-        ...productData,
-        image: file,
-        profilePreview: URL.createObjectURL(file),
-      });
+    const files = Array.from(e.target.files);
+    if (selectedFiles.length + files.length > 8) {
+      notifyWarning("You can upload a maximum of 8 images.");
+      return;
     }
-  };
-  const handleButtonClick = () => {
-    document.getElementById("imageInputFile").click();
-  };
-
-  const getProductData = async () => {
-    try {
-      const res = await axios.get(`${port}getproductdatawithid/${id}`);
-      const fetchedData = res.data[0];
-
-      setProductData({
-        ...fetchedData,
-      });
-    } catch (error) {
-      console.log("Error fetching data:", error);
-    }
+    const previews = files.map((f) => ({
+      file: f,
+      preview: URL.createObjectURL(f),
+    }));
+    setSelectedFiles((prev) => [...prev, ...previews]);
   };
 
-  //edit data
+  const removeSelectedImage = (idx) => {
+    setSelectedFiles((prev) => prev.filter((_, i) => i !== idx));
+  };
+
+  const removeExistingImage = (idx) => {
+    setProductData((p) => ({
+      ...p,
+      existingImages: p.existingImages.filter((_, i) => i !== idx),
+    }));
+  };
+
   const saveProductData = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("brand_id", productData.brand_id);
-    formData.append("cate_id", productData.cate_id);
-    formData.append("name", productData.name);
-    formData.append("slogan", productData.slogan);
-    formData.append("description", productData.description);
-    formData.append("price", productData.price);
-    formData.append("discount", productData.discount);
-    formData.append("memory", productData.memory);
-    formData.append("storage", productData.storage);
-    if (productData.image) {
-      formData.append("image", productData.image);
-    }
-    formData.append("status", productData.status);
-    await axios
-      .put(`${port}editproductData/${id}`, formData, {
+    const fields = [
+      "brand_id",
+      "cate_id",
+      "name",
+      "slogan",
+      "description",
+      "price",
+      "discount",
+      "memory",
+      "storage",
+      "status",
+    ];
+    fields.forEach((key) => formData.append(key, productData[key] || ""));
+    formData.append(
+      "existingImages",
+      JSON.stringify(productData.existingImages)
+    );
+    selectedFiles.forEach((f) => formData.append("image", f.file));
+
+    try {
+      await axios.put(`${port}editproductdata/${id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
-      })
-      .then((res) => {
-        navigate("/admin/product");
-        notifySuccess("Data Updated Successfully");
-      })
-      .catch((error) => {
-        console.log("Error adding product data:", error);
       });
+      notifySuccess("Data Updated Successfully");
+      navigate("/admin/product");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  useEffect(() => {
-    getProductData();
-    getBrandData();
-    getCategoryData();
-  }, [id]);
+  const handleButtonClick = () =>
+    document.getElementById("imageInputFile").click();
 
   return (
     <>
@@ -157,148 +174,155 @@ const EditProduct = () => {
             </button>
           </div>
         </div>
+
         <div className="dashboard-add-content-card-div">
           <div className="dashboard-add-content-left-side">
             <div className="dashboard-add-content-card">
               <h6>General Information</h6>
               <div className="add-product-form-container">
-                <label htmlFor="product-name">Product Name</label>
+                <label>Product Name</label>
                 <input
                   type="text"
-                  id="product-name"
                   name="name"
                   value={productData.name}
                   onChange={handleChangeInput}
-                  placeholder="Type product name here..."
                 />
-                <label htmlFor="product-slogan">Slogan</label>
+                <label>Slogan</label>
                 <input
                   type="text"
-                  id="product-slogan"
                   name="slogan"
                   value={productData.slogan}
                   onChange={handleChangeInput}
-                  placeholder="Type product slogan here..."
                 />
-                <label htmlFor="product-description">Description</label>
+                <label>Description</label>
                 <textarea
-                  id="product-description"
                   name="description"
                   value={productData.description}
                   onChange={handleChangeInput}
-                  placeholder="Type product description here..."
-                ></textarea>
+                />
               </div>
             </div>
 
             <div className="dashboard-add-content-card">
-              <h6>Media</h6>
-              <div className="add-product-form-container">
-                <label htmlFor="imageInputFile">Photo</label>
-                <div className="add-product-upload-container">
-                  <div className="add-product-upload-icon">
-                    {productData.profilePreview ? (
-                      // Show the newly selected image preview
-                      <img
-                        src={productData.profilePreview}
-                        alt="Selected Profile"
-                        width="100"
-                      />
-                    ) : productData.image ? (
-                      // Show the existing profile image if available
-                      <img
-                        src={`/upload/${productData.image}`}
-                        alt="Selected Profile"
-                        width="100"
-                      />
-                    ) : (
-                      // Show default profile image if no profile is set
-                      <img
-                        src={default_profile}
-                        alt="Default Profile"
-                        width="100"
-                      />
-                    )}
-                  </div>
-                  <p className="add-product-upload-text">Click to edit image</p>
-                  <button
-                    type="button"
-                    className="add-product-upload-btn secondary-btn"
-                    onClick={handleButtonClick}
-                  >
-                    Edit Image
-                  </button>
-                  <input
-                    type="file"
-                    id="imageInputFile"
-                    name="profile"
-                    onChange={handleFileChange}
-                    style={{ display: "none" }}
-                  />
-                </div>
-              </div>
-            </div>
+  <h6>Media</h6>
+  <div className="add-product-form-container">
+    <label htmlFor="imageInputFile">Photo</label>
+    <div className="add-product-upload-container">
+      <div className="add-product-upload-icon preview-grid">
+        {/* Existing images */}
+        {productData.existingImages.map((img, index) => (
+          <div key={`existing-${index}`} className="image-preview-wrapper">
+            <img
+              src={`/upload/${img}`}
+              alt={`Existing ${index}`}
+              className="image-preview"
+            />
+            <RxCross2
+              className="remove-preview-button" title="Remove"
+              onClick={() => removeExistingImage(index)}
+            />
+          </div>
+        ))}
 
+        {/* New previews */}
+        {selectedFiles.map((file, index) => (
+          <div key={`new-${index}`} className="image-preview-wrapper">
+            <img
+              src={file.preview}
+              alt={`Preview ${index}`}
+              className="image-preview"
+            />
+            <RxCross2
+              className="remove-preview-button"
+              onClick={() => removeSelectedImage(index)}
+            />
+          </div>
+        ))}
+
+        {/* Default placeholder */}
+        {productData.existingImages.length === 0 && selectedFiles.length === 0 && (
+          <img
+            src={default_profile}
+            alt="Default Preview"
+            className="image-preview"
+            style={{ margin: "0 6px" }}
+          />
+        )}
+      </div>
+
+      <p className="add-product-upload-text">
+        Drag and drop image here, or click add image
+      </p>
+      <button
+        type="button"
+        className="add-product-upload-btn secondary-btn"
+        onClick={handleButtonClick}
+      >
+        Add Image
+      </button>
+      <input
+        type="file"
+        id="imageInputFile"
+        name="images"
+        onChange={handleFileChange}
+        multiple
+        style={{ display: "none" }}
+      />
+    </div>
+  </div>
+</div>
+
+
+            {/* Pricing card */}
             <div className="dashboard-add-content-card">
               <h6>Pricing</h6>
               <div className="add-product-form-container">
-                <label htmlFor="product-price">Base Price</label>
+                <label>Base Price</label>
                 <input
                   type="text"
-                  id="product-price"
                   name="price"
                   value={productData.price}
                   onChange={handleChangeInput}
-                  placeholder="Type base price here..."
                 />
-                <label htmlFor="product-discount">
-                  Discount Percentage (%)
-                </label>
+                <label>Discount (%)</label>
                 <input
                   type="text"
-                  id="product-discount"
                   name="discount"
                   value={productData.discount}
                   onChange={handleChangeInput}
-                  placeholder="Type discount percentage..."
                 />
               </div>
             </div>
           </div>
 
+          {/* Right side */}
           <div className="dashboard-add-content-right-side">
             <div className="dashboard-add-content-card">
               <h6>Brand & Category</h6>
               <div className="add-product-form-container">
-                <label htmlFor="brand">Select Brand</label>
+                <label>Select Brand</label>
                 <select
-                  id="brand"
                   name="brand_id"
                   value={productData.brand_id}
                   onChange={handleChangeInput}
                 >
                   <option value="">Select Brand</option>
-                  {brandData.map((brand) => (
-                    <option key={brand.id} value={brand.id}>
-                      {brand.name}
+                  {brandData.map((b) => (
+                    <option key={b.id} value={b.id}>
+                      {b.name}
                     </option>
                   ))}
                 </select>
-              </div>
-              <div className="add-product-form-container">
-                <label htmlFor="category">
-                  Select Category
-                </label>
+                <label>Select Category</label>
                 <select
-                  id="category"
                   name="cate_id"
                   value={productData.cate_id}
                   onChange={handleChangeInput}
                 >
                   <option value="">Select Category</option>
-                  {categoryData.map((category) => (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
+                  {categoryData.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name}
                     </option>
                   ))}
                 </select>
@@ -308,23 +332,19 @@ const EditProduct = () => {
             <div className="dashboard-add-content-card">
               <h6>Memory & Storage</h6>
               <div className="add-product-form-container">
-                <label htmlFor="memory">Memory (RAM)</label>
+                <label>Memory (RAM)</label>
                 <input
                   type="text"
-                  id="memory"
                   name="memory"
                   value={productData.memory}
                   onChange={handleChangeInput}
-                  placeholder="Memory"
                 />
-                <label htmlFor="storage">Storage</label>
+                <label>Storage</label>
                 <input
                   type="text"
-                  id="storage"
                   name="storage"
                   value={productData.storage}
                   onChange={handleChangeInput}
-                  placeholder="Storage"
                 />
               </div>
             </div>
@@ -332,16 +352,15 @@ const EditProduct = () => {
             <div className="dashboard-add-content-card">
               <h6>Status</h6>
               <div className="add-product-form-container">
-                <label htmlFor="status">Product Status</label>
+                <label>Product Status</label>
                 <select
-                  id="status"
                   name="status"
                   value={productData.status}
                   onChange={handleChangeInput}
                 >
                   <option value="1">Published</option>
                   <option value="2">Low Stock</option>
-                  <option value="3">Draft</option> {/* Fixed from "Draf" */}
+                  <option value="3">Draft</option>
                   <option value="0">Out of Stock</option>
                 </select>
               </div>

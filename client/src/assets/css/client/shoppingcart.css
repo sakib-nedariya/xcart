@@ -30,10 +30,12 @@
   border-top: 1px solid var(--primary-border-color);
   background: var(--light-white-color);
 }
+.shopping-cart-section tr{
+  border-top: 1px solid var(--primary-border-color);
+}
 .shopping-cart-section td {
   padding: 16px;
   background-color: var(--white-color);
-  border-top: 1px solid var(--primary-border-color);
 }
 .shopping-cart-container-product {
   display: flex;
@@ -47,6 +49,7 @@
 }
 .shopping-cart-container-product img {
   max-width: 70px;
+  object-fit: contain;
   height: 70px;
   margin: 0 8px;
 }
