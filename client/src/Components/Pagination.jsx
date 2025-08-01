@@ -1,4 +1,3 @@
-import React from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 
 const Pagination = ({

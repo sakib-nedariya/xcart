@@ -106,12 +106,7 @@
 .contact-container .contact-form .form-group {
   width: 100%;
 }
-.contact-container .radio-group {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
-  margin: 10px 0 30px 0;
-}
+
 .radio-group label {
   display: flex;
   align-items: center;
@@ -120,33 +115,11 @@
   font-size: 14px;
   font-family: var(--primary-font);
 }
-.contact-container .radio-group input {
-  display: none;
-}
-.contact-container .radio-group .custom-radio {
-  width: 16px;
-  height: 16px;
-  border: 2px solid var(--primary-font-color);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 5px;
-}
-.contact-container .radio-group input:checked + .custom-radio {
-  border-color: var(--primary-btn-bg);
-}
-.contact-container .radio-group input:checked + .custom-radio::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  background-color: var(--primary-btn-bg);
-  border-radius: 50%;
-  display: block;
-}
+
 .contact-container .contact-form textarea {
-  resize: none;
+  resize: vertical;
   margin-bottom: 30px;
+  height: 130px;
 }
 .contact-container .contact-form button {
   font-weight: 500;

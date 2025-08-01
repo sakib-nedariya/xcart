@@ -36,6 +36,7 @@ import AddNewCustomer from "../../pages/admin/customers/AddNewCustomer";
 import EditCustomer from "../../pages/admin/customers/EditCustomer";
 import ViewCustomer from "../../pages/admin/customers/ViewCustomer";
 import ScrollToTop from "../../Components/ScrollToTop";
+import Inquiry from "../../pages/admin/inquiry/Inquiry";
 
 const DashboardRoute = () => {
   return (
@@ -76,6 +77,9 @@ const DashboardRoute = () => {
         <Route path="/admin/add-new-customer" element={<AddNewCustomer />} />
         <Route path="/admin/edit-customer/:id" element={<EditCustomer />} />
         <Route path="/admin/view-customer/:id" element={<ViewCustomer />} />
+
+        <Route path="/admin/inquiry" element={<Inquiry />} />
+
       </Routes>
     </>
   );

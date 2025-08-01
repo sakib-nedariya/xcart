@@ -29,6 +29,7 @@
 .userdashboard_inner_content_div img {
   max-width: 70px;
   height: 70px;
+  object-fit: contain;
   margin-right: 8px;
 }
 .userdashboard_main_content_div tbody td {

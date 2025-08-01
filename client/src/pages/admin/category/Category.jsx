@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../layout/Navbar";
 import Sidebar from "../layout/Sidebar";
 import { MdDeleteForever, MdDelete } from "react-icons/md";
-import DeleteModal from "../layout/DeleteModal";
+import DeleteModal from "../../../Components/DeleteModal";
 import { IoPencil } from "react-icons/io5";
 import { IoIosEye } from "react-icons/io";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { notifySuccess } from "../layout/ToastMessage";
-import Pagination from "../../../pages/admin/layout/Pagination";
+import Pagination from "../../../Components/Pagination";
 import Breadcrumb from "../layout/Breadcrumb";
 
 const port = import.meta.env.VITE_SERVER_URL;
@@ -166,7 +166,7 @@ const Category = () => {
           )}
         </div>
 
-        <div className="dashboard-table-container full-height">
+        <div className="dashboard-table-container">
           <table>
             <thead>
               <tr>

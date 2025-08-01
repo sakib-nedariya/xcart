@@ -1,4 +1,4 @@
-const connection = require("../../config/connection");
+const connection = require("../../connection/connection");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");

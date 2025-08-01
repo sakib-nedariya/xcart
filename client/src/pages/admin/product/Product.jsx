@@ -6,9 +6,9 @@ import Sidebar from "../layout/Sidebar";
 import Navbar from "../layout/Navbar";
 import axios from "axios";
 import Breadcrumb from "../layout/Breadcrumb";
-import Pagination from "../../../pages/admin/layout/Pagination";
+import Pagination from "../../../Components/Pagination";
 import { useNavigate } from "react-router-dom";
-import DeleteModal from "../layout/DeleteModal";
+import DeleteModal from "../../../Components/DeleteModal";
 import "../../../assets/css/admin/product.css";
 import { notifySuccess } from "../layout/ToastMessage";
 

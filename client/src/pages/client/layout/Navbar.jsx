@@ -9,11 +9,13 @@ import {
 import { useAuth } from "../../../context/AuthContext";
 import { useCart } from "../../../context/CartContext";
 import "../../../assets/css/client/navbar.css";
+import { useWishlist } from "../../../context/WishlistContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isLoggedIn } = useAuth();
   const { cartCount } = useCart();
+  const { wishlist } = useWishlist();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -62,8 +64,10 @@ const Navbar = () => {
                   <span className="cart-badge">{cartCount}</span>
                 )}
               </NavLink>
-              <NavLink to="/wishlist">
+              <NavLink to="/wishlist" className="cart-icon-wrapper">
                 <AiOutlineHeart />
+                <span className="cart-badge">{wishlist.length}</span>{" "}
+                {/*  count */}
               </NavLink>
               <NavLink to="/user-account-details">
                 <AiOutlineUser />

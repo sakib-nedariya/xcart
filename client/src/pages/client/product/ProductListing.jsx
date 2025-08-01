@@ -5,7 +5,7 @@ import Footer from "../layout/Footer";
 import axios from "axios";
 import "../../../assets/css/main.css";
 import { useNavigate } from "react-router-dom";
-import Pagination from "../../../pages/admin/layout/Pagination";
+import Pagination from "../../../Components/Pagination";
 import noProductFoundImage from "../../../assets/image/no-product-found.png";
 
 const port = import.meta.env.VITE_SERVER_URL;
@@ -67,10 +67,6 @@ const ProductListing = () => {
       }
       setSelectedPriceRange("");
     }
-  };
-
-  const handlePriceBlur = () => {
-    // Optional: keep blur behavior or remove it if only using Enter
   };
 
   const handlePriceKeyDown = (e) => {
@@ -223,7 +219,6 @@ const ProductListing = () => {
                   placeholder="Min Price"
                   value={inputMinPrice}
                   onChange={handlePriceChange}
-                  onBlur={handlePriceBlur}
                   onKeyDown={handlePriceKeyDown}
                 />
                 <input
@@ -233,7 +228,6 @@ const ProductListing = () => {
                   placeholder="Max Price"
                   value={inputMaxPrice}
                   onChange={handlePriceChange}
-                  onBlur={handlePriceBlur}
                   onKeyDown={handlePriceKeyDown}
                 />
               </div>

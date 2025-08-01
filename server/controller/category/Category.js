@@ -1,4 +1,4 @@
-const connection = require("../../config/connection");
+const connection = require("../../connection/connection");
 
 const getCategoryData = (req, res) => {
   const sql =

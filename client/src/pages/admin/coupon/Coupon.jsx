@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../layout/Navbar";
 import Sidebar from "../layout/Sidebar";
 import axios from "axios";
-import DeleteModal from "../layout/DeleteModal";
+import DeleteModal from "../../../Components/DeleteModal";
 import { MdDeleteForever, MdDelete } from "react-icons/md";
 import { notifySuccess } from "../layout/ToastMessage";
 import { IoPencil } from "react-icons/io5";
 import { IoIosEye } from "react-icons/io";
 import Breadcrumb from "../layout/Breadcrumb";
-import Pagination from "../../../pages/admin/layout/Pagination";
+import Pagination from "../../../Components/Pagination";
 import { useNavigate } from "react-router-dom";
 
 const port = import.meta.env.VITE_SERVER_URL;

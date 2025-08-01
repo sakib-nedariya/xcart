@@ -3,10 +3,12 @@ import Navbar from "../layout/Navbar";
 import UserSidebar from "./UserSidebar";
 import "../../../assets/css/client/userDashboard/wishlist.css";
 import { MdOutlineCancel } from "react-icons/md";
-import ShoppingCartProduct from "../../../assets/image/shopping-cart.png";
 import Footer from "../layout/Footer";
+import { useWishlist } from "../../../context/WishlistContext";
+import noItemFound from "../../../assets/image/wishlist.jpg";
 
 const WishList = () => {
+  const { wishlist, removeFromWishlist } = useWishlist();
   return (
     <>
       <Navbar />
@@ -26,98 +28,45 @@ const WishList = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="userdashboard_inner_content_div">
-                    <img src={ShoppingCartProduct} alt="MacBook" />
-                    <span className="shopping-cart-product-name">
-                      2020 Apple MacBook Pro with App...
-                    </span>
+                {wishlist.length === 0 ? (
+                  <td colSpan={4} align="center">
+                    <img src={noItemFound} />
                   </td>
-                  <td>
-                    <span className="product-old-price">₹120000</span>
-                    <span className="product-new-price">₹89000</span>
-                  </td>
-                  <td className="product-in-stock">In Stock</td>
-                  <td>
-                    <button className="primary-btn wishlist_add_to_cart_btn ">
-                      Add to Cart
-                    </button>
-                  </td>
-                  <td>
-                    <span className="product-remove-btn">
-                      <MdOutlineCancel />
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="userdashboard_inner_content_div">
-                    <img src={ShoppingCartProduct} alt="MacBook" />
-                    <span className="shopping-cart-product-name">
-                      2020 Apple MacBook Pro with App...
-                    </span>
-                  </td>
-                  <td>
-                    <span className="product-old-price">₹120000</span>
-                    <span className="product-new-price">₹89000</span>
-                  </td>
-                  <td className="product-in-stock">In Stock</td>
-                  <td>
-                    <button className="primary-btn wishlist_add_to_cart_btn ">
-                      Add to Cart
-                    </button>
-                  </td>
-                  <td>
-                    <span className="product-remove-btn">
-                      <MdOutlineCancel />
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="userdashboard_inner_content_div">
-                    <img src={ShoppingCartProduct} alt="MacBook" />
-                    <span className="shopping-cart-product-name">
-                      2020 Apple MacBook Pro with App...
-                    </span>
-                  </td>
-                  <td>
-                    <span className="product-old-price">₹120000</span>
-                    <span className="product-new-price">₹89000</span>
-                  </td>
-                  <td className="product-in-stock">In Stock</td>
-                  <td>
-                    <button className="primary-btn wishlist_add_to_cart_btn ">
-                      Add to Cart
-                    </button>
-                  </td>
-                  <td>
-                    <span className="product-remove-btn">
-                      <MdOutlineCancel />
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="userdashboard_inner_content_div">
-                    <img src={ShoppingCartProduct} alt="MacBook" />
-                    <span className="shopping-cart-product-name">
-                      2020 Apple MacBook Pro with App...
-                    </span>
-                  </td>
-                  <td>
-                    <span className="product-old-price">₹120000</span>
-                    <span className="product-new-price">₹89000</span>
-                  </td>
-                  <td className="product-out-of-stock">Out of Stock</td>
-                  <td>
-                    <button className="primary-btn wishlist_add_to_cart_btn ">
-                      Add to Cart
-                    </button>
-                  </td>
-                  <td>
-                    <span className="product-remove-btn">
-                      <MdOutlineCancel />
-                    </span>
-                  </td>
-                </tr>
+                ) : (
+                  wishlist.map((product, index) => (
+                    <tr key={index}>
+                      <td className="userdashboard_inner_content_div">
+                        <img
+                          src={`/upload/${product.image}`}
+                          alt={product.slogan}
+                        />
+                        <span className="shopping-cart-product-name">
+                          {product.slogan}
+                        </span>
+                      </td>
+                      <td>
+                        <span className="product-old-price">₹89000</span>
+                        <span className="product-new-price">
+                          ₹{product.price}
+                        </span>
+                      </td>
+                      <td className="product-in-stock">In Stock</td>
+                      <td>
+                        <button className="primary-btn wishlist_add_to_cart_btn ">
+                          Add to Cart
+                        </button>
+                      </td>
+                      <td>
+                        <span
+                          className="product-remove-btn"
+                          onClick={() => removeFromWishlist(product.id)}
+                        >
+                          <MdOutlineCancel />
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

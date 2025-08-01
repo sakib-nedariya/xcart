@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { RiAdminLine, RiCoupon2Line, RiProductHuntLine } from "react-icons/ri";
-import { LuUsers } from "react-icons/lu";
 import { FiLogOut } from "react-icons/fi";
 import { IoGiftOutline, IoPricetagsOutline } from "react-icons/io5";
-import { MdOutlineCategory } from "react-icons/md";
+import { FaUserFriends } from "react-icons/fa";
+import { IoIosPeople } from "react-icons/io";
+import { MdOutlineCategory, MdContactSupport } from "react-icons/md";
 import "../../../assets/css/admin/sidebar.css";
-
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -80,8 +80,20 @@ const Sidebar = () => {
             </li>
             <li>
               <NavLink to="/admin/customers">
-                <LuUsers />
+                <IoIosPeople />
                 Customers
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/admin/users">
+                <FaUserFriends />
+                Users
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/admin/inquiry">
+                <MdContactSupport />
+                Inquiry
               </NavLink>
             </li>
           </ul>
