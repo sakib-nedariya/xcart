@@ -65,11 +65,6 @@ const AddProduct = () => {
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
 
-    if (files.length > 8) {
-      notifyWarning("You can only upload up to 8 images.");
-      return;
-    }
-
     setAddProductData((prevData) => ({
       ...prevData,
       image: files,
@@ -137,36 +132,22 @@ const AddProduct = () => {
       <Sidebar />
       <Navbar />
       <main className="admin-panel-header-div">
-        <div
-          className="admin-dashboard-main-header"
-          style={{ marginBottom: "24px" }}
-        >
+        <div className="admin-dashboard-main-header" style={{ marginBottom: "24px" }}>
           <div>
             <h5>Add Product</h5>
             <div className="admin-panel-breadcrumb">
-              <Link to="/admin/dashboard" className="breadcrumb-link active">
-                Dashboard
-              </Link>
+              <Link to="/admin/dashboard" className="breadcrumb-link active">Dashboard</Link>
               <IoMdArrowDropright />
-              <Link to="/admin/product" className="breadcrumb-link active">
-                Product List
-              </Link>
+              <Link to="/admin/product" className="breadcrumb-link active">Product List</Link>
               <IoMdArrowDropright />
               <span className="breadcrumb-text">Add Product</span>
             </div>
           </div>
           <div className="admin-panel-header-add-buttons">
-            <NavLink
-              to="/admin/product"
-              className="cancel-btn dashboard-add-product-btn"
-            >
+            <NavLink to="/admin/product" className="cancel-btn dashboard-add-product-btn">
               <HiXMark /> Cancel
             </NavLink>
-            <button
-              type="button"
-              onClick={(e) => saveProductData(e)}
-              className="primary-btn dashboard-add-product-btn"
-            >
+            <button type="button" onClick={saveProductData} className="primary-btn dashboard-add-product-btn">
               <MdSave /> Save Product
             </button>
           </div>
@@ -215,25 +196,12 @@ const AddProduct = () => {
                     {addProductData.profilePreview.length > 0 ? (
                       addProductData.profilePreview.map((src, index) => (
                         <div key={index} className="image-preview-wrapper">
-                          <img
-                            src={src}
-                            alt={`Preview ${index}`}
-                            className="image-preview"
-                          />
-
-                          <RxCross2
-                            className="remove-preview-button" title="Remove"
-                            onClick={() => removeImage(index)}
-                          />
+                          <img src={src} alt={`Preview ${index}`} className="image-preview" />
+                          <RxCross2 className="remove-preview-button" title="Remove" onClick={() => removeImage(index)} />
                         </div>
                       ))
                     ) : (
-                      <img
-                        src={default_profile}
-                        alt="Default Preview"
-                        className="image-preview"
-                        style={{ margin: "0 6px" }}
-                      />
+                      <img src={default_profile} alt="Default Preview" className="image-preview" style={{ margin: "0 6px" }} />
                     )}
                   </div>
 
@@ -271,9 +239,7 @@ const AddProduct = () => {
                   onChange={handleChangeInput}
                   placeholder="Type base price here..."
                 />
-                <label htmlFor="product-discount">
-                  Discount Percentage (%)
-                </label>
+                <label htmlFor="product-discount">Discount Percentage (%)</label>
                 <input
                   type="text"
                   id="product-discount"

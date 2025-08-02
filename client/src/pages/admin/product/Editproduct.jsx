@@ -41,18 +41,16 @@ const EditProduct = () => {
     try {
       const { data } = await axios.get(`${port}getbranddata`);
       setBrandData(data);
-    } catch {
-      /*...*/
-    }
+    } catch {}
   };
+
   const getCategoryData = async () => {
     try {
       const { data } = await axios.get(`${port}getcategorydata`);
       setCategoryData(data);
-    } catch {
-      /*...*/
-    }
+    } catch {}
   };
+
   const getProductData = async () => {
     try {
       const res = await axios.get(`${port}getproductdatawithid/${id}`);
@@ -65,9 +63,7 @@ const EditProduct = () => {
         if (fetched.image) imgs = [fetched.image];
       }
       setProductData({ ...fetched, existingImages: imgs });
-    } catch (err) {
-      /*...*/
-    }
+    } catch (err) {}
   };
 
   const handleChangeInput = (e) => {
@@ -77,10 +73,6 @@ const EditProduct = () => {
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
-    if (selectedFiles.length + files.length > 8) {
-      notifyWarning("You can upload a maximum of 8 images.");
-      return;
-    }
     const previews = files.map((f) => ({
       file: f,
       preview: URL.createObjectURL(f),
@@ -119,7 +111,7 @@ const EditProduct = () => {
       "existingImages",
       JSON.stringify(productData.existingImages)
     );
-    selectedFiles.forEach((f) => formData.append("image", f.file));
+    selectedFiles.forEach((f) => formData.append("images", f.file)); // use "images" key
 
     try {
       await axios.put(`${port}editproductdata/${id}`, formData, {
@@ -140,10 +132,7 @@ const EditProduct = () => {
       <Sidebar />
       <Navbar />
       <main className="admin-panel-header-div">
-        <div
-          className="admin-dashboard-main-header"
-          style={{ marginBottom: "24px" }}
-        >
+        <div className="admin-dashboard-main-header" style={{ marginBottom: "24px" }}>
           <div>
             <h5>Edit Product</h5>
             <div className="admin-panel-breadcrumb">
@@ -152,17 +141,14 @@ const EditProduct = () => {
               </Link>
               <IoMdArrowDropright />
               <Link to="/admin/product" className="breadcrumb-link active">
-                Category List
+                Product List
               </Link>
               <IoMdArrowDropright />
               <span className="breadcrumb-text">Edit Product</span>
             </div>
           </div>
           <div className="admin-panel-header-add-buttons">
-            <NavLink
-              to="/admin/product"
-              className="cancel-btn dashboard-add-product-btn"
-            >
+            <NavLink to="/admin/product" className="cancel-btn dashboard-add-product-btn">
               <HiXMark /> Cancel
             </NavLink>
             <button
@@ -181,131 +167,78 @@ const EditProduct = () => {
               <h6>General Information</h6>
               <div className="add-product-form-container">
                 <label>Product Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={productData.name}
-                  onChange={handleChangeInput}
-                />
+                <input type="text" name="name" value={productData.name} onChange={handleChangeInput} />
                 <label>Slogan</label>
-                <input
-                  type="text"
-                  name="slogan"
-                  value={productData.slogan}
-                  onChange={handleChangeInput}
-                />
+                <input type="text" name="slogan" value={productData.slogan} onChange={handleChangeInput} />
                 <label>Description</label>
-                <textarea
-                  name="description"
-                  value={productData.description}
-                  onChange={handleChangeInput}
-                />
+                <textarea name="description" value={productData.description} onChange={handleChangeInput} />
               </div>
             </div>
 
             <div className="dashboard-add-content-card">
-  <h6>Media</h6>
-  <div className="add-product-form-container">
-    <label htmlFor="imageInputFile">Photo</label>
-    <div className="add-product-upload-container">
-      <div className="add-product-upload-icon preview-grid">
-        {/* Existing images */}
-        {productData.existingImages.map((img, index) => (
-          <div key={`existing-${index}`} className="image-preview-wrapper">
-            <img
-              src={`/upload/${img}`}
-              alt={`Existing ${index}`}
-              className="image-preview"
-            />
-            <RxCross2
-              className="remove-preview-button" title="Remove"
-              onClick={() => removeExistingImage(index)}
-            />
-          </div>
-        ))}
+              <h6>Media</h6>
+              <div className="add-product-form-container">
+                <label htmlFor="imageInputFile">Photo</label>
+                <div className="add-product-upload-container">
+                  <div className="add-product-upload-icon preview-grid">
+                    {productData.existingImages.map((img, index) => (
+                      <div key={`existing-${index}`} className="image-preview-wrapper">
+                        <img src={`/upload/${img}`} alt={`Existing ${index}`} className="image-preview" />
+                        <RxCross2 className="remove-preview-button" onClick={() => removeExistingImage(index)} />
+                      </div>
+                    ))}
+                    {selectedFiles.map((file, index) => (
+                      <div key={`new-${index}`} className="image-preview-wrapper">
+                        <img src={file.preview} alt={`Preview ${index}`} className="image-preview" />
+                        <RxCross2 className="remove-preview-button" onClick={() => removeSelectedImage(index)} />
+                      </div>
+                    ))}
+                    {productData.existingImages.length === 0 && selectedFiles.length === 0 && (
+                      <img
+                        src={default_profile}
+                        alt="Default Preview"
+                        className="image-preview"
+                        style={{ margin: "0 6px" }}
+                      />
+                    )}
+                  </div>
+                  <p className="add-product-upload-text">Drag and drop image here, or click add image</p>
+                  <button
+                    type="button"
+                    className="add-product-upload-btn secondary-btn"
+                    onClick={handleButtonClick}
+                  >
+                    Add Image
+                  </button>
+                  <input
+                    type="file"
+                    id="imageInputFile"
+                    name="images"
+                    onChange={handleFileChange}
+                    multiple
+                    style={{ display: "none" }}
+                  />
+                </div>
+              </div>
+            </div>
 
-        {/* New previews */}
-        {selectedFiles.map((file, index) => (
-          <div key={`new-${index}`} className="image-preview-wrapper">
-            <img
-              src={file.preview}
-              alt={`Preview ${index}`}
-              className="image-preview"
-            />
-            <RxCross2
-              className="remove-preview-button"
-              onClick={() => removeSelectedImage(index)}
-            />
-          </div>
-        ))}
-
-        {/* Default placeholder */}
-        {productData.existingImages.length === 0 && selectedFiles.length === 0 && (
-          <img
-            src={default_profile}
-            alt="Default Preview"
-            className="image-preview"
-            style={{ margin: "0 6px" }}
-          />
-        )}
-      </div>
-
-      <p className="add-product-upload-text">
-        Drag and drop image here, or click add image
-      </p>
-      <button
-        type="button"
-        className="add-product-upload-btn secondary-btn"
-        onClick={handleButtonClick}
-      >
-        Add Image
-      </button>
-      <input
-        type="file"
-        id="imageInputFile"
-        name="images"
-        onChange={handleFileChange}
-        multiple
-        style={{ display: "none" }}
-      />
-    </div>
-  </div>
-</div>
-
-
-            {/* Pricing card */}
             <div className="dashboard-add-content-card">
               <h6>Pricing</h6>
               <div className="add-product-form-container">
                 <label>Base Price</label>
-                <input
-                  type="text"
-                  name="price"
-                  value={productData.price}
-                  onChange={handleChangeInput}
-                />
+                <input type="text" name="price" value={productData.price} onChange={handleChangeInput} />
                 <label>Discount (%)</label>
-                <input
-                  type="text"
-                  name="discount"
-                  value={productData.discount}
-                  onChange={handleChangeInput}
-                />
+                <input type="text" name="discount" value={productData.discount} onChange={handleChangeInput} />
               </div>
             </div>
           </div>
 
-          {/* Right side */}
           <div className="dashboard-add-content-right-side">
             <div className="dashboard-add-content-card">
               <h6>Brand & Category</h6>
               <div className="add-product-form-container">
                 <label>Select Brand</label>
-                <select
-                  name="brand_id"
-                  value={productData.brand_id}
-                  onChange={handleChangeInput}
-                >
+                <select name="brand_id" value={productData.brand_id} onChange={handleChangeInput}>
                   <option value="">Select Brand</option>
                   {brandData.map((b) => (
                     <option key={b.id} value={b.id}>
@@ -314,11 +247,7 @@ const EditProduct = () => {
                   ))}
                 </select>
                 <label>Select Category</label>
-                <select
-                  name="cate_id"
-                  value={productData.cate_id}
-                  onChange={handleChangeInput}
-                >
+                <select name="cate_id" value={productData.cate_id} onChange={handleChangeInput}>
                   <option value="">Select Category</option>
                   {categoryData.map((c) => (
                     <option key={c.id} value={c.id}>
@@ -333,19 +262,9 @@ const EditProduct = () => {
               <h6>Memory & Storage</h6>
               <div className="add-product-form-container">
                 <label>Memory (RAM)</label>
-                <input
-                  type="text"
-                  name="memory"
-                  value={productData.memory}
-                  onChange={handleChangeInput}
-                />
+                <input type="text" name="memory" value={productData.memory} onChange={handleChangeInput} />
                 <label>Storage</label>
-                <input
-                  type="text"
-                  name="storage"
-                  value={productData.storage}
-                  onChange={handleChangeInput}
-                />
+                <input type="text" name="storage" value={productData.storage} onChange={handleChangeInput} />
               </div>
             </div>
 
@@ -353,11 +272,7 @@ const EditProduct = () => {
               <h6>Status</h6>
               <div className="add-product-form-container">
                 <label>Product Status</label>
-                <select
-                  name="status"
-                  value={productData.status}
-                  onChange={handleChangeInput}
-                >
+                <select name="status" value={productData.status} onChange={handleChangeInput}>
                   <option value="1">Published</option>
                   <option value="2">Low Stock</option>
                   <option value="3">Draft</option>

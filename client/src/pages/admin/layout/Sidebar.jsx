@@ -14,12 +14,12 @@ const Sidebar = () => {
   const logout = async (e) => {
     e.preventDefault();
     localStorage.removeItem("adminToken");
-    navigate("/admin");
+    navigate("/admin/login");
   };
   useEffect(() => {
     const token = localStorage.getItem("adminToken");
     if (!token) {
-      navigate("/admin");
+      navigate("/admin/login");
     }
   }, []);
   return (

@@ -4,7 +4,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 const port = import.meta.env.VITE_SERVER_URL;
 
-const Login = () => {
+const AdminLogin = () => {
   const navigate = useNavigate();
   const getUsername = localStorage.getItem("unameData");
   const [passwordViewOrHide, setPasswordViewOrHide] = useState(false);
@@ -62,4 +62,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdminLogin;
