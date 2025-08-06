@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState, useEffect, useRef } from "react";
+=======
+import React, { useState, useEffect } from "react";
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
 import { IoIosEye } from "react-icons/io";
 import { MdDeleteForever, MdDelete } from "react-icons/md";
 import { IoPencil } from "react-icons/io5";
@@ -20,14 +24,21 @@ const Product = () => {
   const [categoryData, setCategoryData] = useState([]);
   const [productData, setProductData] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
+<<<<<<< HEAD
   const [deleteId, setDeleteId] = useState(null);
+=======
+  const [deleteId, setDeleteId] = useState(null); // NEW
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const navigate = useNavigate();
 
+<<<<<<< HEAD
   const tableContainerRef = useRef(null);
 
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   const getBrandData = async () => {
     try {
       const res = await axios.get(`${port}getbranddata`);
@@ -107,12 +118,15 @@ const Product = () => {
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
+<<<<<<< HEAD
       if (tableContainerRef.current) {
         tableContainerRef.current.scrollTo({
           top: 0,
           behavior: "smooth",
         });
       }
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
     }
   };
 
@@ -196,7 +210,11 @@ const Product = () => {
           )}
         </div>
 
+<<<<<<< HEAD
         <div className="dashboard-table-container" ref={tableContainerRef}>
+=======
+        <div className="dashboard-table-container">
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
           <table>
             <thead>
               <tr>

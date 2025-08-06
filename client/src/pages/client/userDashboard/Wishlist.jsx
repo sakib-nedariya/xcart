@@ -8,6 +8,7 @@ import { useWishlist } from "../../../context/WishlistContext";
 import noItemFound from "../../../assets/image/wishlist.jpg";
 
 const WishList = () => {
+<<<<<<< HEAD
   const getFirstImage = (image) => {
     if (Array.isArray(image)) return image[0];
     try {
@@ -17,6 +18,8 @@ const WishList = () => {
       return image;
     }
   };
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   const { wishlist, removeFromWishlist } = useWishlist();
   return (
     <>
@@ -33,12 +36,20 @@ const WishList = () => {
                   <th>Price</th>
                   <th>Status</th>
                   <th>Action</th>
+<<<<<<< HEAD
                   <th></th> 
+=======
+                  <th></th>
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                 </tr>
               </thead>
               <tbody>
                 {wishlist.length === 0 ? (
+<<<<<<< HEAD
                   <td colSpan={5} align="center">
+=======
+                  <td colSpan={4} align="center">
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                     <img src={noItemFound} />
                   </td>
                 ) : (
@@ -46,8 +57,13 @@ const WishList = () => {
                     <tr key={index}>
                       <td className="userdashboard_inner_content_div">
                         <img
+<<<<<<< HEAD
                           src={`/upload/${getFirstImage(product.image)}`}
                           alt="product_image"
+=======
+                          src={`/upload/${product.image}`}
+                          alt={product.slogan}
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                         />
                         <span className="shopping-cart-product-name">
                           {product.slogan}

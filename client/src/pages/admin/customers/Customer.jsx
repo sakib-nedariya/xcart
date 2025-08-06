@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useEffect, useRef, useState } from "react";
+=======
+import React, { useEffect, useState } from "react";
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
 import axios from "axios";
 import { IoIosEye } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
@@ -20,8 +24,11 @@ const Customer = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
+<<<<<<< HEAD
    const tableContainerRef = useRef(null);
 
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   // Fetch customer data
   const getCustomerData = async () => {
     try {
@@ -61,6 +68,7 @@ const Customer = () => {
     getCustomerData();
   }, []);
 
+<<<<<<< HEAD
  const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
@@ -70,6 +78,11 @@ const Customer = () => {
           behavior: "smooth",
         });
       }
+=======
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
     }
   };
 
@@ -136,7 +149,11 @@ const Customer = () => {
           </button>
         </div>
 
+<<<<<<< HEAD
            <div className="dashboard-table-container" ref={tableContainerRef}>
+=======
+        <div className="dashboard-table-container">
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
           <table>
             <thead>
               <tr>
@@ -158,7 +175,11 @@ const Customer = () => {
                       alt="profile_image"
                     />
                     <span>
+<<<<<<< HEAD
                       {customer.first_name}&nbsp;{customer.middle_name}&nbsp;
+=======
+                      {customer.first_name}&nbsp;
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                       {customer.last_name}
                     </span>
                   </td>

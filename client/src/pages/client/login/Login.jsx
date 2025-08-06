@@ -28,13 +28,20 @@ const Login = () => {
         "http://localhost:1020/login",
         formData
       );
+<<<<<<< HEAD
       localStorage.setItem("id", response.data.user.id);
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
       login(response.data.token);
       notifySuccess(response.data.message);
       navigate("/");
     } catch (error) {
       const message = error.response?.data?.message || "Login failed";
+<<<<<<< HEAD
       notifyError(message);
+=======
+      notifyError(message); 
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
     }
   };
 

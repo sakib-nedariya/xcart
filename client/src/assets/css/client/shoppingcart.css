@@ -70,7 +70,11 @@
   border: 1px solid var(--black-color);
   border-radius: 5px;
 }
+<<<<<<< HEAD
 .product_quantity svg, .quantity-selector svg {
+=======
+.product_quantity svg {
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   cursor: pointer;
   font-size: 20px;
 }

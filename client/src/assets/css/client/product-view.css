@@ -218,9 +218,14 @@
 
 /* Bookmark Button */
 .product-view-container .bookmark-btn {
+<<<<<<< HEAD
   border: 2px solid var(--primary-font-color);
   color: var(--light-black-color);
   padding: 8px 16px;
+=======
+  border: 1px solid var(--primary-font-color);
+  padding: 11px 20px;
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   border-radius: 8px;
   background: none;
   cursor: pointer;
@@ -228,6 +233,15 @@
   align-items: center;
 }
 
+<<<<<<< HEAD
+=======
+.product-view-container .bookmark-btn i {
+  width: 20px;
+  height: 20px;
+  color: var(--primary-font-color);
+}
+
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
 .product-view-container .product-view-page-product-description {
   background-color: var(--white-color);
   margin-top: 50px;

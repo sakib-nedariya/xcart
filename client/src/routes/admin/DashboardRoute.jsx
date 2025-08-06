@@ -1,7 +1,11 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "../../assets/css/main.css";
+<<<<<<< HEAD
 import Login from "../../pages/admin/AdminLogin/AdminLogin";
+=======
+import Login from "../../pages/admin/login/Login";
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
 import Dashboard from "../../pages/admin/dashboard/Dashboard";
 
 import Product from "../../pages/admin/product/Product";
@@ -35,6 +39,7 @@ import Customer from "../../pages/admin/customers/Customer";
 import AddNewCustomer from "../../pages/admin/customers/AddNewCustomer";
 import EditCustomer from "../../pages/admin/customers/EditCustomer";
 import ViewCustomer from "../../pages/admin/customers/ViewCustomer";
+<<<<<<< HEAD
 
 import ScrollToTop from "../../Components/ScrollToTop";
 
@@ -43,13 +48,21 @@ import ViewUsers from "../../pages/admin/users/ViewUsers";
 
 import Inquiry from "../../pages/admin/inquiry/Inquiry";
 import ViewInquiry from "../../pages/admin/inquiry/ViewInquiry";
+=======
+import ScrollToTop from "../../Components/ScrollToTop";
+import Inquiry from "../../pages/admin/inquiry/Inquiry";
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
 
 const DashboardRoute = () => {
   return (
     <>
       <ScrollToTop />
       <Routes>
+<<<<<<< HEAD
         <Route path="/admin/login" element={<Login />} />
+=======
+        <Route path="/admin" element={<Login />} />
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
         <Route path="/admin/dashboard" element={<Dashboard />} />
 
         <Route path="/admin/product" element={<Product />} />
@@ -84,11 +97,16 @@ const DashboardRoute = () => {
         <Route path="/admin/edit-customer/:id" element={<EditCustomer />} />
         <Route path="/admin/view-customer/:id" element={<ViewCustomer />} />
 
+<<<<<<< HEAD
         <Route path="/admin/users" element={<Users />} />
         <Route path="/admin/view-user/:id" element={<ViewUsers />} />
 
         <Route path="/admin/inquiry" element={<Inquiry />} />
         <Route path="/admin/inquiry/view-inquiry" element={<ViewInquiry />} />
+=======
+        <Route path="/admin/inquiry" element={<Inquiry />} />
+
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
       </Routes>
     </>
   );

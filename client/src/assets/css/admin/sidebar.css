@@ -40,6 +40,9 @@
 .menu-content li a.active {
   background-color: var(--sidebar-bg-color);
   color: var(--primary-btn-bg);
+<<<<<<< HEAD
   font-weight: 500;
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   border-radius: 6px;
 }

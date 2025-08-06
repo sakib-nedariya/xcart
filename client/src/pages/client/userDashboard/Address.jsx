@@ -119,10 +119,17 @@ const Address = () => {
                     </div>
 
                     <div className="form-group">
+<<<<<<< HEAD
                       <label>Mobile Number</label>
                       <input
                         type="number"
                         name="mobile-number"
+=======
+                      <label>Phone Number</label>
+                      <input
+                        type="number"
+                        name="phone-number"
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                         placeholder="+91 73569 83829"
                       />
                     </div>
@@ -236,10 +243,17 @@ const Address = () => {
                     </div>
 
                     <div className="form-group">
+<<<<<<< HEAD
                       <label>Mobile Number</label>
                       <input
                         type="number"
                         name="mobile-number"
+=======
+                      <label>Phone Number</label>
+                      <input
+                        type="number"
+                        name="phone-number"
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                         placeholder="+91 73569 83829"
                       />
                     </div>

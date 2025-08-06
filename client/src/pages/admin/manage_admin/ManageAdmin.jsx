@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { useEffect, useRef, useState } from "react";
+=======
+import React, { useEffect, useState } from "react";
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
 import axios from "axios";
 import { IoIosEye } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
@@ -20,11 +24,15 @@ const ManageAdmin = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
+<<<<<<< HEAD
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
 
   const tableContainerRef = useRef(null);
 
+=======
+  // Fetch admin data
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   const getAdminData = async () => {
     try {
       const res = await axios.get(`${port}getadmindata`);
@@ -34,11 +42,20 @@ const ManageAdmin = () => {
     }
   };
 
+<<<<<<< HEAD
+=======
+  //delete admin
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   const openDeleteModal = (id) => {
     setIsDeleteModalOpen(true);
     setDeleteId(id);
   };
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   const closeDeleteModal = () => {
     setIsDeleteModalOpen(false);
     setDeleteId(null);
@@ -49,8 +66,13 @@ const ManageAdmin = () => {
       await axios.delete(`${port}deleteadmindata/${deleteId}`);
       getAdminData();
       notifySuccess("Data Deleted Successfully");
+<<<<<<< HEAD
     } catch (error) {
       console.log("Error deleting admin:", error);
+=======
+    } catch {
+      console.log(error);
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
     }
     closeDeleteModal();
   };
@@ -62,6 +84,7 @@ const ManageAdmin = () => {
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
+<<<<<<< HEAD
       if (tableContainerRef.current) {
         tableContainerRef.current.scrollTo({
           top: 0,
@@ -75,10 +98,18 @@ const ManageAdmin = () => {
     navigate(`/admin/edit-admin/${id}`);
   };
 
+=======
+    }
+  };
+  const handleNavigateEdit = (id) => {
+    navigate(`/admin/edit-admin/${id}`);
+  };
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   const handleNavigateView = (id) => {
     navigate(`/admin/view-admin/${id}`);
   };
 
+<<<<<<< HEAD
   const filteredData = adminData.filter((admin) => {
     if (activeTab === "All") return true;
     if (activeTab === "Active") return admin.status === 1;
@@ -92,6 +123,22 @@ const ManageAdmin = () => {
   const endIndex = startIndex + itemsPerPage;
   const currentData = filteredData.slice(startIndex, endIndex);
 
+=======
+    // Filter data based on active tab
+    const filteredData = adminData.filter((admin) => {
+      if (activeTab === "All") return true;
+      if (activeTab === "Active") return admin.status === 1;
+      if (activeTab === "Blocked") return admin.status === 0;
+      return true;
+    });
+  
+    // Pagination logic on filtered data
+    const totalItems = filteredData.length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentData = filteredData.slice(startIndex, endIndex);
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   return (
     <>
       <Sidebar />
@@ -102,6 +149,7 @@ const ManageAdmin = () => {
           breadcrumbText="Admin List"
           button={{ link: "/admin/add-new-admin", text: "Add New Admin" }}
         />
+<<<<<<< HEAD
 
         <div className="admin-panel-header-tabs">
           {["All", "Active", "Blocked"].map((tab) => (
@@ -119,6 +167,39 @@ const ManageAdmin = () => {
         </div>
 
         <div className="dashboard-table-container" ref={tableContainerRef}>
+=======
+        <div className="admin-panel-header-tabs">
+          <button
+            type="button"
+            className={`admin-panel-header-tab ${
+              activeTab === "All" ? "active" : ""
+            }`}
+            onClick={() => setActiveTab("All")}
+          >
+            All
+          </button>
+          <button
+            type="button"
+            className={`admin-panel-header-tab ${
+              activeTab === "Active" ? "active" : ""
+            }`}
+            onClick={() => setActiveTab("Active")}
+          >
+            Active
+          </button>
+          <button
+            type="button"
+            className={`admin-panel-header-tab ${
+              activeTab === "Blocked" ? "active" : ""
+            }`}
+            onClick={() => setActiveTab("Blocked")}
+          >
+            Blocked
+          </button>
+        </div>
+
+        <div className="dashboard-table-container">
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
           <table>
             <thead>
               <tr>
@@ -133,11 +214,20 @@ const ManageAdmin = () => {
             </thead>
             <tbody>
               {currentData.map((admin, index) => (
+<<<<<<< HEAD
                 <tr key={index}>
                   <td className="product-info admin-profile">
                     <img src={`/upload/${admin.profile}`} alt="profile_image" />
                     <span>
                       {admin.first_name} {admin.last_name}
+=======
+                <tr key={index + 1}>
+                  <td className="product-info admin-profile">
+                    <img src={`/upload/${admin.profile}`} alt="profile_image" />
+                    <span>
+                      {admin.first_name}&nbsp;
+                      {admin.last_name}
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                     </span>
                   </td>
                   <td>{admin.email}</td>
@@ -158,6 +248,7 @@ const ManageAdmin = () => {
                   <td className="actions">
                     <IoPencil
                       title="Edit"
+<<<<<<< HEAD
                       onClick={() => handleNavigateEdit(admin.id)}
                     />
                     <IoIosEye
@@ -170,13 +261,36 @@ const ManageAdmin = () => {
                         onClick={() => openDeleteModal(admin.id)}
                       />
                     )}
+=======
+                      onClick={() => {
+                        handleNavigateEdit(admin.id);
+                      }}
+                    />
+                    <IoIosEye
+                      onClick={() => {
+                        handleNavigateView(admin.id);
+                      }}
+                      title="View"
+                    />
+                    <MdDeleteForever
+                      onClick={() => {
+                        openDeleteModal(admin.id);
+                      }}
+                      title="Delete"
+                    />
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
 
+<<<<<<< HEAD
           {totalItems > itemsPerPage && (
+=======
+          {/* Use the new Pagination component */}
+          {totalItems >= 11 && (
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
@@ -188,7 +302,10 @@ const ManageAdmin = () => {
           )}
         </div>
       </main>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
       {isDeleteModalOpen && (
         <DeleteModal
           title="Admin"

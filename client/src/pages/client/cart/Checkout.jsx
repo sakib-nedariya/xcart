@@ -48,6 +48,7 @@ const Checkout = () => {
     );
   };
 
+<<<<<<< HEAD
   const getFirstImage = (image) => {
     if (Array.isArray(image)) return image[0];
     try {
@@ -58,6 +59,8 @@ const Checkout = () => {
     }
   };
 
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   const discount = 999;
   const tax = 2999;
   const total = getSubtotal() + tax - discount;
@@ -176,7 +179,11 @@ const Checkout = () => {
                   <input type="text" name="email" placeholder="" />
                 </div>
                 <div style={{ width: "50%" }}>
+<<<<<<< HEAD
                   <label className="checkout-label-title">Mobile Number</label>
+=======
+                  <label className="checkout-label-title">Phone Number</label>
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                   <input type="text" name="phonenumber" placeholder="" />
                 </div>
               </div>
@@ -248,6 +255,7 @@ const Checkout = () => {
               >
                 {cartItems.map((item) => (
                   <div className="order-summery-product" key={item.id}>
+<<<<<<< HEAD
 
 
                     <img
@@ -255,6 +263,9 @@ const Checkout = () => {
                        alt={item.slogan}
                     />
 
+=======
+                    <img src={`/upload/${item.image}`} alt={item.slogan} />
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                     <div className="order-summery-product-details">
                       <p className="order-summery-product-title">
                         {item.slogan}

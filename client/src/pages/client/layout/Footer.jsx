@@ -21,7 +21,11 @@ const Footer = () => {
               <input type="text" id="name" placeholder="" />
             </div>
             <div className="input-container">
+<<<<<<< HEAD
               <label htmlFor="phone">Mobile Number</label>
+=======
+              <label htmlFor="phone">PHONE NUMBER</label>
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
               <input type="tel" id="phone" placeholder="" />
             </div>
             <button type="button" className="primary-btn footer-request-btn">

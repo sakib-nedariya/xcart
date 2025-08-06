@@ -41,7 +41,10 @@ const Signup = () => {
         password,
         mobile_number,
       });
+<<<<<<< HEAD
      
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
 
       notifySuccess(response.data.message);
       navigate("/login"); // Redirect after success

@@ -4,8 +4,12 @@ import "../../../assets/css/client/product-view.css";
 import "../../../assets/css/main.css";
 import Navbar from "../layout/Navbar";
 import Footer from "../layout/Footer";
+<<<<<<< HEAD
 import { HiMinusSm, HiPlusSm } from "react-icons/hi";
 import { FiHeart } from "react-icons/fi";
+=======
+import { BsBookmark } from "react-icons/bs";
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
 import { useCart } from "../../../context/CartContext";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -160,9 +164,15 @@ const ProductView = () => {
                     <div className="cart-actions">
                       <div className="product-actions">
                         <div className="quantity-selector">
+<<<<<<< HEAD
                           <HiMinusSm />
                           <span>01</span>
                           <HiPlusSm />
+=======
+                          <span>-</span>
+                          <span>01</span>
+                          <span>+</span>
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                         </div>
                         <button
                           className="secondary-btn product-add-to-cart-btn"
@@ -175,7 +185,11 @@ const ProductView = () => {
                       <div className="buy-now-icon">
                         <button className="primary-btn buy-now">Buy Now</button>
                         <button className="bookmark-btn">
+<<<<<<< HEAD
                           <FiHeart size={22} />
+=======
+                          <BsBookmark size={18} />
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                         </button>
                       </div>
                     </div>

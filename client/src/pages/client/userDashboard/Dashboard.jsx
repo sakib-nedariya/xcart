@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+=======
+import React from "react";
+import { useNavigate } from "react-router-dom";
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
 import Navbar from "../layout/Navbar";
 import UserSidebar from "./UserSidebar";
 import "../../../assets/css/client/userDashboard/dashboard.css";
@@ -8,6 +13,7 @@ import receiptImage from "../../../assets/image/Receipt.png";
 import packageImage from "../../../assets/image/Package.png";
 import profile from "../../../assets/image/dash-profile.png";
 import Footer from "../layout/Footer";
+<<<<<<< HEAD
 import { useEffect } from "react";
 import axios from "axios";
 
@@ -31,6 +37,10 @@ const Dashboard = () => {
     fetchUserData();
   }, [id]);
 
+=======
+
+const Dashboard = () => {
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   const navigate = useNavigate();
 
   const handleEditAccount = () => {
@@ -55,13 +65,18 @@ const Dashboard = () => {
                 </div>
                 <div className="text-box">
                   <div className="dashboard_inner_content_number">154</div>
+<<<<<<< HEAD
                   <div className="dashboard_inner_content_label">
                     Total Orders
                   </div>
+=======
+                  <div className="dashboard_inner_content_label">Total Orders</div>
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                 </div>
               </div>
               <div className="userdashboard_content_card">
                 <div className="icon-box">
+<<<<<<< HEAD
                   <img
                     src={receiptImage}
                     className="icon"
@@ -73,10 +88,18 @@ const Dashboard = () => {
                   <div className="dashboard_inner_content_label">
                     Pending Orders
                   </div>
+=======
+                  <img src={receiptImage} className="icon" alt="Pending Orders" />
+                </div>
+                <div className="text-box">
+                  <div className="dashboard_inner_content_number">05</div>
+                  <div className="dashboard_inner_content_label">Pending Orders</div>
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                 </div>
               </div>
               <div className="userdashboard_content_card">
                 <div className="icon-box">
+<<<<<<< HEAD
                   <img
                     src={packageImage}
                     className="icon"
@@ -88,14 +111,25 @@ const Dashboard = () => {
                   <div className="dashboard_inner_content_label">
                     Completed Orders
                   </div>
+=======
+                  <img src={packageImage} className="icon" alt="Completed Orders" />
+                </div>
+                <div className="text-box">
+                  <div className="dashboard_inner_content_number">149</div>
+                  <div className="dashboard_inner_content_label">Completed Orders</div>
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                 </div>
               </div>
             </div>
 
             <div className="userdashboard_user_details">
+<<<<<<< HEAD
               <h5 className="dashboard-user-name">
                 Hello, {userDashData.first_name} {userDashData.last_name}
               </h5>
+=======
+              <h5 className="dashboard-user-name">Hello, Sakib Nedariya</h5>
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
               <p>
                 From your account dashboard, you can easily check & view your
                 <span> Recent Orders</span>, manage your
@@ -109,6 +143,7 @@ const Dashboard = () => {
                 <h6>Account info</h6>
                 <div className="user_details_content">
                   <div className="user-details" style={{ display: "flex" }}>
+<<<<<<< HEAD
                     <img
                       src={
                         userDashData.profile
@@ -117,6 +152,9 @@ const Dashboard = () => {
                       }
                       alt="profile"
                     />
+=======
+                    <img src={profile} alt="profile" />
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                     <div
                       style={{
                         display: "flex",
@@ -124,6 +162,7 @@ const Dashboard = () => {
                         justifyContent: "space-evenly",
                       }}
                     >
+<<<<<<< HEAD
                       <h5>
                         {userDashData.first_name} {userDashData.last_name}
                       </h5>
@@ -146,6 +185,21 @@ const Dashboard = () => {
                     className="user-profile-edit-btn"
                     onClick={handleEditAccount}
                   >
+=======
+                      <h5>Sakib Nedariya</h5>
+                      <p>Palanpur, Gujarat</p>
+                    </div>
+                  </div>
+                  <div className="user_email_and_mobile_no">
+                    <p>
+                      Email:<span>sakibnedariya@gmail.com</span>
+                    </p>
+                    <p>
+                      Mobile No:<span>+918569741212</span>
+                    </p>
+                  </div>
+                  <button className="user-profile-edit-btn" onClick={handleEditAccount}>
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                     Edit Account
                   </button>
                 </div>
@@ -169,10 +223,14 @@ const Dashboard = () => {
                       Email:<span>sakibnedariya@gmail.com</span>
                     </p>
                   </div>
+<<<<<<< HEAD
                   <button
                     className="user-profile-edit-btn"
                     onClick={handleEditAddress}
                   >
+=======
+                  <button className="user-profile-edit-btn" onClick={handleEditAddress}>
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                     Edit Address
                   </button>
                 </div>

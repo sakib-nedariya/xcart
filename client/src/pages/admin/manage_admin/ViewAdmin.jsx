@@ -148,12 +148,21 @@ const ViewAdmin = () => {
                     />
                   </div>
                   <div>
+<<<<<<< HEAD
                     <label htmlFor="mobile-number">Mobile Number</label>
                     <input
                       type="text"
                       name="mobile_number"
                       id="mobile-number"
                       placeholder="Type your Mobile Number here..."
+=======
+                    <label htmlFor="phone-number">Phone Number</label>
+                    <input
+                      type="text"
+                      name="mobile_number"
+                      id="phone-number"
+                      placeholder="Type your phone number here..."
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                       value={adminData.mobile_number}
                       disabled
                     />

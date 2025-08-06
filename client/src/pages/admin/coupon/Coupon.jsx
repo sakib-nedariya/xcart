@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState, useEffect, useRef } from "react";
+=======
+import React, { useState, useEffect } from "react";
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
 import Navbar from "../layout/Navbar";
 import Sidebar from "../layout/Sidebar";
 import axios from "axios";
@@ -24,8 +28,11 @@ const Coupon = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
 
+<<<<<<< HEAD
   const tableContainerRef = useRef(null);
 
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   const getCouponData = async () => {
     try {
       const res = await axios.get(`${port}getcoupondata`);
@@ -113,12 +120,15 @@ const Coupon = () => {
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
+<<<<<<< HEAD
       if (tableContainerRef.current) {
         tableContainerRef.current.scrollTo({
           top: 0,
           behavior: "smooth",
         });
       }
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
     }
   };
 
@@ -184,7 +194,11 @@ const Coupon = () => {
             </button>
           )}
         </div>
+<<<<<<< HEAD
         <div className="dashboard-table-container" ref={tableContainerRef}>
+=======
+        <div className="dashboard-table-container">
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
           <table>
             <thead>
               <tr>

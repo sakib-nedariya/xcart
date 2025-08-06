@@ -138,11 +138,19 @@ const ViewCustomer = () => {
                     />
                   </div>
                   <div>
+<<<<<<< HEAD
                     <label htmlFor="mobile-number">Mobile Number</label>
                     <input
                       type="text"
                       name="mobile_number"
                       id="mobile-number"
+=======
+                    <label htmlFor="phone-number">Phone Number</label>
+                    <input
+                      type="text"
+                      name="mobile_number"
+                      id="phone-number"
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                       value={customerData.mobile_number}
                       disabled
                     />

@@ -4,6 +4,7 @@ import { HiMinusSm, HiPlusSm } from "react-icons/hi";
 import { MdOutlineCancel } from "react-icons/md";
 import "../../../assets/css/client/shoppingcart.css";
 import Navbar from "../layout/Navbar";
+<<<<<<< HEAD
 import noItemFound from "../../../assets/image/no-item-add.png";
 import Footer from "../layout/Footer";
 import { useCart } from "../../../context/CartContext";
@@ -11,6 +12,15 @@ import { useCart } from "../../../context/CartContext";
 const ShoppingCart = () => {
   const navigate = useNavigate();
   const { cartItems, addToCart, removeFromCart } = useCart();
+=======
+import noItemFound from "../../../assets/image/no-item-add.png"
+import Footer from "../layout/Footer";
+import { useCart } from "../../../context/CartContext"; 
+
+const ShoppingCart = () => {
+  const navigate = useNavigate();
+  const { cartItems, addToCart, removeFromCart } = useCart(); 
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
 
   const [quantities, setQuantities] = useState({});
 
@@ -27,6 +37,7 @@ const ShoppingCart = () => {
       ...prev,
       [product.id]: (prev[product.id] || 1) + 1,
     }));
+<<<<<<< HEAD
     addToCart(product);
   };
 
@@ -38,6 +49,9 @@ const ShoppingCart = () => {
     } catch {
       return image;
     }
+=======
+    addToCart(product); 
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   };
 
   const handleDecrement = (product) => {
@@ -82,25 +96,37 @@ const ShoppingCart = () => {
               <tbody>
                 {cartItems.length === 0 ? (
                   <tr>
+<<<<<<< HEAD
                     <td colSpan={4} align="center">
                       <img src={noItemFound} />
                     </td>
+=======
+                    <td colSpan={4} align="center"><img src={noItemFound}  /></td>
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                   </tr>
                 ) : (
                   cartItems.map((item) => (
                     <tr key={item.id}>
                       <td className="shopping-cart-container-product">
                         <span
+<<<<<<< HEAD
                           className="product-remove-btn"
                           title="Remove"
+=======
+                          className="product-remove-btn" title="Remove"
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                           onClick={() => handleRemove(item.id)}
                         >
                           <MdOutlineCancel />
                         </span>
+<<<<<<< HEAD
                         <img
                       src={`/upload/${getFirstImage(item.image)}`}
                       alt={item.slogan}
                     />
+=======
+                        <img src={`/upload/${item.image}`} alt={item.slogan} />
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                         <span className="shopping-cart-product-name">
                           {item.slogan}
                         </span>
@@ -178,4 +204,8 @@ const ShoppingCart = () => {
   );
 };
 
+<<<<<<< HEAD
 export default ShoppingCart;
+=======
+export default ShoppingCart;
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88

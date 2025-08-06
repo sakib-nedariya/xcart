@@ -559,7 +559,10 @@ button {
   border: 1px solid var(--primary-border-color);
   background-color: var(--white-color);
   border-radius: 4px;
+<<<<<<< HEAD
   height: fit-content;
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
 }
 
 /* active user container in dashboard */

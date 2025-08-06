@@ -29,6 +29,7 @@ const ProductCategory = () => {
       setAddedProductIds((prev) => [...prev, product.id]);
       setTimeout(() => {
         setAddedProductIds((prev) => prev.filter((id) => id !== product.id));
+<<<<<<< HEAD
       }, 3000); 
     }
   };
@@ -40,6 +41,9 @@ const ProductCategory = () => {
       return Array.isArray(parsed) ? parsed[0] : image;
     } catch {
       return image;
+=======
+      }, 2000); // animation lasts for 2 seconds
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
     }
   };
 
@@ -122,10 +126,17 @@ const ProductCategory = () => {
                   </div>
 
                   <img
+<<<<<<< HEAD
                       src={`/upload/${getFirstImage(product.image)}`}
                       alt={product.slogan}
                     className="product-image"
                     />
+=======
+                    src={`/upload/${product.image}`}
+                    alt={product.slogan}
+                    className="product-image"
+                  />
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                   <div className="about-categorty-products">
                     <h6 className="product-name">{product.slogan}</h6>
                     <p className="product-price">${product.price}</p>

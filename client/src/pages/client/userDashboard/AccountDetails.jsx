@@ -2,6 +2,7 @@ import Footer from "../layout/Footer";
 import UserSidebar from "./UserSidebar";
 import Navbar from "../layout/Navbar";
 import "../../../assets/css/client/userDashboard/accDetails.css";
+<<<<<<< HEAD
 import default_profile from "../../../assets/image/default_profile.png";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { useState, useEffect } from "react";
@@ -18,6 +19,15 @@ const AccountDetails = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+=======
+import userProfile from "../../../assets/image/dash-profile.png";
+
+import { useState, useEffect } from "react";
+import { Country, State, City } from "country-state-city";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+
+const AccountDetails = () => {
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
@@ -26,6 +36,7 @@ const AccountDetails = () => {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
 
+<<<<<<< HEAD
   const [profilePreview, setProfilePreview] = useState("");
 
   const [userData, setUserData] = useState({
@@ -66,6 +77,11 @@ const AccountDetails = () => {
       getUserById(userId);
     }
   }, [userId]);
+=======
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
 
   useEffect(() => {
     setCountries(Country.getAllCountries());
@@ -74,12 +90,19 @@ const AccountDetails = () => {
   useEffect(() => {
     if (selectedCountry) {
       setStates(State.getStatesOfCountry(selectedCountry));
+<<<<<<< HEAD
+=======
+      setSelectedState("");
+      setCities([]);
+      setSelectedCity("");
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
     }
   }, [selectedCountry]);
 
   useEffect(() => {
     if (selectedState) {
       setCities(City.getCitiesOfState(selectedCountry, selectedState));
+<<<<<<< HEAD
     }
   }, [selectedState]);
 
@@ -162,6 +185,12 @@ const AccountDetails = () => {
     }
   };
 
+=======
+      setSelectedCity("");
+    }
+  }, [selectedState]);
+
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   return (
     <>
       <Navbar />
@@ -179,6 +208,7 @@ const AccountDetails = () => {
                   onClick={() => document.getElementById("imageUpload").click()}
                 >
                   <img
+<<<<<<< HEAD
                     src={
                       profilePreview
                         ? profilePreview
@@ -186,6 +216,9 @@ const AccountDetails = () => {
                         ? `/upload/${userData.profile}`
                         : default_profile
                     }
+=======
+                    src={userProfile}
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                     alt="user-profile"
                     className="user-profile-image-wrapper-profile-img"
                   />
@@ -208,8 +241,17 @@ const AccountDetails = () => {
                     id="imageUpload"
                     accept="image/*"
                     style={{ display: "none" }}
+<<<<<<< HEAD
                     name="profile"
                     onChange={handleFileChange}
+=======
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        console.log("Selected:", file);
+                      }
+                    }}
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                   />
                 </div>
 
@@ -219,9 +261,13 @@ const AccountDetails = () => {
                       <label>First Name</label>
                       <input
                         type="text"
+<<<<<<< HEAD
                         name="first_name"
                         value={userData.first_name}
                         onChange={handleChangeInput}
+=======
+                        name="firstname"
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                         placeholder="Enter First Name"
                       />
                     </div>
@@ -229,9 +275,13 @@ const AccountDetails = () => {
                       <label>Last Name</label>
                       <input
                         type="text"
+<<<<<<< HEAD
                         name="last_name"
                         value={userData.last_name}
                         onChange={handleChangeInput}
+=======
+                        name="lastname"
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                         placeholder="Enter Last Name"
                       />
                     </div>
@@ -242,8 +292,11 @@ const AccountDetails = () => {
                       <input
                         type="text"
                         name="username"
+<<<<<<< HEAD
                         value={userData.username}
                         onChange={handleChangeInput}
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                         placeholder="Enter username"
                       />
                     </div>
@@ -252,8 +305,11 @@ const AccountDetails = () => {
                       <input
                         type="email"
                         name="email"
+<<<<<<< HEAD
                         value={userData.email}
                         onChange={handleChangeInput}
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                         placeholder="Enter email"
                       />
                     </div>
@@ -264,8 +320,11 @@ const AccountDetails = () => {
                       <input
                         type="text"
                         name="mobile_number"
+<<<<<<< HEAD
                         value={userData.mobile_number}
                         onChange={handleChangeInput}
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                         placeholder="Enter Mobile Number"
                       />
                     </div>
@@ -273,7 +332,11 @@ const AccountDetails = () => {
                       <label htmlFor="country">Country</label>
                       <select
                         id="country"
+<<<<<<< HEAD
                         value={selectedCountry || ""}
+=======
+                        value={selectedCountry}
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                         onChange={(e) => setSelectedCountry(e.target.value)}
                       >
                         <option value="">Select Country</option>
@@ -290,7 +353,11 @@ const AccountDetails = () => {
                       <label htmlFor="state">State</label>
                       <select
                         id="state"
+<<<<<<< HEAD
                         value={selectedState || ""}
+=======
+                        value={selectedState}
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                         onChange={(e) => setSelectedState(e.target.value)}
                         disabled={!states.length}
                       >
@@ -306,7 +373,11 @@ const AccountDetails = () => {
                       <label htmlFor="city">City</label>
                       <select
                         id="city"
+<<<<<<< HEAD
                         value={selectedCity || ""}
+=======
+                        value={selectedCity}
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                         onChange={(e) => setSelectedCity(e.target.value)}
                         disabled={!cities.length}
                       >
@@ -324,6 +395,7 @@ const AccountDetails = () => {
                         type="text"
                         name="pincode"
                         placeholder="Enter Pincode"
+<<<<<<< HEAD
                         value={userData.pincode}
                         onChange={handleChangeInput}
                       />
@@ -333,6 +405,12 @@ const AccountDetails = () => {
                     className="primary-btn user-save-changes-btn"
                     onClick={handleSaveChanges}
                   >
+=======
+                      />
+                    </div>
+                  </div>
+                  <button className="primary-btn user-save-changes-btn">
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                     Save Changes
                   </button>
                 </div>
@@ -350,13 +428,42 @@ const AccountDetails = () => {
                 <div className="user_profile_form">
                   <div className="user-profile-details-inner flex">
                     <div className="form-group user-password">
+<<<<<<< HEAD
+=======
+                      <label>Current Password</label>
+                      <div className="password-wrapper">
+                        <input
+                          type={showCurrentPassword ? "text" : "password"}
+                          name="current-password"
+                          placeholder="Enter current password"
+                        />
+                        <span
+                          onClick={() =>
+                            setShowCurrentPassword(!showCurrentPassword)
+                          }
+                        >
+                          {showCurrentPassword ? (
+                            <IoEyeOffOutline />
+                          ) : (
+                            <IoEyeOutline />
+                          )}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="user-profile-details-inner flex">
+                    <div className="form-group user-password">
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                       <label>New Password</label>
                       <div className="password-wrapper">
                         <input
                           type={showNewPassword ? "text" : "password"}
                           name="new-password"
+<<<<<<< HEAD
                           value={newPassword}
                           onChange={(e) => setNewPassword(e.target.value)}
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                           placeholder="Enter new password"
                         />
                         <span
@@ -378,8 +485,11 @@ const AccountDetails = () => {
                         <input
                           type={showConfirmPassword ? "text" : "password"}
                           name="confirm-password"
+<<<<<<< HEAD
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
+=======
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                           placeholder="Enter confirm password"
                         />
                         <span
@@ -396,10 +506,14 @@ const AccountDetails = () => {
                       </div>
                     </div>
                   </div>
+<<<<<<< HEAD
                   <button
                     className="primary-btn user-save-changes-btn"
                     onClick={handleChangePassword}
                   >
+=======
+                  <button className="primary-btn user-save-changes-btn">
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
                     Change Password
                   </button>
                 </div>

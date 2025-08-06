@@ -13,10 +13,17 @@ const LogoutModal = ({ onCancel, onLogout }) => {
   }, []);
 
   const generateCaptcha = () => {
+<<<<<<< HEAD
     const randomCaptcha = Math.floor(1000 + Math.random() * 9000).toString(); 
     setCaptcha(randomCaptcha);
     setUserInput("");
     setError(""); 
+=======
+    const randomCaptcha = Math.floor(10000 + Math.random() * 90000).toString(); // Generates a 5-digit random number
+    setCaptcha(randomCaptcha);
+    setUserInput(""); // Clear input field when new CAPTCHA is generated
+    setError(""); // Reset error message
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   };
 
   const handleCaptchaChange = (e) => {
@@ -38,7 +45,11 @@ const LogoutModal = ({ onCancel, onLogout }) => {
         <h6>Logout</h6>
         <div>
           <label htmlFor="captcha">
+<<<<<<< HEAD
             If you want logout, enter <strong>"{captcha}"</strong>
+=======
+            If you want logout, enter <strong>{captcha}</strong>
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
           </label>
           <input
             type="text"

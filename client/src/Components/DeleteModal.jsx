@@ -13,7 +13,11 @@ const DeleteModal = ({ title, onCancel, onDelete }) => {
   }, []);
 
   const generateCaptcha = () => {
+<<<<<<< HEAD
     const randomCaptcha = Math.floor(1000 + Math.random() * 9000).toString(); 
+=======
+    const randomCaptcha = Math.floor(10000 + Math.random() * 90000).toString(); // Generates a 5-digit random number
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
     setCaptcha(randomCaptcha);
     setUserInput("");
     setError(""); 
@@ -38,7 +42,11 @@ const DeleteModal = ({ title, onCancel, onDelete }) => {
         <h6>Delete {title}</h6>
         <div>
           <label htmlFor="captcha">
+<<<<<<< HEAD
             If you want to delete, enter <strong>"{captcha}"</strong>
+=======
+            If you want to delete, enter <strong>{captcha}</strong>
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
           </label>
           <input
             type="text"

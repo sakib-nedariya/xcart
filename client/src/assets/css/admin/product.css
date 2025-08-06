@@ -2,7 +2,11 @@
   width: 35px;
   height: 35px;
   border-radius: 50%;
+<<<<<<< HEAD
   object-fit: cover;
+=======
+  object-fit: contain;
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
   margin-right: 10px;
 }
 .admin-panel-header-div .dashboard-table-container .product-info {
@@ -80,8 +84,12 @@
 .add-product-form-container .add-product-upload-icon img {
   width: 80px;
   height: 80px;
+<<<<<<< HEAD
   object-fit: cover;
   border-radius: 6px;
+=======
+  object-fit: contain;
+>>>>>>> 5e9d71c978b8d9b26fb0e8dcea8a09bc863a0a88
 }
 .add-product-form-container .add-product-upload-text {
   color: var(--primary-font-color);
